@@ -22,6 +22,10 @@
     <XamlComponentResourceLocation>nested</XamlComponentResourceLocation>
 
     <TerminalCppWinrt>true</TerminalCppWinrt>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
 
   </PropertyGroup>
   <Import Project="..\..\..\common.openconsole.props" Condition="'$(OpenConsoleDir)'==''" />

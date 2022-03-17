@@ -10,7 +10,7 @@
 using namespace winrt;
 using namespace winrt::Windows::UI;
 using namespace winrt::Windows::UI::Composition;
-using namespace winrt::Windows::UI::Xaml::Hosting;
+using namespace winrt::Microsoft::UI::Xaml::Hosting;
 using namespace winrt::Windows::Foundation::Numerics;
 
 // Note: Generate GUID using TlgGuid.exe tool - seriously, it won't work if you

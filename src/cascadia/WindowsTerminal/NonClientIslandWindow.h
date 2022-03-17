@@ -29,7 +29,7 @@ public:
     // this is the same for all DPIs
     static constexpr const int topBorderVisibleHeight = 1;
 
-    NonClientIslandWindow(const winrt::Windows::UI::Xaml::ElementTheme& requestedTheme) noexcept;
+    NonClientIslandWindow(const winrt::Microsoft::UI::Xaml::ElementTheme& requestedTheme) noexcept;
     virtual ~NonClientIslandWindow() override;
 
     void MakeWindow() noexcept override;
@@ -43,23 +43,23 @@ public:
     void Initialize() override;
 
     void OnAppInitialized() override;
-    void SetContent(winrt::Windows::UI::Xaml::UIElement content) override;
-    void SetTitlebarContent(winrt::Windows::UI::Xaml::UIElement content);
-    void OnApplicationThemeChanged(const winrt::Windows::UI::Xaml::ElementTheme& requestedTheme) override;
+    void SetContent(winrt::Microsoft::UI::Xaml::UIElement content) override;
+    void SetTitlebarContent(winrt::Microsoft::UI::Xaml::UIElement content);
+    void OnApplicationThemeChanged(const winrt::Microsoft::UI::Xaml::ElementTheme& requestedTheme) override;
 
 private:
     std::optional<COORD> _oldIslandPos;
 
     winrt::TerminalApp::TitlebarControl _titlebar{ nullptr };
-    winrt::Windows::UI::Xaml::UIElement _clientContent{ nullptr };
+    winrt::Microsoft::UI::Xaml::UIElement _clientContent{ nullptr };
 
     wil::unique_hbrush _backgroundBrush;
     til::color _backgroundBrushColor;
 
-    winrt::Windows::UI::Xaml::Controls::Border _dragBar{ nullptr };
+    winrt::Microsoft::UI::Xaml::Controls::Border _dragBar{ nullptr };
     wil::unique_hwnd _dragBarWindow;
 
-    winrt::Windows::UI::Xaml::ElementTheme _theme;
+    winrt::Microsoft::UI::Xaml::ElementTheme _theme;
 
     bool _isMaximized;
     bool _trackingMouse{ false };
@@ -80,7 +80,7 @@ private:
     [[nodiscard]] LRESULT _OnPaint() noexcept;
     [[nodiscard]] LRESULT _OnSetCursor(WPARAM wParam, LPARAM lParam) const noexcept;
     void _OnMaximizeChange() noexcept;
-    void _OnDragBarSizeChanged(winrt::Windows::Foundation::IInspectable sender, winrt::Windows::UI::Xaml::SizeChangedEventArgs eventArgs);
+    void _OnDragBarSizeChanged(winrt::Windows::Foundation::IInspectable sender, winrt::Microsoft::UI::Xaml::SizeChangedEventArgs eventArgs);
 
     void _SetIsBorderless(const bool borderlessEnabled) override;
     void _SetIsFullscreen(const bool fullscreenEnabled) override;

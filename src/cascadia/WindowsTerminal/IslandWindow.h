@@ -29,8 +29,8 @@ public:
     void OnMinimize() override;
     void OnRestore() override;
     virtual void OnAppInitialized();
-    virtual void SetContent(winrt::Windows::UI::Xaml::UIElement content);
-    virtual void OnApplicationThemeChanged(const winrt::Windows::UI::Xaml::ElementTheme& requestedTheme);
+    virtual void SetContent(winrt::Microsoft::UI::Xaml::UIElement content);
+    virtual void OnApplicationThemeChanged(const winrt::Microsoft::UI::Xaml::ElementTheme& requestedTheme);
     virtual RECT GetNonClientFrame(const UINT dpi) const noexcept;
     virtual SIZE GetTotalNonClientExclusiveSize(const UINT dpi) const noexcept;
 
@@ -87,8 +87,8 @@ protected:
 
     HWND _interopWindowHandle;
 
-    winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource _source;
-    winrt::Windows::UI::Xaml::Controls::Grid _rootGrid;
+    winrt::Microsoft::UI::Xaml::Hosting::DesktopWindowXamlSource _source;
+    winrt::Microsoft::UI::Xaml::Controls::Grid _rootGrid;
     wil::com_ptr<ITaskbarList3> _taskbar;
 
     std::function<void(const HWND, const RECT, winrt::Microsoft::Terminal::Settings::Model::LaunchMode& launchMode)> _pfnCreateCallback;

@@ -22,9 +22,9 @@
     X(double, Opacity, 1.0)                                                                                                                     \
     X(winrt::hstring, BackgroundImage)                                                                                                          \
     X(double, BackgroundImageOpacity, 1.0)                                                                                                      \
-    X(winrt::Windows::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, winrt::Windows::UI::Xaml::Media::Stretch::UniformToFill)            \
-    X(winrt::Windows::UI::Xaml::HorizontalAlignment, BackgroundImageHorizontalAlignment, winrt::Windows::UI::Xaml::HorizontalAlignment::Center) \
-    X(winrt::Windows::UI::Xaml::VerticalAlignment, BackgroundImageVerticalAlignment, winrt::Windows::UI::Xaml::VerticalAlignment::Center)       \
+    X(winrt::Microsoft::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, winrt::Microsoft::UI::Xaml::Media::Stretch::UniformToFill)            \
+    X(winrt::Microsoft::UI::Xaml::HorizontalAlignment, BackgroundImageHorizontalAlignment, winrt::Microsoft::UI::Xaml::HorizontalAlignment::Center) \
+    X(winrt::Microsoft::UI::Xaml::VerticalAlignment, BackgroundImageVerticalAlignment, winrt::Microsoft::UI::Xaml::VerticalAlignment::Center)       \
     X(bool, RetroTerminalEffect, false)                                                                                                         \
     X(winrt::hstring, PixelShaderPath)
 

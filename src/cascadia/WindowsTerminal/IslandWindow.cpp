@@ -14,8 +14,8 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 using namespace winrt::Windows::UI;
 using namespace winrt::Windows::UI::Composition;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Hosting;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Hosting;
 using namespace winrt::Windows::Foundation::Numerics;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 using namespace winrt::Microsoft::Terminal::Control;
@@ -309,7 +309,7 @@ void IslandWindow::Initialize()
     // stash the child interop handle so we can resize it when the main hwnd is resized
     interop->get_WindowHandle(&_interopWindowHandle);
 
-    _rootGrid = winrt::Windows::UI::Xaml::Controls::Grid();
+    _rootGrid = winrt::Microsoft::UI::Xaml::Controls::Grid();
     _source.Content(_rootGrid);
 
     // initialize the taskbar object
@@ -683,7 +683,7 @@ void IslandWindow::OnRestore()
     // TODO GH#1989 Stop rendering island content when the app is minimized.
 }
 
-void IslandWindow::SetContent(winrt::Windows::UI::Xaml::UIElement content)
+void IslandWindow::SetContent(winrt::Microsoft::UI::Xaml::UIElement content)
 {
     _rootGrid.Children().Clear();
     _rootGrid.Children().Append(content);
@@ -745,7 +745,7 @@ void IslandWindow::OnAppInitialized()
 // - arg: the ElementTheme to use as the new theme for the UI
 // Return Value:
 // - <none>
-void IslandWindow::OnApplicationThemeChanged(const winrt::Windows::UI::Xaml::ElementTheme& requestedTheme)
+void IslandWindow::OnApplicationThemeChanged(const winrt::Microsoft::UI::Xaml::ElementTheme& requestedTheme)
 {
     _rootGrid.RequestedTheme(requestedTheme);
     // Invalidate the window rect, so that we'll repaint any elements we're
