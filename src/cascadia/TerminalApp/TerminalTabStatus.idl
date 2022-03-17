@@ -3,7 +3,7 @@
 
 namespace TerminalApp
 {
-    [default_interface] runtimeclass TerminalTabStatus : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass TerminalTabStatus : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         TerminalTabStatus();
 

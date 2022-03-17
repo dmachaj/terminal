@@ -22,17 +22,17 @@ namespace winrt::TerminalApp::implementation
         void ReleaseButtons();
 
         void _MinimizeClick(winrt::Windows::Foundation::IInspectable const& sender,
-                            winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+                            winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void _MaximizeClick(winrt::Windows::Foundation::IInspectable const& sender,
-                            winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+                            winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void _CloseClick(winrt::Windows::Foundation::IInspectable const& sender,
-                         winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+                         winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
-        TYPED_EVENT(MinimizeClick, TerminalApp::MinMaxCloseControl, winrt::Windows::UI::Xaml::RoutedEventArgs);
-        TYPED_EVENT(MaximizeClick, TerminalApp::MinMaxCloseControl, winrt::Windows::UI::Xaml::RoutedEventArgs);
-        TYPED_EVENT(CloseClick, TerminalApp::MinMaxCloseControl, winrt::Windows::UI::Xaml::RoutedEventArgs);
+        TYPED_EVENT(MinimizeClick, TerminalApp::MinMaxCloseControl, winrt::Microsoft::UI::Xaml::RoutedEventArgs);
+        TYPED_EVENT(MaximizeClick, TerminalApp::MinMaxCloseControl, winrt::Microsoft::UI::Xaml::RoutedEventArgs);
+        TYPED_EVENT(CloseClick, TerminalApp::MinMaxCloseControl, winrt::Microsoft::UI::Xaml::RoutedEventArgs);
 
-        std::shared_ptr<ThrottledFuncTrailing<winrt::Windows::UI::Xaml::Controls::Button>> _displayToolTip{ nullptr };
+        std::shared_ptr<ThrottledFuncTrailing<winrt::Microsoft::UI::Xaml::Controls::Button>> _displayToolTip{ nullptr };
         std::optional<CaptionButton> _lastPressedButton{ std::nullopt };
     };
 }

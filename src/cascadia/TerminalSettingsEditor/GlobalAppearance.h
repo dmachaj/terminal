@@ -23,10 +23,10 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     public:
         GlobalAppearance();
 
-        void OnNavigatedTo(const winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs& e);
+        void OnNavigatedTo(const winrt::Microsoft::UI::Xaml::Navigation::NavigationEventArgs& e);
 
         WINRT_PROPERTY(Editor::GlobalAppearancePageNavigationState, State, nullptr);
-        GETSET_BINDABLE_ENUM_SETTING(Theme, winrt::Windows::UI::Xaml::ElementTheme, State().Globals().Theme);
+        GETSET_BINDABLE_ENUM_SETTING(Theme, winrt::Microsoft::UI::Xaml::ElementTheme, State().Globals().Theme);
         GETSET_BINDABLE_ENUM_SETTING(TabWidthMode, winrt::Microsoft::UI::Xaml::Controls::TabViewWidthMode, State().Globals().TabWidthMode);
 
     public:

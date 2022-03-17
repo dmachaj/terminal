@@ -11,7 +11,7 @@
 #include "../types/UiaTracing.h"
 
 using namespace Microsoft::Console::Types;
-using namespace winrt::Windows::UI::Xaml::Automation::Peers;
+using namespace winrt::Microsoft::UI::Xaml::Automation::Peers;
 using namespace winrt::Windows::Graphics::Display;
 
 namespace UIA
@@ -22,9 +22,9 @@ namespace UIA
 
 namespace XamlAutomation
 {
-    using winrt::Windows::UI::Xaml::Automation::SupportedTextSelection;
-    using winrt::Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
-    using winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider;
+    using winrt::Microsoft::UI::Xaml::Automation::SupportedTextSelection;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider;
 }
 
 namespace winrt::Microsoft::Terminal::Control::implementation

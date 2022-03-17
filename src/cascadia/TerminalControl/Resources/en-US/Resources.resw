@@ -145,19 +145,19 @@
     <value>Paste text</value>
     <comment>The displayed caption for dragging text onto a terminal.</comment>
   </data>
-  <data name="SearchBox_CaseSensitivity.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+  <data name="SearchBox_CaseSensitivity.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Case Sensitivity</value>
     <comment>The name of the case sensitivity button on the search box control for accessibility.</comment>
   </data>
-  <data name="SearchBox_SearchForwards.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+  <data name="SearchBox_SearchForwards.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Search Forward</value>
     <comment>The name of the search forward button for accessibility.</comment>
   </data>
-  <data name="SearchBox_SearchBackwards.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+  <data name="SearchBox_SearchBackwards.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Search Backward</value>
     <comment>The name of the search backward button for accessibility.</comment>
   </data>
-  <data name="SearchBox_TextBox.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+  <data name="SearchBox_TextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Search Text</value>
     <comment>The name of the text box on the search box control for accessibility.</comment>
   </data>
@@ -165,7 +165,7 @@
     <value>terminal</value>
     <comment>The type of control that the terminal adheres to. Used to identify how a user can interact with this kind of control.</comment>
   </data>
-  <data name="SearchBox_Close.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+  <data name="SearchBox_Close.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Close Search Box</value>
     <comment>The explanation of the search box close button used by Narrator and other screen readers.</comment>
   </data>

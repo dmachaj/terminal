@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 #include "pch.h"
-#include "winrt/Windows.UI.Xaml.Interop.h"
+#include "winrt/Microsoft.UI.Xaml.Interop.h"
 #include "HighlightedTextControl.h"
 
 #include "HighlightedTextControl.g.cpp"
@@ -10,7 +10,7 @@
 using namespace winrt;
 using namespace winrt::TerminalApp;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::UI::Text;
 using namespace winrt::Windows::Foundation;

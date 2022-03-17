@@ -13,37 +13,37 @@ using namespace Microsoft::Console::Utils;
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
-    static std::tuple<Windows::UI::Xaml::HorizontalAlignment, Windows::UI::Xaml::VerticalAlignment> ConvertConvergedAlignment(ConvergedAlignment alignment)
+    static std::tuple<Microsoft::UI::Xaml::HorizontalAlignment, Microsoft::UI::Xaml::VerticalAlignment> ConvertConvergedAlignment(ConvergedAlignment alignment)
     {
         // extract horizontal alignment
-        Windows::UI::Xaml::HorizontalAlignment horizAlign;
+        Microsoft::UI::Xaml::HorizontalAlignment horizAlign;
         switch (alignment & static_cast<ConvergedAlignment>(0x0F))
         {
         case ConvergedAlignment::Horizontal_Left:
-            horizAlign = Windows::UI::Xaml::HorizontalAlignment::Left;
+            horizAlign = Microsoft::UI::Xaml::HorizontalAlignment::Left;
             break;
         case ConvergedAlignment::Horizontal_Right:
-            horizAlign = Windows::UI::Xaml::HorizontalAlignment::Right;
+            horizAlign = Microsoft::UI::Xaml::HorizontalAlignment::Right;
             break;
         case ConvergedAlignment::Horizontal_Center:
         default:
-            horizAlign = Windows::UI::Xaml::HorizontalAlignment::Center;
+            horizAlign = Microsoft::UI::Xaml::HorizontalAlignment::Center;
             break;
         }
 
         // extract vertical alignment
-        Windows::UI::Xaml::VerticalAlignment vertAlign;
+        Microsoft::UI::Xaml::VerticalAlignment vertAlign;
         switch (alignment & static_cast<ConvergedAlignment>(0xF0))
         {
         case ConvergedAlignment::Vertical_Top:
-            vertAlign = Windows::UI::Xaml::VerticalAlignment::Top;
+            vertAlign = Microsoft::UI::Xaml::VerticalAlignment::Top;
             break;
         case ConvergedAlignment::Vertical_Bottom:
-            vertAlign = Windows::UI::Xaml::VerticalAlignment::Bottom;
+            vertAlign = Microsoft::UI::Xaml::VerticalAlignment::Bottom;
             break;
         case ConvergedAlignment::Vertical_Center:
         default:
-            vertAlign = Windows::UI::Xaml::VerticalAlignment::Center;
+            vertAlign = Microsoft::UI::Xaml::VerticalAlignment::Center;
             break;
         }
 

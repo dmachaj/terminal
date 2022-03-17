@@ -5,7 +5,7 @@
 #include "Utils.h"
 
 using namespace winrt::Windows;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
@@ -24,9 +24,9 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
     };
 
     template<>
-    struct BitmapIconSource<winrt::Windows::UI::Xaml::Controls::IconSource>
+    struct BitmapIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
     {
-        using type = winrt::Windows::UI::Xaml::Controls::BitmapIconSource;
+        using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
     };
 #pragma endregion
 
@@ -43,9 +43,9 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
     };
 
     template<>
-    struct FontIconSource<winrt::Windows::UI::Xaml::Controls::IconSource>
+    struct FontIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
     {
-        using type = winrt::Windows::UI::Xaml::Controls::FontIconSource;
+        using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
     };
 #pragma endregion
 
@@ -124,12 +124,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
                     const bool isMDL2Icon = ch >= L'\uE700' && ch <= L'\uF8FF';
                     if (isMDL2Icon)
                     {
-                        icon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe Fluent Icons, Segoe MDL2 Assets" });
+                        icon.FontFamily(winrt::Microsoft::UI::Xaml::Media::FontFamily{ L"Segoe Fluent Icons, Segoe MDL2 Assets" });
                     }
                     else
                     {
                         // Note: you _do_ need to manually set the font here.
-                        icon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
+                        icon.FontFamily(winrt::Microsoft::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
                     }
                     icon.FontSize(12);
                     icon.Glyph(iconPath);
@@ -178,7 +178,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
     // Return Value:
     // - Visible if the object was a string and wasn't the empty string.
     Foundation::IInspectable IconPathConverter::Convert(Foundation::IInspectable const& value,
-                                                        Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                        Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                         Foundation::IInspectable const& /* parameter */,
                                                         hstring const& /* language */)
     {
@@ -188,16 +188,16 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 
     // unused for one-way bindings
     Foundation::IInspectable IconPathConverter::ConvertBack(Foundation::IInspectable const& /* value */,
-                                                            Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                            Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                             Foundation::IInspectable const& /* parameter */,
                                                             hstring const& /* language */)
     {
         throw hresult_not_implemented();
     }
 
-    Windows::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceWUX(hstring path)
+    Microsoft::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceWUX(hstring path)
     {
-        return _getIconSource<Windows::UI::Xaml::Controls::IconSource>(path);
+        return _getIconSource<Microsoft::UI::Xaml::Controls::IconSource>(path);
     }
 
     Microsoft::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceMUX(hstring path)

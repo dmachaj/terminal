@@ -3,7 +3,7 @@
 
 namespace TerminalApp
 {    
-    [default_interface] runtimeclass HighlightedTextSegment : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass HighlightedTextSegment : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         HighlightedTextSegment();
         HighlightedTextSegment(String text, Boolean isMatched);
@@ -12,7 +12,7 @@ namespace TerminalApp
         Boolean IsHighlighted { get; };
     }
 
-    [default_interface] runtimeclass HighlightedText : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass HighlightedText : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         HighlightedText();
         HighlightedText(Windows.Foundation.Collections.IObservableVector<HighlightedTextSegment> segments);

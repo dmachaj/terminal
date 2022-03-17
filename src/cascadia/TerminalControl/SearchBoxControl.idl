@@ -5,7 +5,7 @@ namespace Microsoft.Terminal.Control
 {
     delegate void SearchHandler(String query, Boolean goForward, Boolean isCaseSensitive);
 
-    [default_interface] runtimeclass SearchBoxControl : Windows.UI.Xaml.Controls.UserControl
+    [default_interface] runtimeclass SearchBoxControl : Microsoft.UI.Xaml.Controls.UserControl
     {
         SearchBoxControl();
         void SetFocusOnTextbox();
@@ -13,6 +13,6 @@ namespace Microsoft.Terminal.Control
         Boolean ContainsFocus();
 
         event SearchHandler Search;
-        event Windows.Foundation.TypedEventHandler<SearchBoxControl, Windows.UI.Xaml.RoutedEventArgs> Closed;
+        event Windows.Foundation.TypedEventHandler<SearchBoxControl, Microsoft.UI.Xaml.RoutedEventArgs> Closed;
     }
 }

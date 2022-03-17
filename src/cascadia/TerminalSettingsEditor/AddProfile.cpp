@@ -12,8 +12,8 @@
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
@@ -32,13 +32,13 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     }
 
     void AddProfile::AddNewClick(const IInspectable& /*sender*/,
-                                 const Windows::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
+                                 const Microsoft::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
     {
         _State.RequestAddNew();
     }
 
     void AddProfile::DuplicateClick(const IInspectable& /*sender*/,
-                                    const Windows::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
+                                    const Microsoft::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
     {
         if (const auto selected = Profiles().SelectedItem())
         {
@@ -47,7 +47,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     }
 
     void AddProfile::ProfilesSelectionChanged(const IInspectable& /*sender*/,
-                                              const Windows::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
+                                              const Microsoft::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
     {
         if (!_IsProfileSelected)
         {

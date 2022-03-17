@@ -7,7 +7,7 @@
 #include "LaunchPageNavigationState.g.cpp"
 #include "EnumEntry.h"
 
-using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 

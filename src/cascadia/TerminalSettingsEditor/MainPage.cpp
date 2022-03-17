@@ -19,15 +19,15 @@
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
 }
 
 using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::System;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::Foundation::Collections;
 
 static const std::wstring_view launchTag{ L"Launch_Nav" };
@@ -56,9 +56,9 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
 
         _colorSchemesNavState = winrt::make<ColorSchemesPageNavigationState>(_settingsClone);
 
-        Automation::AutomationProperties::SetHelpText(SaveButton(), RS_(L"Settings_SaveSettingsButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
-        Automation::AutomationProperties::SetHelpText(ResetButton(), RS_(L"Settings_ResetSettingsButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
-        Automation::AutomationProperties::SetHelpText(OpenJsonNavItem(), RS_(L"Nav_OpenJSON/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetHelpText(SaveButton(), RS_(L"Settings_SaveSettingsButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetHelpText(ResetButton(), RS_(L"Settings_ResetSettingsButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetHelpText(OpenJsonNavItem(), RS_(L"Nav_OpenJSON/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
 
         _breadcrumbs = single_threaded_observable_vector<IInspectable>();
     }
@@ -444,7 +444,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         }
     }
 
-    void MainPage::OpenJsonTapped(IInspectable const& /*sender*/, Windows::UI::Xaml::Input::TappedRoutedEventArgs const& /*args*/)
+    void MainPage::OpenJsonTapped(IInspectable const& /*sender*/, Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& /*args*/)
     {
         const CoreWindow window = CoreWindow::GetForCurrentThread();
         const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
@@ -456,7 +456,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         _OpenJsonHandlers(nullptr, target);
     }
 
-    void MainPage::OpenJsonKeyDown(IInspectable const& /*sender*/, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    void MainPage::OpenJsonKeyDown(IInspectable const& /*sender*/, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
     {
         if (args.Key() == VirtualKey::Enter || args.Key() == VirtualKey::Space)
         {

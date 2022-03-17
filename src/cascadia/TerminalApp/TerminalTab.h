@@ -29,7 +29,7 @@ namespace winrt::TerminalApp::implementation
         winrt::Microsoft::Terminal::Control::TermControl GetActiveTerminalControl() const;
         winrt::Microsoft::Terminal::Settings::Model::Profile GetFocusedProfile() const noexcept;
 
-        void Focus(winrt::Windows::UI::Xaml::FocusState focusState) override;
+        void Focus(winrt::Microsoft::UI::Xaml::FocusState focusState) override;
 
         winrt::fire_and_forget Scroll(const int delta);
 
@@ -138,13 +138,13 @@ namespace winrt::TerminalApp::implementation
 
         winrt::hstring _runtimeTabText{};
         bool _inRename{ false };
-        winrt::Windows::UI::Xaml::Controls::TextBox::LayoutUpdated_revoker _tabRenameBoxLayoutUpdatedRevoker;
+        winrt::Microsoft::UI::Xaml::Controls::TextBox::LayoutUpdated_revoker _tabRenameBoxLayoutUpdatedRevoker;
 
         winrt::TerminalApp::ShortcutActionDispatch _dispatch;
 
         void _Setup();
 
-        std::optional<Windows::UI::Xaml::DispatcherTimer> _bellIndicatorTimer;
+        std::optional<Microsoft::UI::Xaml::DispatcherTimer> _bellIndicatorTimer;
         void _BellIndicatorTimerTick(Windows::Foundation::IInspectable const& sender, Windows::Foundation::IInspectable const& e);
 
         void _MakeTabViewItem() override;

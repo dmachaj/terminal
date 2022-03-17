@@ -3,11 +3,11 @@
 
 namespace Microsoft.Terminal.Settings.Editor
 {
-    [default_interface] runtimeclass KeyChordListener : Windows.UI.Xaml.Controls.UserControl
+    [default_interface] runtimeclass KeyChordListener : Microsoft.UI.Xaml.Controls.UserControl
     {
         KeyChordListener();
 
         Microsoft.Terminal.Control.KeyChord Keys;
-        static Windows.UI.Xaml.DependencyProperty KeysProperty { get; };
+        static Microsoft.UI.Xaml.DependencyProperty KeysProperty { get; };
     }
 }

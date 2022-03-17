@@ -22,7 +22,7 @@ Author(s):
 // This is inexplicable, but for whatever reason, cppwinrt conflicts with the
 //      SDK definition of this function, so the only fix is to undef it.
 // from WinBase.h
-// Windows::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
+// Microsoft::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
 #ifdef GetCurrentTime
 #undef GetCurrentTime
 #endif
@@ -37,21 +37,21 @@ Author(s):
 #include "winrtTaefTemplates.hpp"
 
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
-#include "winrt/Windows.UI.Xaml.Markup.h"
+#include "winrt/Microsoft.UI.Xaml.Markup.h"
 #include <winrt/Windows.system.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/windows.ui.core.h>
 #include <winrt/Windows.ui.input.h>
-#include <winrt/Windows.UI.Xaml.Controls.h>
-#include <winrt/Windows.UI.Xaml.Controls.Primitives.h>
-#include <winrt/Windows.UI.Xaml.Data.h>
-#include <winrt/Windows.ui.xaml.media.h>
-#include <winrt/Windows.ui.xaml.input.h>
-#include <winrt/Windows.UI.Xaml.Markup.h>
-#include <winrt/Windows.UI.Xaml.Documents.h>
+#include <winrt/Microsoft.UI.Xaml.Controls.h>
+#include <winrt/Microsoft.UI.Xaml.Controls.Primitives.h>
+#include <winrt/Microsoft.UI.Xaml.Data.h>
+#include <winrt/Microsoft.UI.Xaml.media.h>
+#include <winrt/Microsoft.UI.Xaml.input.h>
+#include <winrt/Microsoft.UI.Xaml.Markup.h>
+#include <winrt/Microsoft.UI.Xaml.Documents.h>
 
-#include <windows.ui.xaml.media.dxinterop.h>
+#include <Microsoft.UI.Xaml.media.dxinterop.h>
 
 #include <winrt/windows.applicationmodel.core.h>
 

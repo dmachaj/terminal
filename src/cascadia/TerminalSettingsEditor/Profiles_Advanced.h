@@ -14,14 +14,14 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     public:
         Profiles_Advanced();
 
-        void OnNavigatedTo(const Windows::UI::Xaml::Navigation::NavigationEventArgs& e);
-        void OnNavigatedFrom(const Windows::UI::Xaml::Navigation::NavigationEventArgs& e);
+        void OnNavigatedTo(const Microsoft::UI::Xaml::Navigation::NavigationEventArgs& e);
+        void OnNavigatedFrom(const Microsoft::UI::Xaml::Navigation::NavigationEventArgs& e);
 
-        WINRT_CALLBACK(PropertyChanged, Windows::UI::Xaml::Data::PropertyChangedEventHandler);
+        WINRT_CALLBACK(PropertyChanged, Microsoft::UI::Xaml::Data::PropertyChangedEventHandler);
         WINRT_PROPERTY(Editor::ProfileViewModel, Profile, nullptr);
 
     private:
-        Windows::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _ViewModelChangedRevoker;
+        Microsoft::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _ViewModelChangedRevoker;
     };
 };
 

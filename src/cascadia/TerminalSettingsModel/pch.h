@@ -18,7 +18,7 @@
 // This is inexplicable, but for whatever reason, cppwinrt conflicts with the
 //      SDK definition of this function, so the only fix is to undef it.
 // from WinBase.h
-// Windows::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
+// Microsoft::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
 #ifdef GetCurrentTime
 #undef GetCurrentTime
 #endif
@@ -32,8 +32,8 @@
 #include <winrt/Windows.Storage.h>
 #include <winrt/Windows.System.h>
 #include <winrt/Windows.UI.Core.h>
-#include <winrt/Windows.UI.Xaml.Controls.h>
-#include <winrt/Windows.UI.Xaml.Media.h>
+#include <winrt/Microsoft.UI.Xaml.Controls.h>
+#include <winrt/Microsoft.UI.Xaml.Media.h>
 
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
 

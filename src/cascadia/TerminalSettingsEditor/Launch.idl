@@ -10,7 +10,7 @@ namespace Microsoft.Terminal.Settings.Editor
         Microsoft.Terminal.Settings.Model.CascadiaSettings Settings;
     };
 
-    [default_interface] runtimeclass Launch : Windows.UI.Xaml.Controls.Page
+    [default_interface] runtimeclass Launch : Microsoft.UI.Xaml.Controls.Page
     {
         Launch();
         LaunchPageNavigationState State { get; };

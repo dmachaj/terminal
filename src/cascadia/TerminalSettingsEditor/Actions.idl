@@ -13,7 +13,7 @@ namespace Microsoft.Terminal.Settings.Editor
         String NewActionName { get; };
     }
 
-    runtimeclass KeyBindingViewModel : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    runtimeclass KeyBindingViewModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         // Settings Model side
         String Name { get; };
@@ -25,12 +25,12 @@ namespace Microsoft.Terminal.Settings.Editor
         Boolean IsNewlyAdded { get; };
         Microsoft.Terminal.Control.KeyChord ProposedKeys;
         Object ProposedAction;
-        Windows.UI.Xaml.Controls.Flyout AcceptChangesFlyout;
+        Microsoft.UI.Xaml.Controls.Flyout AcceptChangesFlyout;
         String EditButtonName { get; };
         String CancelButtonName { get; };
         String AcceptButtonName { get; };
         String DeleteButtonName { get; };
-        Windows.UI.Xaml.Media.Brush ContainerBackground { get; };
+        Microsoft.UI.Xaml.Media.Brush ContainerBackground { get; };
 
         void EnterHoverMode();
         void ExitHoverMode();
@@ -53,7 +53,7 @@ namespace Microsoft.Terminal.Settings.Editor
         Microsoft.Terminal.Settings.Model.CascadiaSettings Settings;
     };
 
-    [default_interface] runtimeclass Actions : Windows.UI.Xaml.Controls.Page
+    [default_interface] runtimeclass Actions : Microsoft.UI.Xaml.Controls.Page
     {
         Actions();
         ActionsPageNavigationState State { get; };

@@ -6,8 +6,8 @@
 #include "XamlLights.h"
 #include "VisualBellLight.g.cpp"
 
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Media;
 
 namespace winrt::Microsoft::Terminal::Control::implementation
 {

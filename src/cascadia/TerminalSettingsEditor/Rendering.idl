@@ -8,7 +8,7 @@ namespace Microsoft.Terminal.Settings.Editor
         Microsoft.Terminal.Settings.Model.GlobalAppSettings Globals;
     };
 
-    [default_interface] runtimeclass Rendering : Windows.UI.Xaml.Controls.Page
+    [default_interface] runtimeclass Rendering : Microsoft.UI.Xaml.Controls.Page
     {
         Rendering();
         RenderingPageNavigationState State { get; };

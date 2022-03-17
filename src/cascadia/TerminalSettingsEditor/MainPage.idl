@@ -27,7 +27,7 @@ namespace Microsoft.Terminal.Settings.Editor
         BreadcrumbSubPage SubPage;
     }
 
-    [default_interface] runtimeclass MainPage : Windows.UI.Xaml.Controls.Page, IHostedInWindow
+    [default_interface] runtimeclass MainPage : Microsoft.UI.Xaml.Controls.Page, IHostedInWindow
     {
         MainPage(Microsoft.Terminal.Settings.Model.CascadiaSettings settings);
 

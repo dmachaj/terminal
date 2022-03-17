@@ -9,6 +9,10 @@
   <!-- XamlApplicationToolkit -->
   <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.3\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="'$(TerminalXamlApplicationToolkit)'  == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.3\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
 
+  <!-- WinAppSDK -->
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.props" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.props')" />
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props')" />
+  
   <!-- TAEF -->
   <PropertyGroup>
     <TAEFPackagePathRoot>$(MSBuildThisFileDirectory)..\packages\Microsoft.Taef.10.60.210621002</TAEFPackagePathRoot>

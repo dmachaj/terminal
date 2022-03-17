@@ -22,11 +22,11 @@ namespace UIA
 
 namespace XamlAutomation
 {
-    using winrt::Windows::UI::Xaml::Automation::SupportedTextSelection;
-    using winrt::Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
-    using winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider;
-    using winrt::Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint;
-    using winrt::Windows::UI::Xaml::Automation::Text::TextUnit;
+    using winrt::Microsoft::UI::Xaml::Automation::SupportedTextSelection;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider;
+    using winrt::Microsoft::UI::Xaml::Automation::Text::TextPatternRangeEndpoint;
+    using winrt::Microsoft::UI::Xaml::Automation::Text::TextUnit;
 }
 
 namespace winrt::Microsoft::Terminal::Control::implementation
@@ -131,7 +131,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
             if (result.punkVal == mixedAttributeVal.get())
             {
-                return Windows::UI::Xaml::DependencyProperty::UnsetValue();
+                return Microsoft::UI::Xaml::DependencyProperty::UnsetValue();
             }
 
             [[fallthrough]];

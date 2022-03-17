@@ -84,12 +84,12 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
 
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsInEditMode, false);
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsNewlyAdded, false);
-        VIEW_MODEL_OBSERVABLE_PROPERTY(Windows::UI::Xaml::Controls::Flyout, AcceptChangesFlyout, nullptr);
+        VIEW_MODEL_OBSERVABLE_PROPERTY(Microsoft::UI::Xaml::Controls::Flyout, AcceptChangesFlyout, nullptr);
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsAutomationPeerAttached, false);
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsHovered, false);
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsContainerFocused, false);
         VIEW_MODEL_OBSERVABLE_PROPERTY(bool, IsEditButtonFocused, false);
-        VIEW_MODEL_OBSERVABLE_PROPERTY(Windows::UI::Xaml::Media::Brush, ContainerBackground, nullptr);
+        VIEW_MODEL_OBSERVABLE_PROPERTY(Microsoft::UI::Xaml::Media::Brush, ContainerBackground, nullptr);
         TYPED_EVENT(ModifyKeyBindingRequested, Editor::KeyBindingViewModel, Editor::ModifyKeyBindingEventArgs);
         TYPED_EVENT(DeleteKeyBindingRequested, Editor::KeyBindingViewModel, Terminal::Control::KeyChord);
         TYPED_EVENT(DeleteNewlyAddedKeyBinding, Editor::KeyBindingViewModel, IInspectable);
@@ -112,16 +112,16 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     public:
         Actions();
 
-        void OnNavigatedTo(const winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs& e);
-        Windows::UI::Xaml::Automation::Peers::AutomationPeer OnCreateAutomationPeer();
-        void AddNew_Click(const IInspectable& sender, const Windows::UI::Xaml::RoutedEventArgs& eventArgs);
+        void OnNavigatedTo(const winrt::Microsoft::UI::Xaml::Navigation::NavigationEventArgs& e);
+        Microsoft::UI::Xaml::Automation::Peers::AutomationPeer OnCreateAutomationPeer();
+        void AddNew_Click(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& eventArgs);
 
-        WINRT_CALLBACK(PropertyChanged, Windows::UI::Xaml::Data::PropertyChangedEventHandler);
+        WINRT_CALLBACK(PropertyChanged, Microsoft::UI::Xaml::Data::PropertyChangedEventHandler);
         WINRT_PROPERTY(Editor::ActionsPageNavigationState, State, nullptr);
         WINRT_PROPERTY(Windows::Foundation::Collections::IObservableVector<Editor::KeyBindingViewModel>, KeyBindingList);
 
     private:
-        void _ViewModelPropertyChangedHandler(const Windows::Foundation::IInspectable& senderVM, const Windows::UI::Xaml::Data::PropertyChangedEventArgs& args);
+        void _ViewModelPropertyChangedHandler(const Windows::Foundation::IInspectable& senderVM, const Microsoft::UI::Xaml::Data::PropertyChangedEventArgs& args);
         void _ViewModelDeleteKeyBindingHandler(const Editor::KeyBindingViewModel& senderVM, const Control::KeyChord& args);
         void _ViewModelModifyKeyBindingHandler(const Editor::KeyBindingViewModel& senderVM, const Editor::ModifyKeyBindingEventArgs& args);
         void _ViewModelDeleteNewlyAddedKeyBindingHandler(const Editor::KeyBindingViewModel& senderVM, const IInspectable& args);

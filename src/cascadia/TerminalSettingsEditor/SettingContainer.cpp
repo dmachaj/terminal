@@ -6,7 +6,7 @@
 #include "SettingContainer.g.cpp"
 #include "LibraryResources.h"
 
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
 {

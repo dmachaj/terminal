@@ -10,9 +10,9 @@
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Graphics::Display;
 using namespace winrt::Windows::UI;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml::Media;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 using namespace winrt::Microsoft::Terminal::Control;
 using namespace winrt::Microsoft::Terminal::TerminalConnection;
@@ -31,8 +31,8 @@ static const int CombinedPaneBorderSize = 2 * PaneBorderSize;
 static const int AnimationDurationInMilliseconds = 200;
 static const Duration AnimationDuration = DurationHelper::FromTimeSpan(winrt::Windows::Foundation::TimeSpan(std::chrono::milliseconds(AnimationDurationInMilliseconds)));
 
-winrt::Windows::UI::Xaml::Media::SolidColorBrush Pane::s_focusedBorderBrush = { nullptr };
-winrt::Windows::UI::Xaml::Media::SolidColorBrush Pane::s_unfocusedBorderBrush = { nullptr };
+winrt::Microsoft::UI::Xaml::Media::SolidColorBrush Pane::s_focusedBorderBrush = { nullptr };
+winrt::Microsoft::UI::Xaml::Media::SolidColorBrush Pane::s_unfocusedBorderBrush = { nullptr };
 
 Pane::Pane(const Profile& profile, const TermControl& control, const bool lastFocused) :
     _control{ control },
@@ -1142,7 +1142,7 @@ void Pane::_ControlGotFocusHandler(winrt::Windows::Foundation::IInspectable cons
                                    RoutedEventArgs const& /* args */)
 {
     FocusState f = FocusState::Programmatic;
-    if (const auto o = sender.try_as<winrt::Windows::UI::Xaml::Controls::Control>())
+    if (const auto o = sender.try_as<winrt::Microsoft::UI::Xaml::Controls::Control>())
     {
         f = o.FocusState();
     }
@@ -3092,7 +3092,7 @@ void Pane::_SetupResources()
     if (res.HasKey(unfocusedBorderBrushKey))
     {
         winrt::Windows::Foundation::IInspectable obj = res.Lookup(unfocusedBorderBrushKey);
-        s_unfocusedBorderBrush = obj.try_as<winrt::Windows::UI::Xaml::Media::SolidColorBrush>();
+        s_unfocusedBorderBrush = obj.try_as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
     }
     else
     {

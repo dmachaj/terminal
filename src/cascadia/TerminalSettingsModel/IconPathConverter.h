@@ -9,16 +9,16 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         IconPathConverter() = default;
 
         Windows::Foundation::IInspectable Convert(Windows::Foundation::IInspectable const& value,
-                                                  Windows::UI::Xaml::Interop::TypeName const& targetType,
+                                                  Microsoft::UI::Xaml::Interop::TypeName const& targetType,
                                                   Windows::Foundation::IInspectable const& parameter,
                                                   hstring const& language);
 
         Windows::Foundation::IInspectable ConvertBack(Windows::Foundation::IInspectable const& value,
-                                                      Windows::UI::Xaml::Interop::TypeName const& targetType,
+                                                      Microsoft::UI::Xaml::Interop::TypeName const& targetType,
                                                       Windows::Foundation::IInspectable const& parameter,
                                                       hstring const& language);
 
-        static Windows::UI::Xaml::Controls::IconSource IconSourceWUX(hstring path);
+        static Microsoft::UI::Xaml::Controls::IconSource IconSourceWUX(hstring path);
         static Microsoft::UI::Xaml::Controls::IconSource IconSourceMUX(hstring path);
     };
 }

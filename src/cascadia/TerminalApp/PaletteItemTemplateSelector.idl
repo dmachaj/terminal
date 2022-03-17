@@ -3,12 +3,12 @@
 
 namespace TerminalApp
 {
-    [default_interface] runtimeclass PaletteItemTemplateSelector : Windows.UI.Xaml.Controls.DataTemplateSelector
+    [default_interface] runtimeclass PaletteItemTemplateSelector : Microsoft.UI.Xaml.Controls.DataTemplateSelector
     {
         PaletteItemTemplateSelector();
 
-        Windows.UI.Xaml.DataTemplate TabItemTemplate;
-        Windows.UI.Xaml.DataTemplate NestedItemTemplate;
-        Windows.UI.Xaml.DataTemplate GeneralItemTemplate;
+        Microsoft.UI.Xaml.DataTemplate TabItemTemplate;
+        Microsoft.UI.Xaml.DataTemplate NestedItemTemplate;
+        Microsoft.UI.Xaml.DataTemplate GeneralItemTemplate;
     }
 }

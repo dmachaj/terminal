@@ -30,8 +30,8 @@ using namespace winrt::Windows::System;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::UI::Text;
-using namespace winrt::Windows::UI::Xaml::Controls;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace ::TerminalApp;
 using namespace ::Microsoft::Console;
 using namespace ::Microsoft::Terminal::Core;
@@ -42,7 +42,7 @@ using namespace std::chrono_literals;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
     using IInspectable = Windows::Foundation::IInspectable;
     using VirtualKeyModifiers = Windows::System::VirtualKeyModifiers;
 }
@@ -132,7 +132,7 @@ namespace winrt::TerminalApp::implementation
             // LocalTests
             try
             {
-                result = ::winrt::Windows::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsElevated();
+                result = ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsElevated();
             }
             CATCH_LOG();
             return result;
@@ -170,7 +170,7 @@ namespace winrt::TerminalApp::implementation
 
                 for (auto const& kvPair : dictionary.ThemeDictionaries())
                 {
-                    const auto themeDictionary = kvPair.Value().as<winrt::Windows::UI::Xaml::ResourceDictionary>();
+                    const auto themeDictionary = kvPair.Value().as<winrt::Microsoft::UI::Xaml::ResourceDictionary>();
 
                     if (themeDictionary.HasKey(tabViewBackgroundKey))
                     {
@@ -226,7 +226,7 @@ namespace winrt::TerminalApp::implementation
                 page->_OpenNewTerminalViaDropdown(NewTerminalArgs());
             }
         });
-        _newTabButton.Drop([weakThis{ get_weak() }](Windows::Foundation::IInspectable const&, winrt::Windows::UI::Xaml::DragEventArgs e) {
+        _newTabButton.Drop([weakThis{ get_weak() }](Windows::Foundation::IInspectable const&, winrt::Microsoft::UI::Xaml::DragEventArgs e) {
             if (auto page{ weakThis.get() })
             {
                 page->NewTerminalByDrop(e);
@@ -437,7 +437,7 @@ namespace winrt::TerminalApp::implementation
         return nullptr;
     }
 
-    winrt::fire_and_forget TerminalPage::NewTerminalByDrop(winrt::Windows::UI::Xaml::DragEventArgs& e)
+    winrt::fire_and_forget TerminalPage::NewTerminalByDrop(winrt::Microsoft::UI::Xaml::DragEventArgs& e)
     {
         Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem> items;
         try
@@ -698,7 +698,7 @@ namespace winrt::TerminalApp::implementation
         return CascadiaSettings::ApplicationVersion();
     }
 
-    void TerminalPage::_ThirdPartyNoticesOnClick(const IInspectable& /*sender*/, const Windows::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
+    void TerminalPage::_ThirdPartyNoticesOnClick(const IInspectable& /*sender*/, const Microsoft::UI::Xaml::RoutedEventArgs& /*eventArgs*/)
     {
         std::filesystem::path currentPath{ wil::GetModuleFileNameW<std::wstring>(nullptr) };
         currentPath.replace_filename(L"NOTICE.html");
@@ -887,7 +887,7 @@ namespace winrt::TerminalApp::implementation
             auto isUwp = false;
             try
             {
-                isUwp = ::winrt::Windows::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
+                isUwp = ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
             }
             CATCH_LOG();
 
@@ -1211,7 +1211,7 @@ namespace winrt::TerminalApp::implementation
     // - e: the KeyRoutedEventArgs containing info about the keystroke.
     // Return Value:
     // - <none>
-    void TerminalPage::_KeyDownHandler(Windows::Foundation::IInspectable const& /*sender*/, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+    void TerminalPage::_KeyDownHandler(Windows::Foundation::IInspectable const& /*sender*/, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
     {
         const auto keyStatus = e.KeyStatus();
         const auto vkey = gsl::narrow_cast<WORD>(e.OriginalKey());
@@ -1990,7 +1990,7 @@ namespace winrt::TerminalApp::implementation
         if (keyChord.Vkey() != VK_OEM_COMMA)
         {
             // use the XAML shortcut to give us the automatic capabilities
-            auto menuShortcut = Windows::UI::Xaml::Input::KeyboardAccelerator{};
+            auto menuShortcut = Microsoft::UI::Xaml::Input::KeyboardAccelerator{};
 
             // TODO: Modify this when https://github.com/microsoft/terminal/issues/877 is resolved
             menuShortcut.Key(static_cast<Windows::System::VirtualKey>(keyChord.Vkey()));
@@ -2935,8 +2935,8 @@ namespace winrt::TerminalApp::implementation
 
         const auto defaultBackgroundKey = winrt::box_value(L"TabViewItemHeaderBackground");
         const auto defaultForegroundKey = winrt::box_value(L"SystemControlForegroundBaseHighBrush");
-        winrt::Windows::UI::Xaml::Media::SolidColorBrush backgroundBrush;
-        winrt::Windows::UI::Xaml::Media::SolidColorBrush foregroundBrush;
+        winrt::Microsoft::UI::Xaml::Media::SolidColorBrush backgroundBrush;
+        winrt::Microsoft::UI::Xaml::Media::SolidColorBrush foregroundBrush;
 
         // TODO: Related to GH#3917 - I think if the system is set to "Dark"
         // theme, but the app is set to light theme, then this lookup still
@@ -2946,21 +2946,21 @@ namespace winrt::TerminalApp::implementation
         if (res.HasKey(defaultBackgroundKey))
         {
             winrt::Windows::Foundation::IInspectable obj = res.Lookup(defaultBackgroundKey);
-            backgroundBrush = obj.try_as<winrt::Windows::UI::Xaml::Media::SolidColorBrush>();
+            backgroundBrush = obj.try_as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
         }
         else
         {
-            backgroundBrush = winrt::Windows::UI::Xaml::Media::SolidColorBrush{ winrt::Windows::UI::Colors::Black() };
+            backgroundBrush = winrt::Microsoft::UI::Xaml::Media::SolidColorBrush{ winrt::Windows::UI::Colors::Black() };
         }
 
         if (res.HasKey(defaultForegroundKey))
         {
             winrt::Windows::Foundation::IInspectable obj = res.Lookup(defaultForegroundKey);
-            foregroundBrush = obj.try_as<winrt::Windows::UI::Xaml::Media::SolidColorBrush>();
+            foregroundBrush = obj.try_as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
         }
         else
         {
-            foregroundBrush = winrt::Windows::UI::Xaml::Media::SolidColorBrush{ winrt::Windows::UI::Colors::White() };
+            foregroundBrush = winrt::Microsoft::UI::Xaml::Media::SolidColorBrush{ winrt::Windows::UI::Colors::White() };
         }
 
         _newTabButton.Background(backgroundBrush);
@@ -3297,7 +3297,7 @@ namespace winrt::TerminalApp::implementation
         auto isUwp = false;
         try
         {
-            isUwp = ::winrt::Windows::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
+            isUwp = ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
         }
         CATCH_LOG();
 
@@ -3391,13 +3391,13 @@ namespace winrt::TerminalApp::implementation
     // - element: The TeachingTip to set the theme on.
     // Return Value:
     // - <none>
-    void TerminalPage::_UpdateTeachingTipTheme(winrt::Windows::UI::Xaml::FrameworkElement element)
+    void TerminalPage::_UpdateTeachingTipTheme(winrt::Microsoft::UI::Xaml::FrameworkElement element)
     {
         auto theme{ _settings.GlobalSettings().Theme() };
         while (element)
         {
             element.RequestedTheme(theme);
-            element = element.Parent().try_as<winrt::Windows::UI::Xaml::FrameworkElement>();
+            element = element.Parent().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>();
         }
     }
 
@@ -3430,7 +3430,7 @@ namespace winrt::TerminalApp::implementation
                     tip.Closed({ page->get_weak(), &TerminalPage::_FocusActiveControl });
                 }
             }
-            _UpdateTeachingTipTheme(WindowIdToast().try_as<winrt::Windows::UI::Xaml::FrameworkElement>());
+            _UpdateTeachingTipTheme(WindowIdToast().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>());
 
             if (page->_windowIdToast != nullptr)
             {
@@ -3565,7 +3565,7 @@ namespace winrt::TerminalApp::implementation
                     tip.Closed({ page->get_weak(), &TerminalPage::_FocusActiveControl });
                 }
             }
-            _UpdateTeachingTipTheme(RenameFailedToast().try_as<winrt::Windows::UI::Xaml::FrameworkElement>());
+            _UpdateTeachingTipTheme(RenameFailedToast().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>());
 
             if (page->_windowRenameFailedToast != nullptr)
             {
@@ -3618,7 +3618,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void TerminalPage::_WindowRenamerKeyUp(const IInspectable& sender,
-                                           winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+                                           winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
     {
         if (e.OriginalKey() == Windows::System::VirtualKey::Enter)
         {

@@ -18,9 +18,9 @@ using namespace ::Microsoft::Console::Types;
 using namespace ::Microsoft::Console::VirtualTerminal;
 using namespace ::Microsoft::Terminal::Core;
 using namespace winrt::Windows::Graphics::Display;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Input;
-using namespace winrt::Windows::UI::Xaml::Automation::Peers;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Input;
+using namespace winrt::Microsoft::UI::Xaml::Automation::Peers;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::UI::Input;
@@ -579,7 +579,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - None
     // Return Value:
     // - The automation peer for our control
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer TermControl::OnCreateAutomationPeer()
+    Microsoft::UI::Xaml::Automation::Peers::AutomationPeer TermControl::OnCreateAutomationPeer()
     {
         // MSFT 33353327: We're purposefully not using _initializedTerminal to ensure we're fully initialized.
         // Doing so makes us return nullptr when XAML requests an automation peer.
@@ -609,7 +609,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         return til::point{ til::math::rounding, _core.FontSize().Width, _core.FontSize().Height };
     }
 
-    const Windows::UI::Xaml::Thickness TermControl::GetPadding()
+    const Microsoft::UI::Xaml::Thickness TermControl::GetPadding()
     {
         return SwapChainPanel().Margin();
     }
@@ -1430,7 +1430,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - args: pointer data (i.e.: mouse, touch)
     // Return Value:
     // - true if we successfully capture the pointer, false otherwise.
-    bool TermControl::_CapturePointer(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    bool TermControl::_CapturePointer(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
         IUIElement uielem;
         if (sender.try_as(uielem))
@@ -1448,7 +1448,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - args: pointer data (i.e.: mouse, touch)
     // Return Value:
     // - true if we release capture of the pointer, false otherwise.
-    bool TermControl::_ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    bool TermControl::_ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
         IUIElement uielem;
         if (sender.try_as(uielem))
@@ -1689,7 +1689,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // Arguments:
     // - sender: The SwapChainPanel who's DPI changed. This is our _swapchainPanel.
     // - args: This param is unused in the CompositionScaleChanged event.
-    void TermControl::_SwapChainScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel const& sender,
+    void TermControl::_SwapChainScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender,
                                              Windows::Foundation::IInspectable const& /*args*/)
     {
         const auto scaleX = sender.CompositionScaleX();
@@ -2069,8 +2069,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     //      Two Double values provide isometric horizontal & vertical padding
     //      Four Double values provide independent padding for 4 sides of the bounding rectangle
     // Return Value:
-    // - Windows::UI::Xaml::Thickness object
-    Windows::UI::Xaml::Thickness TermControl::ParseThicknessFromPadding(const hstring padding)
+    // - Microsoft::UI::Xaml::Thickness object
+    Microsoft::UI::Xaml::Thickness TermControl::ParseThicknessFromPadding(const hstring padding)
     {
         const wchar_t singleCharDelim = L',';
         std::wstringstream tokenStream(padding.c_str());
@@ -2474,7 +2474,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         if (auto loadedUiElement{ FindName(L"RendererFailedNotice") })
         {
-            if (auto uiElement{ loadedUiElement.try_as<::winrt::Windows::UI::Xaml::UIElement>() })
+            if (auto uiElement{ loadedUiElement.try_as<::winrt::Microsoft::UI::Xaml::UIElement>() })
             {
                 uiElement.Visibility(Visibility::Visible);
             }
@@ -2609,7 +2609,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - sender: not used
     // - args: event data
     void TermControl::_PointerExitedHandler(Windows::Foundation::IInspectable const& /*sender*/,
-                                            Windows::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
+                                            Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
     {
         _core.ClearHoveredCell();
     }

@@ -18,7 +18,7 @@ namespace Microsoft.Terminal.Control
     }
 
     [default_interface]
-    runtimeclass TSFInputControl : Windows.UI.Xaml.Controls.UserControl
+    runtimeclass TSFInputControl : Microsoft.UI.Xaml.Controls.UserControl
     {
         TSFInputControl();
 

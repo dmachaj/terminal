@@ -3,7 +3,7 @@
 #include "EmptyStringVisibilityConverter.g.cpp"
 
 using namespace winrt::Windows;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::TerminalApp::implementation
 {
@@ -19,7 +19,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - Visible if the object was a string and wasn't the empty string.
     Foundation::IInspectable EmptyStringVisibilityConverter::Convert(Foundation::IInspectable const& value,
-                                                                     Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                                     Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                                      Foundation::IInspectable const& /* parameter */,
                                                                      hstring const& /* language */)
     {
@@ -29,7 +29,7 @@ namespace winrt::TerminalApp::implementation
 
     // unused for one-way bindings
     Foundation::IInspectable EmptyStringVisibilityConverter::ConvertBack(Foundation::IInspectable const& /* value */,
-                                                                         Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                                         Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                                          Foundation::IInspectable const& /* parameter */,
                                                                          hstring const& /* language */)
     {

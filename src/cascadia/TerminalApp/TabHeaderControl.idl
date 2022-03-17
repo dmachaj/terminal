@@ -6,7 +6,7 @@ namespace TerminalApp
 {
     delegate void TitleChangeRequestedArgs(String title);
 
-    [default_interface] runtimeclass TabHeaderControl : Windows.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass TabHeaderControl : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         String Title { get; set; };
         Double RenamerMaxWidth { get; set; };

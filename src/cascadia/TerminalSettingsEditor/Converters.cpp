@@ -12,9 +12,9 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         return to_hstring((int)number) + L"%";
     }
 
-    winrt::Windows::UI::Xaml::Media::SolidColorBrush Converters::ColorToBrush(winrt::Windows::UI::Color color)
+    winrt::Microsoft::UI::Xaml::Media::SolidColorBrush Converters::ColorToBrush(winrt::Windows::UI::Color color)
     {
-        return Windows::UI::Xaml::Media::SolidColorBrush(color);
+        return Microsoft::UI::Xaml::Media::SolidColorBrush(color);
     }
 
     winrt::Windows::UI::Text::FontWeight Converters::DoubleToFontWeight(double value)
@@ -32,9 +32,9 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         return !value;
     }
 
-    winrt::Windows::UI::Xaml::Visibility Converters::InvertedBooleanToVisibility(bool value)
+    winrt::Microsoft::UI::Xaml::Visibility Converters::InvertedBooleanToVisibility(bool value)
     {
-        return value ? winrt::Windows::UI::Xaml::Visibility::Collapsed : winrt::Windows::UI::Xaml::Visibility::Visible;
+        return value ? winrt::Microsoft::UI::Xaml::Visibility::Collapsed : winrt::Microsoft::UI::Xaml::Visibility::Visible;
     }
 
     winrt::Windows::UI::Color Converters::LightenColor(winrt::Windows::UI::Color color)
@@ -95,9 +95,9 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     {
         return expected != actual;
     }
-    winrt::Windows::UI::Xaml::Visibility Converters::StringNotEmptyToVisibility(winrt::hstring value)
+    winrt::Microsoft::UI::Xaml::Visibility Converters::StringNotEmptyToVisibility(winrt::hstring value)
     {
-        return value.empty() ? winrt::Windows::UI::Xaml::Visibility::Collapsed : winrt::Windows::UI::Xaml::Visibility::Visible;
+        return value.empty() ? winrt::Microsoft::UI::Xaml::Visibility::Collapsed : winrt::Microsoft::UI::Xaml::Visibility::Visible;
     }
 
     // Method Description:

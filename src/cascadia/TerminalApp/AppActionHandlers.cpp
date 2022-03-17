@@ -10,7 +10,7 @@
 #include "Utils.h"
 
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::UI::Text;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::Foundation::Collections;
@@ -843,7 +843,7 @@ namespace winrt::TerminalApp::implementation
             }
         }
 
-        _UpdateTeachingTipTheme(WindowRenamer().try_as<winrt::Windows::UI::Xaml::FrameworkElement>());
+        _UpdateTeachingTipTheme(WindowRenamer().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>());
         WindowRenamer().IsOpen(true);
 
         // PAIN: We can't immediately focus the textbox in the TeachingTip. It's

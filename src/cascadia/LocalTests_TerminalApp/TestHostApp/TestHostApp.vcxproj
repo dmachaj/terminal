@@ -14,6 +14,10 @@
     <UseWmXml>true</UseWmXml>
     <ConfigurationType>Application</ConfigurationType>
     <OpenConsoleCppWinRTProject>true</OpenConsoleCppWinRTProject>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
 
     <!--
     These two properties are very important!
@@ -124,8 +128,6 @@
       <Implementation>..\build\Binaries\$(_TAEFPlatformName)\TE.AppxUnitTestClient.dll</Implementation>
     </Reference>
   </ItemGroup>
-
-  <Import Project="$(OpenConsoleDir)\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('$(OpenConsoleDir)\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets')" />
 
   <Import Project="$(OpenConsoleDir)\src\common.build.post.props" />
 

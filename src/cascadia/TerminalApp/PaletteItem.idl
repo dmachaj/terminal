@@ -3,7 +3,7 @@
 
 namespace TerminalApp
 {
-    unsealed runtimeclass PaletteItem : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    unsealed runtimeclass PaletteItem : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         String Name;
         String KeyChordText;

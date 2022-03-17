@@ -79,7 +79,7 @@ private:                                                                        
 // Remember to register your dependency property in the respective cpp file.
 #define DEPENDENCY_PROPERTY(type, name)                                  \
 public:                                                                  \
-    static winrt::Windows::UI::Xaml::DependencyProperty name##Property() \
+    static winrt::Microsoft::UI::Xaml::DependencyProperty name##Property() \
     {                                                                    \
         return _##name##Property;                                        \
     }                                                                    \
@@ -93,7 +93,7 @@ public:                                                                  \
     }                                                                    \
                                                                          \
 private:                                                                 \
-    static winrt::Windows::UI::Xaml::DependencyProperty _##name##Property;
+    static winrt::Microsoft::UI::Xaml::DependencyProperty _##name##Property;
 
 namespace winrt::Microsoft::Terminal::Settings
 {
@@ -110,9 +110,9 @@ namespace winrt::Microsoft::Terminal::Settings
 // may not have popups in them. Rather than define the same exact body for all
 // their ViewChanging events, the HasScrollViewer struct will just do it for
 // you!
-inline void DismissAllPopups(winrt::Windows::UI::Xaml::XamlRoot const& xamlRoot)
+inline void DismissAllPopups(winrt::Microsoft::UI::Xaml::XamlRoot const& xamlRoot)
 {
-    const auto popups{ winrt::Windows::UI::Xaml::Media::VisualTreeHelper::GetOpenPopupsForXamlRoot(xamlRoot) };
+    const auto popups{ winrt::Microsoft::UI::Xaml::Media::VisualTreeHelper::GetOpenPopupsForXamlRoot(xamlRoot) };
     for (const auto& p : popups)
     {
         p.IsOpen(false);
@@ -124,7 +124,7 @@ struct HasScrollViewer
 {
     // When the ScrollViewer scrolls, dismiss any popups we might have.
     void ViewChanging(winrt::Windows::Foundation::IInspectable const& sender,
-                      const winrt::Windows::UI::Xaml::Controls::ScrollViewerViewChangingEventArgs& /*e*/)
+                      const winrt::Microsoft::UI::Xaml::Controls::ScrollViewerViewChangingEventArgs& /*e*/)
     {
         // Inside this struct, we can't get at the XamlRoot() that our subclass
         // implements. I mean, _we_ can, but when XAML does it's code
@@ -132,7 +132,7 @@ struct HasScrollViewer
         //
         // Fortunately for us, we don't need to! The sender is a UIElement, so
         // we can just get _their_ XamlRoot().
-        if (const auto& uielem{ sender.try_as<winrt::Windows::UI::Xaml::UIElement>() })
+        if (const auto& uielem{ sender.try_as<winrt::Microsoft::UI::Xaml::UIElement>() })
         {
             DismissAllPopups(uielem.XamlRoot());
         }

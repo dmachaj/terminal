@@ -30,7 +30,7 @@ using namespace ::Microsoft::Terminal::Settings::Model;
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
     // Global Settings
-    DEFINE_ENUM_MAP(winrt::Windows::UI::Xaml::ElementTheme, ElementTheme);
+    DEFINE_ENUM_MAP(winrt::Microsoft::UI::Xaml::ElementTheme, ElementTheme);
     DEFINE_ENUM_MAP(winrt::Microsoft::UI::Xaml::Controls::TabViewWidthMode, TabViewWidthMode);
     DEFINE_ENUM_MAP(Model::FirstWindowPreference, FirstWindowPreference);
     DEFINE_ENUM_MAP(Model::LaunchMode, LaunchMode);
@@ -41,7 +41,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
     // Profile Settings
     DEFINE_ENUM_MAP(Model::CloseOnExitMode, CloseOnExitMode);
     DEFINE_ENUM_MAP(Microsoft::Terminal::Control::ScrollbarState, ScrollbarState);
-    DEFINE_ENUM_MAP(Windows::UI::Xaml::Media::Stretch, BackgroundImageStretchMode);
+    DEFINE_ENUM_MAP(Microsoft::UI::Xaml::Media::Stretch, BackgroundImageStretchMode);
     DEFINE_ENUM_MAP(Microsoft::Terminal::Control::TextAntialiasingMode, TextAntialiasingMode);
     DEFINE_ENUM_MAP(Microsoft::Terminal::Core::CursorStyle, CursorStyle);
     DEFINE_ENUM_MAP(Microsoft::Terminal::Settings::Model::IntenseStyle, IntenseTextStyle);

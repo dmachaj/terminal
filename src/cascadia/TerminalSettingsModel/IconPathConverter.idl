@@ -11,11 +11,11 @@ namespace Microsoft.Terminal.Settings.Model
     // The default attribute is optimal if you won't be adding instance members
     // to IconPathConverter, because no QueryInterface will be
     // required to call the IValueConverter methods
-    runtimeclass IconPathConverter : [default] Windows.UI.Xaml.Data.IValueConverter
+    runtimeclass IconPathConverter : [default] Microsoft.UI.Xaml.Data.IValueConverter
     {
         IconPathConverter();
 
-        static Windows.UI.Xaml.Controls.IconSource IconSourceWUX(String path);
+        static Microsoft.UI.Xaml.Controls.IconSource IconSourceWUX(String path);
         static Microsoft.UI.Xaml.Controls.IconSource IconSourceMUX(String path);
     };
 

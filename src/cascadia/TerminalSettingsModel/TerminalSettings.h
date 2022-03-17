@@ -128,9 +128,9 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         INHERITABLE_SETTING(Model::TerminalSettings, hstring, BackgroundImage);
         INHERITABLE_SETTING(Model::TerminalSettings, double, BackgroundImageOpacity, 1.0);
 
-        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Windows::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, winrt::Windows::UI::Xaml::Media::Stretch::UniformToFill);
-        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Windows::UI::Xaml::HorizontalAlignment, BackgroundImageHorizontalAlignment, winrt::Windows::UI::Xaml::HorizontalAlignment::Center);
-        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Windows::UI::Xaml::VerticalAlignment, BackgroundImageVerticalAlignment, winrt::Windows::UI::Xaml::VerticalAlignment::Center);
+        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Microsoft::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, winrt::Microsoft::UI::Xaml::Media::Stretch::UniformToFill);
+        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Microsoft::UI::Xaml::HorizontalAlignment, BackgroundImageHorizontalAlignment, winrt::Microsoft::UI::Xaml::HorizontalAlignment::Center);
+        INHERITABLE_SETTING(Model::TerminalSettings, winrt::Microsoft::UI::Xaml::VerticalAlignment, BackgroundImageVerticalAlignment, winrt::Microsoft::UI::Xaml::VerticalAlignment::Center);
 
         INHERITABLE_SETTING(Model::TerminalSettings, Microsoft::Terminal::Control::IKeyBindings, KeyBindings, nullptr);
 

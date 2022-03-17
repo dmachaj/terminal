@@ -8,9 +8,9 @@
 using namespace winrt;
 using namespace winrt::Windows::ApplicationModel::Activation;
 using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
-using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
 
 namespace winrt::TerminalApp::implementation
 {
@@ -30,7 +30,7 @@ namespace winrt::TerminalApp::implementation
         // Disable XAML's automatic backplating of text when in High Contrast
         // mode: we want full control of and responsibility for the foreground
         // and background colors that we draw in XAML.
-        HighContrastAdjustment(::winrt::Windows::UI::Xaml::ApplicationHighContrastAdjustment::None);
+        HighContrastAdjustment(::winrt::Microsoft::UI::Xaml::ApplicationHighContrastAdjustment::None);
     }
 
     AppLogic App::Logic()

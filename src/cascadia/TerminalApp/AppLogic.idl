@@ -60,7 +60,7 @@ namespace TerminalApp
         void Quit();
 
         void LoadSettings();
-        Windows.UI.Xaml.UIElement GetRoot();
+        Microsoft.UI.Xaml.UIElement GetRoot();
 
         void SetInboundListener();
 
@@ -84,7 +84,7 @@ namespace TerminalApp
         Boolean CenterOnLaunch { get; };
 
         InitialPosition GetInitialPosition(Int64 defaultInitialX, Int64 defaultInitialY);
-        Windows.UI.Xaml.ElementTheme GetRequestedTheme();
+        Microsoft.UI.Xaml.ElementTheme GetRequestedTheme();
         Microsoft.Terminal.Settings.Model.LaunchMode GetLaunchMode();
         Boolean GetShowTabsInTitlebar();
         Boolean GetInitialAlwaysOnTop();
@@ -108,10 +108,10 @@ namespace TerminalApp
 
         Windows.Foundation.Collections.IMapView<Microsoft.Terminal.Control.KeyChord, Microsoft.Terminal.Settings.Model.Command> GlobalHotkeys();
 
-        event Windows.Foundation.TypedEventHandler<Object, Windows.UI.Xaml.UIElement> SetTitleBarContent;
+        event Windows.Foundation.TypedEventHandler<Object, Microsoft.UI.Xaml.UIElement> SetTitleBarContent;
         event Windows.Foundation.TypedEventHandler<Object, String> TitleChanged;
         event Windows.Foundation.TypedEventHandler<Object, LastTabClosedEventArgs> LastTabClosed;
-        event Windows.Foundation.TypedEventHandler<Object, Windows.UI.Xaml.ElementTheme> RequestedThemeChanged;
+        event Windows.Foundation.TypedEventHandler<Object, Microsoft.UI.Xaml.ElementTheme> RequestedThemeChanged;
         event Windows.Foundation.TypedEventHandler<Object, Object> FocusModeChanged;
         event Windows.Foundation.TypedEventHandler<Object, Object> FullscreenChanged;
         event Windows.Foundation.TypedEventHandler<Object, Object> ChangeMaximizeRequested;
