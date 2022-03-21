@@ -6,18 +6,21 @@
 #include "App.g.h"
 #include "App.base.h"
 
+//#include <winrt/Microsoft.UI.Xaml.Hosting.h>
+
 namespace winrt::TerminalApp::implementation
 {
     struct App : AppT2<App>
     {
     public:
         App();
-        void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs const&);
+        void OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const&);
 
         TerminalApp::AppLogic Logic();
 
     private:
-        bool _isUwp = false;
+        //bool _isUwp = false;
+        winrt::Microsoft::UI::Xaml::Window window{ nullptr };
     };
 }
 

@@ -854,7 +854,7 @@ namespace winrt::TerminalApp::implementation
     // - eventArgs: the event's constituent arguments
     void TerminalPage::_OnTabClick(const IInspectable& sender, const Microsoft::UI::Xaml::Input::PointerRoutedEventArgs& eventArgs)
     {
-        if (eventArgs.GetCurrentPoint(*this).Properties().IsMiddleButtonPressed())
+        if (eventArgs.GetCurrentPoint(this->Root()).Properties().IsMiddleButtonPressed())
         {
             const auto tabViewItem = sender.try_as<MUX::Controls::TabViewItem>();
             if (auto tab{ _GetTabByTabViewItem(tabViewItem) })
@@ -863,7 +863,7 @@ namespace winrt::TerminalApp::implementation
             }
             eventArgs.Handled(true);
         }
-        else if (eventArgs.GetCurrentPoint(*this).Properties().IsRightButtonPressed())
+        else if (eventArgs.GetCurrentPoint(this->Root()).Properties().IsRightButtonPressed())
         {
             eventArgs.Handled(true);
         }

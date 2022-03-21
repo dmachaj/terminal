@@ -179,7 +179,8 @@ namespace winrt::TerminalApp::implementation
                         const til::color backgroundColor = backgroundSolidBrush.Color();
 
                         const auto acrylicBrush = Media::AcrylicBrush();
-                        acrylicBrush.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
+                        // WinAppSDK feature loss
+                        //acrylicBrush.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
                         acrylicBrush.FallbackColor(backgroundColor);
                         acrylicBrush.TintColor(backgroundColor);
                         acrylicBrush.TintOpacity(0.5);
@@ -726,7 +727,7 @@ namespace winrt::TerminalApp::implementation
         {
             if (presenter.CanShowDialog())
             {
-                co_return co_await presenter.ShowDialog(FindName(name).try_as<WUX::Controls::ContentDialog>());
+                co_return co_await presenter.ShowDialog(this->Root().FindName(name).try_as<WUX::Controls::ContentDialog>());
             }
         }
         co_return ContentDialogResult::None;
@@ -966,22 +967,31 @@ namespace winrt::TerminalApp::implementation
     void TerminalPage::_OpenNewTerminalViaDropdown(const NewTerminalArgs newTerminalArgs)
     {
         // if alt is pressed, open a pane
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
-        const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
-        const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const winrt::Microsoft::UI::Xaml::Window window = *this;
+        //const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
+        //const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
+        const auto rAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightMenu);
+        const auto lAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftMenu);
         const bool altPressed = WI_IsFlagSet(lAltState, CoreVirtualKeyStates::Down) ||
                                 WI_IsFlagSet(rAltState, CoreVirtualKeyStates::Down);
 
-        const auto shiftState{ window.GetKeyState(VirtualKey::Shift) };
-        const auto rShiftState = window.GetKeyState(VirtualKey::RightShift);
-        const auto lShiftState = window.GetKeyState(VirtualKey::LeftShift);
+        const auto shiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift);
+        const auto rShiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightShift);
+        const auto lShiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftShift);
+        //const auto shiftState{ window.GetKeyState(VirtualKey::Shift) };
+        //const auto rShiftState = window.GetKeyState(VirtualKey::RightShift);
+        //const auto lShiftState = window.GetKeyState(VirtualKey::LeftShift);
         const auto shiftPressed{ WI_IsFlagSet(shiftState, CoreVirtualKeyStates::Down) ||
                                  WI_IsFlagSet(lShiftState, CoreVirtualKeyStates::Down) ||
                                  WI_IsFlagSet(rShiftState, CoreVirtualKeyStates::Down) };
 
-        const auto ctrlState{ window.GetKeyState(VirtualKey::Control) };
-        const auto rCtrlState = window.GetKeyState(VirtualKey::RightControl);
-        const auto lCtrlState = window.GetKeyState(VirtualKey::LeftControl);
+        const auto ctrlState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Control);
+        const auto rCtrlState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightControl);
+        const auto lCtrlState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftControl);
+        //const auto ctrlState{ window.GetKeyState(VirtualKey::Control) };
+        //const auto rCtrlState = window.GetKeyState(VirtualKey::RightControl);
+        //const auto lCtrlState = window.GetKeyState(VirtualKey::LeftControl);
         const auto ctrlPressed{ WI_IsFlagSet(ctrlState, CoreVirtualKeyStates::Down) ||
                                 WI_IsFlagSet(rCtrlState, CoreVirtualKeyStates::Down) ||
                                 WI_IsFlagSet(lCtrlState, CoreVirtualKeyStates::Down) };
@@ -1149,18 +1159,23 @@ namespace winrt::TerminalApp::implementation
     void TerminalPage::_SettingsButtonOnClick(const IInspectable&,
                                               const RoutedEventArgs&)
     {
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
 
         // check alt state
-        const auto rAltState{ window.GetKeyState(VirtualKey::RightMenu) };
-        const auto lAltState{ window.GetKeyState(VirtualKey::LeftMenu) };
+        const auto rAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightMenu);
+        const auto lAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftMenu);
+        //const auto rAltState{ window.GetKeyState(VirtualKey::RightMenu) };
+        //const auto lAltState{ window.GetKeyState(VirtualKey::LeftMenu) };
         const bool altPressed{ WI_IsFlagSet(lAltState, CoreVirtualKeyStates::Down) ||
                                WI_IsFlagSet(rAltState, CoreVirtualKeyStates::Down) };
 
         // check shift state
-        const auto shiftState{ window.GetKeyState(VirtualKey::Shift) };
-        const auto lShiftState{ window.GetKeyState(VirtualKey::LeftShift) };
-        const auto rShiftState{ window.GetKeyState(VirtualKey::RightShift) };
+        const auto shiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift);
+        const auto lShiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftShift);
+        const auto rShiftState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightShift);
+        //const auto shiftState{ window.GetKeyState(VirtualKey::Shift) };
+        //const auto lShiftState{ window.GetKeyState(VirtualKey::LeftShift) };
+        //const auto rShiftState{ window.GetKeyState(VirtualKey::RightShift) };
         const auto shiftPressed{ WI_IsFlagSet(shiftState, CoreVirtualKeyStates::Down) ||
                                  WI_IsFlagSet(lShiftState, CoreVirtualKeyStates::Down) ||
                                  WI_IsFlagSet(rShiftState, CoreVirtualKeyStates::Down) };
@@ -1291,7 +1306,7 @@ namespace winrt::TerminalApp::implementation
     // - The Microsoft::Terminal::Core::ControlKeyStates representing the modifier key states.
     ControlKeyStates TerminalPage::_GetPressedModifierKeys() noexcept
     {
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
         // DONT USE
         //      != CoreVirtualKeyStates::None
         // OR
@@ -1320,7 +1335,8 @@ namespace winrt::TerminalApp::implementation
 
         for (const auto& mod : modifiers)
         {
-            const auto state = window.GetKeyState(mod.vkey);
+            const auto state = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(mod.vkey);
+            //const auto state = window.GetKeyState(mod.vkey);
             const auto isDown = WI_IsFlagSet(state, CoreVirtualKeyStates::Down);
 
             if (isDown)
@@ -2157,7 +2173,7 @@ namespace winrt::TerminalApp::implementation
                 co_await winrt::resume_foreground(Dispatcher());
 
                 // We have to initialize the dialog here to be able to change the text of the text block within it
-                FindName(L"MultiLinePasteDialog").try_as<WUX::Controls::ContentDialog>();
+                this->Root().FindName(L"MultiLinePasteDialog").try_as<WUX::Controls::ContentDialog>();
                 ClipboardText().Text(text);
 
                 // The vertical offset on the scrollbar does not reset automatically, so reset it manually
@@ -2219,7 +2235,7 @@ namespace winrt::TerminalApp::implementation
         if (auto presenter{ _dialogPresenter.get() })
         {
             // FindName needs to be called first to actually load the xaml object
-            auto unopenedUriDialog = FindName(L"CouldNotOpenUriDialog").try_as<WUX::Controls::ContentDialog>();
+            auto unopenedUriDialog = this->Root().FindName(L"CouldNotOpenUriDialog").try_as<WUX::Controls::ContentDialog>();
 
             // Insert the reason and the URI
             CouldNotOpenUriReason().Text(reason);
@@ -2299,7 +2315,7 @@ namespace winrt::TerminalApp::implementation
         if (auto presenter{ _dialogPresenter.get() })
         {
             // FindName needs to be called first to actually load the xaml object
-            auto controlNoticeDialog = FindName(L"ControlNoticeDialog").try_as<WUX::Controls::ContentDialog>();
+            auto controlNoticeDialog = this->Root().FindName(L"ControlNoticeDialog").try_as<WUX::Controls::ContentDialog>();
 
             ControlNoticeDialog().Title(winrt::box_value(title));
 
@@ -2480,9 +2496,11 @@ namespace winrt::TerminalApp::implementation
         TerminalConnection::ITerminalConnection debugConnection{ nullptr };
         if (_settings.GlobalSettings().DebugFeaturesEnabled())
         {
-            const CoreWindow window = CoreWindow::GetForCurrentThread();
-            const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
-            const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
+            //const CoreWindow window = CoreWindow::GetForCurrentThread();
+            const auto rAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightMenu);
+            const auto lAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftMenu);
+            //const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
+            //const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
             const bool bothAltsPressed = WI_IsFlagSet(lAltState, CoreVirtualKeyStates::Down) &&
                                          WI_IsFlagSet(rAltState, CoreVirtualKeyStates::Down);
             if (bothAltsPressed)
@@ -3251,11 +3269,11 @@ namespace winrt::TerminalApp::implementation
     // Method Description:
     // - Displays a dialog stating the "Touch Keyboard and Handwriting Panel
     //   Service" is disabled.
-    void TerminalPage::ShowKeyboardServiceWarning() const
+    void TerminalPage::ShowKeyboardServiceWarning() //const
     {
         if (!_IsMessageDismissed(InfoBarMessage::KeyboardServiceWarning))
         {
-            if (const auto keyboardServiceWarningInfoBar = FindName(L"KeyboardServiceWarningInfoBar").try_as<MUX::Controls::InfoBar>())
+            if (const auto keyboardServiceWarningInfoBar = Root().FindName(L"KeyboardServiceWarningInfoBar").try_as<MUX::Controls::InfoBar>())
             {
                 keyboardServiceWarningInfoBar.IsOpen(true);
             }
@@ -3264,7 +3282,7 @@ namespace winrt::TerminalApp::implementation
 
     // Method Description:
     // - Displays a info popup guiding the user into setting their default terminal.
-    void TerminalPage::ShowSetAsDefaultInfoBar() const
+    void TerminalPage::ShowSetAsDefaultInfoBar() //const
     {
         if (!CascadiaSettings::IsDefaultTerminalAvailable() || _IsMessageDismissed(InfoBarMessage::SetAsDefault))
         {
@@ -3279,7 +3297,7 @@ namespace winrt::TerminalApp::implementation
             return;
         }
 
-        if (const auto infoBar = FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
+        if (const auto infoBar = this->Root().FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
         {
             TraceLoggingWrite(g_hTerminalAppProvider, "SetAsDefaultTipPresented", TraceLoggingKeyword(MICROSOFT_KEYWORD_MEASURES), TelemetryPrivacyDataTag(PDT_ProductAndServicePerformance));
             infoBar.IsOpen(true);
@@ -3422,7 +3440,7 @@ namespace winrt::TerminalApp::implementation
             // create the toast for it.
             if (page->_windowIdToast == nullptr)
             {
-                if (MUX::Controls::TeachingTip tip{ page->FindName(L"WindowIdToast").try_as<MUX::Controls::TeachingTip>() })
+                if (MUX::Controls::TeachingTip tip{ page->Root().FindName(L"WindowIdToast").try_as<MUX::Controls::TeachingTip>() })
                 {
                     page->_windowIdToast = std::make_shared<Toast>(tip);
                     // Make sure to use the weak ref when setting up this
@@ -3557,7 +3575,7 @@ namespace winrt::TerminalApp::implementation
             // create the toast for it.
             if (page->_windowRenameFailedToast == nullptr)
             {
-                if (MUX::Controls::TeachingTip tip{ page->FindName(L"RenameFailedToast").try_as<MUX::Controls::TeachingTip>() })
+                if (MUX::Controls::TeachingTip tip{ page->Root().FindName(L"RenameFailedToast").try_as<MUX::Controls::TeachingTip>() })
                 {
                     page->_windowRenameFailedToast = std::make_shared<Toast>(tip);
                     // Make sure to use the weak ref when setting up this
@@ -3750,7 +3768,7 @@ namespace winrt::TerminalApp::implementation
     // - sender: the ICoreState instance containing the connection state
     // Return Value:
     // - <none>
-    winrt::fire_and_forget TerminalPage::_ConnectionStateChangedHandler(const IInspectable& sender, const IInspectable& /*args*/) const
+    winrt::fire_and_forget TerminalPage::_ConnectionStateChangedHandler(const IInspectable& sender, const IInspectable& /*args*/) //const
     {
         if (const auto coreState{ sender.try_as<winrt::Microsoft::Terminal::Control::ICoreState>() })
         {
@@ -3758,7 +3776,7 @@ namespace winrt::TerminalApp::implementation
             if (newConnectionState == ConnectionState::Failed && !_IsMessageDismissed(InfoBarMessage::CloseOnExitInfo))
             {
                 co_await winrt::resume_foreground(Dispatcher());
-                if (const auto infoBar = FindName(L"CloseOnExitInfoBar").try_as<MUX::Controls::InfoBar>())
+                if (const auto infoBar = this->Root().FindName(L"CloseOnExitInfoBar").try_as<MUX::Controls::InfoBar>())
                 {
                     infoBar.IsOpen(true);
                 }
@@ -3773,10 +3791,10 @@ namespace winrt::TerminalApp::implementation
     // - <none>
     // Return Value:
     // - <none>
-    void TerminalPage::_CloseOnExitInfoDismissHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/) const
+    void TerminalPage::_CloseOnExitInfoDismissHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/)// const
     {
         _DismissMessage(InfoBarMessage::CloseOnExitInfo);
-        if (const auto infoBar = FindName(L"CloseOnExitInfoBar").try_as<MUX::Controls::InfoBar>())
+        if (const auto infoBar = this->Root().FindName(L"CloseOnExitInfoBar").try_as<MUX::Controls::InfoBar>())
         {
             infoBar.IsOpen(false);
         }
@@ -3789,10 +3807,10 @@ namespace winrt::TerminalApp::implementation
     // - <none>
     // Return Value:
     // - <none>
-    void TerminalPage::_KeyboardServiceWarningInfoDismissHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/) const
+    void TerminalPage::_KeyboardServiceWarningInfoDismissHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/)// const
     {
         _DismissMessage(InfoBarMessage::KeyboardServiceWarning);
-        if (const auto infoBar = FindName(L"KeyboardServiceWarningInfoBar").try_as<MUX::Controls::InfoBar>())
+        if (const auto infoBar = this->Root().FindName(L"KeyboardServiceWarningInfoBar").try_as<MUX::Controls::InfoBar>())
         {
             infoBar.IsOpen(false);
         }
@@ -3808,7 +3826,7 @@ namespace winrt::TerminalApp::implementation
     void TerminalPage::_SetAsDefaultDismissHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/)
     {
         _DismissMessage(InfoBarMessage::SetAsDefault);
-        if (const auto infoBar = FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
+        if (const auto infoBar = this->Root().FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
         {
             infoBar.IsOpen(false);
         }
@@ -3822,7 +3840,7 @@ namespace winrt::TerminalApp::implementation
     // - Dismisses the Default Terminal tip and opens the settings.
     void TerminalPage::_SetAsDefaultOpenSettingsHandler(const IInspectable& /*sender*/, const IInspectable& /*args*/)
     {
-        if (const auto infoBar = FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
+        if (const auto infoBar = this->Root().FindName(L"SetAsDefaultInfoBar").try_as<MUX::Controls::InfoBar>())
         {
             infoBar.IsOpen(false);
         }

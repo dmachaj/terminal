@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IconPathConverter.g.h"
+#include <winrt/windows.ui.xaml.interop.h>
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
@@ -9,12 +10,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         IconPathConverter() = default;
 
         Windows::Foundation::IInspectable Convert(Windows::Foundation::IInspectable const& value,
-                                                  Microsoft::UI::Xaml::Interop::TypeName const& targetType,
+                                                  Windows::UI::Xaml::Interop::TypeName const& targetType,
                                                   Windows::Foundation::IInspectable const& parameter,
                                                   hstring const& language);
 
         Windows::Foundation::IInspectable ConvertBack(Windows::Foundation::IInspectable const& value,
-                                                      Microsoft::UI::Xaml::Interop::TypeName const& targetType,
+                                                      Windows::UI::Xaml::Interop::TypeName const& targetType,
                                                       Windows::Foundation::IInspectable const& parameter,
                                                       hstring const& language);
 

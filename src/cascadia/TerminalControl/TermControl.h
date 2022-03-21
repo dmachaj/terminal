@@ -101,8 +101,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         bool ReadOnly() const noexcept;
         void ToggleReadOnly();
 
-        static Control::MouseButtonState GetPressedMouseButtons(const winrt::Windows::UI::Input::PointerPoint point);
-        static unsigned int GetPointerUpdateKind(const winrt::Windows::UI::Input::PointerPoint point);
+        static Control::MouseButtonState GetPressedMouseButtons(const winrt::Microsoft::UI::Input::PointerPoint  point);
+        static unsigned int GetPointerUpdateKind(const winrt::Microsoft::UI::Input::PointerPoint  point);
         static Microsoft::UI::Xaml::Thickness ParseThicknessFromPadding(const hstring padding);
 
         hstring ReadEntireBuffer() const;
@@ -172,12 +172,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // Auto scroll occurs when user, while selecting, drags cursor outside
         // viewport. View is then scrolled to 'follow' the cursor.
         double _autoScrollVelocity;
-        std::optional<Windows::UI::Input::PointerPoint> _autoScrollingPointerPoint;
+        std::optional<Microsoft::UI::Input::PointerPoint > _autoScrollingPointerPoint;
         Microsoft::UI::Xaml::DispatcherTimer _autoScrollTimer;
         std::optional<std::chrono::high_resolution_clock::time_point> _lastAutoScrollUpdateTime;
         bool _pointerPressedInBounds{ false };
 
-        winrt::Windows::UI::Composition::ScalarKeyFrameAnimation _bellLightAnimation{ nullptr };
+        winrt::Microsoft::UI::Composition::ScalarKeyFrameAnimation _bellLightAnimation{ nullptr };
         Microsoft::UI::Xaml::DispatcherTimer _bellLightTimer{ nullptr };
 
         std::optional<Microsoft::UI::Xaml::DispatcherTimer> _cursorTimer;
@@ -246,7 +246,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         bool _CapturePointer(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
         bool _ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
 
-        void _TryStartAutoScroll(Windows::UI::Input::PointerPoint const& pointerPoint, const double scrollVelocity);
+        void _TryStartAutoScroll(Microsoft::UI::Input::PointerPoint  const& pointerPoint, const double scrollVelocity);
         void _TryStopAutoScroll(const uint32_t pointerId);
         void _UpdateAutoScroll(Windows::Foundation::IInspectable const& sender, Windows::Foundation::IInspectable const& e);
 

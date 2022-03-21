@@ -273,7 +273,8 @@ namespace winrt::TerminalApp::implementation
         }
 
         _root->SetSettings(_settings, false);
-        _root->Loaded({ this, &AppLogic::_OnLoaded });
+        // WinAppSDK BUG BUG This is horribly broken
+        //_root->Loaded({ this, &AppLogic::_OnLoaded });
         _root->Initialized([this](auto&&, auto&&) {
             // GH#288 - When we finish initialization, if the user wanted us
             // launched _fullscreen_, toggle fullscreen mode. This will make sure
@@ -356,7 +357,7 @@ namespace winrt::TerminalApp::implementation
         // IMPORTANT: This is necessary as documented in the ContentDialog MSDN docs.
         // Since we're hosting the dialog in a Xaml island, we need to connect it to the
         // xaml tree somehow.
-        dialog.XamlRoot(_root->XamlRoot());
+        dialog.XamlRoot(_root->Content().XamlRoot());
 
         // IMPORTANT: Set the requested theme of the dialog, because the
         // PopupRoot isn't directly in the Xaml tree of our root. So the dialog
@@ -1145,7 +1146,7 @@ namespace winrt::TerminalApp::implementation
         if (_root)
         {
             // Manually bubble the OnDirectKeyEvent event up through the focus tree.
-            auto xamlRoot{ _root->XamlRoot() };
+            auto xamlRoot{ _root->Content().XamlRoot() };
             auto focusedObject{ Microsoft::UI::Xaml::Input::FocusManager::GetFocusedElement(xamlRoot) };
             do
             {

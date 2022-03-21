@@ -23,11 +23,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
     };
 
-    template<>
-    struct BitmapIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
-    {
-        using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
-    };
+    // Not needed with WinAppSDK
+    //template<>
+    //struct BitmapIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
+    //{
+    //    using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
+    //};
 #pragma endregion
 
 #pragma region FontIconSource
@@ -42,11 +43,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
     };
 
-    template<>
-    struct FontIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
-    {
-        using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
-    };
+    // Not needed with WinAppSDK
+    //template<>
+    //struct FontIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
+    //{
+    //    using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
+    //};
 #pragma endregion
 
     // Method Description:
@@ -178,7 +180,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
     // Return Value:
     // - Visible if the object was a string and wasn't the empty string.
     Foundation::IInspectable IconPathConverter::Convert(Foundation::IInspectable const& value,
-                                                        Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                        Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                         Foundation::IInspectable const& /* parameter */,
                                                         hstring const& /* language */)
     {
@@ -188,7 +190,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 
     // unused for one-way bindings
     Foundation::IInspectable IconPathConverter::ConvertBack(Foundation::IInspectable const& /* value */,
-                                                            Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                            Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                             Foundation::IInspectable const& /* parameter */,
                                                             hstring const& /* language */)
     {

@@ -128,7 +128,7 @@ public:                                                                         
         if (_##name != value)                                                             \
         {                                                                                 \
             _##name = value;                                                              \
-            event(*this, Windows::UI::Xaml::Data::PropertyChangedEventArgs{ L## #name }); \
+            event(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L## #name }); \
         }                                                                                 \
     };                                                                                    \
                                                                                           \

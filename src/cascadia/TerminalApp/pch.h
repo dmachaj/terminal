@@ -35,6 +35,7 @@
 #include <winrt/Windows.System.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Input.h>
+#include <winrt/Microsoft.UI.Input.h>
 #include <winrt/Windows.UI.Text.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <winrt/Microsoft.UI.Xaml.Automation.Peers.h>
@@ -49,7 +50,7 @@
 #include <winrt/Windows.Media.Core.h>
 #include <winrt/Windows.Media.Playback.h>
 
-#include <winrt/Microsoft.Toolkit.Win32.UI.XamlHost.h>
+//#include <winrt/Microsoft.Toolkit.Win32.UI.XamlHost.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.Primitives.h>
 #include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
@@ -62,6 +63,8 @@
 #include <winrt/Windows.Storage.h>
 #include <winrt/Windows.Storage.Provider.h>
 #include <winrt/Windows.Storage.Pickers.h>
+
+#include <winrt/windows.ui.xaml.interop.h>
 
 #include <Microsoft.UI.Xaml.media.dxinterop.h>
 

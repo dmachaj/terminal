@@ -465,7 +465,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
             if (acrylic == nullptr)
             {
                 acrylic = Media::AcrylicBrush{};
-                acrylic.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
+                // WINAPPSDKBUG - Acrylic background not supported
+                //acrylic.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
             }
 
             // see GH#1082: Initialize background color so we don't get a
@@ -1160,7 +1161,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // We'll need this later, for PointerMoved events.
         _pointerPressedInBounds = true;
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             const auto contactRect = point.Properties().ContactRect();
             auto anchor = til::point{ til::math::rounding, contactRect.X, contactRect.Y };
@@ -1205,8 +1206,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
             _FocusFollowMouseRequestedHandlers(*this, nullptr);
         }
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Mouse ||
-            type == Windows::Devices::Input::PointerDeviceType::Pen)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Mouse ||
+            type == Microsoft::UI::Input::PointerDeviceType::Pen)
         {
             _interactivity.PointerMoved(TermControl::GetPressedMouseButtons(point),
                                         TermControl::GetPointerUpdateKind(point),
@@ -1249,7 +1250,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
                 }
             }
         }
-        else if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        else if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             const auto contactRect = point.Properties().ContactRect();
             til::point newTouchPoint{ til::math::rounding, contactRect.X, contactRect.Y };
@@ -1284,15 +1285,15 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         _ReleasePointerCapture(sender, args);
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Mouse ||
-            type == Windows::Devices::Input::PointerDeviceType::Pen)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Mouse ||
+            type == Microsoft::UI::Input::PointerDeviceType::Pen)
         {
             _interactivity.PointerReleased(TermControl::GetPressedMouseButtons(point),
                                            TermControl::GetPointerUpdateKind(point),
                                            ControlKeyStates(args.KeyModifiers()),
                                            pixelPosition.to_core_point());
         }
-        else if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        else if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             _interactivity.TouchReleased();
         }
@@ -1466,7 +1467,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - pointerPoint: info about pointer that causes auto scroll. Pointer's position
     //      is later used to update selection.
     // - scrollVelocity: target velocity of scrolling in characters / sec
-    void TermControl::_TryStartAutoScroll(Windows::UI::Input::PointerPoint const& pointerPoint, const double scrollVelocity)
+    void TermControl::_TryStartAutoScroll(Microsoft::UI::Input::PointerPoint  const& pointerPoint, const double scrollVelocity)
     {
         // Allow only one pointer at the time
         if (!_autoScrollingPointerPoint ||
@@ -2678,7 +2679,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         _RaiseNoticeHandlers(*this, eventArgs);
     }
 
-    Control::MouseButtonState TermControl::GetPressedMouseButtons(const winrt::Windows::UI::Input::PointerPoint point)
+    Control::MouseButtonState TermControl::GetPressedMouseButtons(const winrt::Microsoft::UI::Input::PointerPoint  point)
     {
         Control::MouseButtonState state{};
         WI_SetFlagIf(state, Control::MouseButtonState::IsLeftButtonDown, point.Properties().IsLeftButtonPressed());
@@ -2687,7 +2688,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         return state;
     }
 
-    unsigned int TermControl::GetPointerUpdateKind(const winrt::Windows::UI::Input::PointerPoint point)
+    unsigned int TermControl::GetPointerUpdateKind(const winrt::Microsoft::UI::Input::PointerPoint  point)
     {
         const auto props = point.Properties();
 
@@ -2695,22 +2696,22 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         unsigned int uiButton{};
         switch (props.PointerUpdateKind())
         {
-        case winrt::Windows::UI::Input::PointerUpdateKind::LeftButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::LeftButtonPressed:
             uiButton = WM_LBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::LeftButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::LeftButtonReleased:
             uiButton = WM_LBUTTONUP;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::MiddleButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::MiddleButtonPressed:
             uiButton = WM_MBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::MiddleButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::MiddleButtonReleased:
             uiButton = WM_MBUTTONUP;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::RightButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::RightButtonPressed:
             uiButton = WM_RBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::RightButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::RightButtonReleased:
             uiButton = WM_RBUTTONUP;
             break;
         default:

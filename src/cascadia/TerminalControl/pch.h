@@ -31,7 +31,7 @@
 #include <winrt/Windows.system.h>
 #include <winrt/Windows.Graphics.Display.h>
 #include <winrt/windows.ui.core.h>
-#include <winrt/Windows.ui.input.h>
+#include <winrt/Microsoft.ui.input.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <winrt/Microsoft.UI.Xaml.h>
 #include <winrt/Microsoft.UI.Xaml.Automation.Peers.h>
@@ -45,6 +45,8 @@
 #include <winrt/Microsoft.UI.Xaml.Input.h>
 #include <winrt/Microsoft.UI.Xaml.Interop.h>
 #include <winrt/Microsoft.UI.Xaml.markup.h>
+#include <winrt/Microsoft.UI.Input.h>
+#include <winrt/Windows.UI.Xaml.Interop.h>
 #include <winrt/Windows.ApplicationModel.DataTransfer.h>
 #include <winrt/Windows.Storage.h>
 

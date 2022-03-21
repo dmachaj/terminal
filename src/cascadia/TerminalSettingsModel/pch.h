@@ -41,6 +41,8 @@
 #include <winrt/Microsoft.Terminal.Control.h>
 #include <winrt/Microsoft.Terminal.TerminalConnection.h>
 
+#include <winrt/windows.ui.xaml.interop.h>
+
 // Including TraceLogging essentials for the binary
 #include <TraceLoggingProvider.h>
 #include <winmeta.h>

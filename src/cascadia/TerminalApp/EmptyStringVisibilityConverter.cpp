@@ -19,7 +19,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - Visible if the object was a string and wasn't the empty string.
     Foundation::IInspectable EmptyStringVisibilityConverter::Convert(Foundation::IInspectable const& value,
-                                                                     Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                                     Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                                      Foundation::IInspectable const& /* parameter */,
                                                                      hstring const& /* language */)
     {
@@ -29,7 +29,7 @@ namespace winrt::TerminalApp::implementation
 
     // unused for one-way bindings
     Foundation::IInspectable EmptyStringVisibilityConverter::ConvertBack(Foundation::IInspectable const& /* value */,
-                                                                         Microsoft::UI::Xaml::Interop::TypeName const& /* targetType */,
+                                                                         Windows::UI::Xaml::Interop::TypeName const& /* targetType */,
                                                                          Foundation::IInspectable const& /* parameter */,
                                                                          hstring const& /* language */)
     {

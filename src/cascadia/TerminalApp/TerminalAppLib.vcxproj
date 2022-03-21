@@ -19,7 +19,7 @@
   </PropertyGroup>
   <PropertyGroup Label="NuGet Dependencies">
     <TerminalCppWinrt>true</TerminalCppWinrt>
-    <TerminalXamlApplicationToolkit>true</TerminalXamlApplicationToolkit>
+    <!--<TerminalXamlApplicationToolkit>true</TerminalXamlApplicationToolkit>-->
     <TerminalWinAppSDK>true</TerminalWinAppSDK>
     <AppContainerApplication>false</AppContainerApplication>
     <!-- <AppxPackage>true</AppxPackage> -->

@@ -37,6 +37,11 @@
     <!--  PGO -->
     <Import Condition="'$(PgoTarget)' == 'true' And '$(Platform)'=='x64' And '$(PGOBuildMode)'!='' and Exists('$(PkgMicrosoft_PGO_Helpers_Cpp)\build\Microsoft.PGO-Helpers.Cpp.targets')" Project="$(PkgMicrosoft_PGO_Helpers_Cpp)\build\Microsoft.PGO-Helpers.Cpp.targets" />
 
+    <!-- Work around 1.0 bug by importing before cppwinrt-->
+    <!-- WinAppSDK -->
+    <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets')" />
+    <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.targets" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.targets')" />
+
     <!-- CppWinrt -->
     <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.CppWinRT.2.0.210825.3\build\native\Microsoft.Windows.CppWinRT.targets" Condition="'$(TerminalCppWinrt)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.CppWinRT.2.0.210825.3\build\native\Microsoft.Windows.CppWinRT.targets')" />
 
@@ -57,10 +62,6 @@
 
     <!-- VisualStudioSetup -->
     <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.VisualStudio.Setup.Configuration.Native.2.3.2262\build\native\Microsoft.VisualStudio.Setup.Configuration.Native.targets" Condition="'$(TerminalVisualStudioSetup)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.VisualStudio.Setup.Configuration.Native.2.3.2262\build\native\Microsoft.VisualStudio.Setup.Configuration.Native.targets')" />
-
-    <!-- WinAppSDK -->
-    <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets')" />
-    <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.targets" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.targets')" />
 
     <!-- WIL (bug bug not scoped to save edits) -->
     <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets" Condition=" Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets')" />

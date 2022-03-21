@@ -9,6 +9,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <OpenConsoleCppWinRTProject>true</OpenConsoleCppWinRTProject>
     <TerminalCppWinrt>true</TerminalCppWinrt>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)\common.openconsole.props" Condition="'$(OpenConsoleDir)'==''" />
