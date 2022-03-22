@@ -1041,44 +1041,45 @@ winrt::fire_and_forget Pane::_playBellSound(winrt::Windows::Foundation::Uri uri)
         // bell_. So we have to re-create the MediaPlayer each time we want to
         // play the bell, to make sure a subsequent play doesn't come through
         // and reactivate the old one.
+        
+        // WinAppSDK BUG BUG - no media player support
+        //if (!_bellPlayer)
+        //{
+        //    // The MediaPlayer might not exist on Windows N SKU.
+        //    try
+        //    {
+        //        _bellPlayer = winrt::Windows::Media::Playback::MediaPlayer();
+        //    }
+        //    CATCH_LOG();
+        //}
+        //if (_bellPlayer)
+        //{
+        //    const auto source{ winrt::Windows::Media::Core::MediaSource::CreateFromUri(uri) };
+        //    const auto item{ winrt::Windows::Media::Playback::MediaPlaybackItem(source) };
+        //    _bellPlayer.Source(item);
+        //    _bellPlayer.Play();
 
-        if (!_bellPlayer)
-        {
-            // The MediaPlayer might not exist on Windows N SKU.
-            try
-            {
-                _bellPlayer = winrt::Windows::Media::Playback::MediaPlayer();
-            }
-            CATCH_LOG();
-        }
-        if (_bellPlayer)
-        {
-            const auto source{ winrt::Windows::Media::Core::MediaSource::CreateFromUri(uri) };
-            const auto item{ winrt::Windows::Media::Playback::MediaPlaybackItem(source) };
-            _bellPlayer.Source(item);
-            _bellPlayer.Play();
-
-            // This lambda will clean up the bell player when we're done with it.
-            auto weakThis2{ weak_from_this() };
-            _mediaEndedRevoker = _bellPlayer.MediaEnded(winrt::auto_revoke, [weakThis2](auto&&, auto&&) {
-                if (auto self{ weakThis2.lock() })
-                {
-                    if (self->_bellPlayer)
-                    {
-                        // We need to make sure clear out the current track
-                        // that's being played, again, so that the system can't
-                        // come through and replay it. In testing, we needed to
-                        // do this, closing the MediaPlayer alone wasn't good
-                        // enough.
-                        self->_bellPlayer.Pause();
-                        self->_bellPlayer.Source(nullptr);
-                        self->_bellPlayer.Close();
-                    }
-                    self->_mediaEndedRevoker.revoke();
-                    self->_bellPlayer = nullptr;
-                }
-            });
-        }
+        //    // This lambda will clean up the bell player when we're done with it.
+        //    auto weakThis2{ weak_from_this() };
+        //    _mediaEndedRevoker = _bellPlayer.MediaEnded(winrt::auto_revoke, [weakThis2](auto&&, auto&&) {
+        //        if (auto self{ weakThis2.lock() })
+        //        {
+        //            if (self->_bellPlayer)
+        //            {
+        //                // We need to make sure clear out the current track
+        //                // that's being played, again, so that the system can't
+        //                // come through and replay it. In testing, we needed to
+        //                // do this, closing the MediaPlayer alone wasn't good
+        //                // enough.
+        //                self->_bellPlayer.Pause();
+        //                self->_bellPlayer.Source(nullptr);
+        //                self->_bellPlayer.Close();
+        //            }
+        //            self->_mediaEndedRevoker.revoke();
+        //            self->_bellPlayer = nullptr;
+        //        }
+        //    });
+        //}
     }
 }
 
@@ -1183,14 +1184,15 @@ void Pane::Shutdown()
     // Clear out our media player callbacks, and stop any playing media. This
     // will prevent the callback from being triggered after we've closed, and
     // also make sure that our sound stops when we're closed.
-    _mediaEndedRevoker.revoke();
-    if (_bellPlayer)
-    {
-        _bellPlayer.Pause();
-        _bellPlayer.Source(nullptr);
-        _bellPlayer.Close();
-    }
-    _bellPlayer = nullptr;
+    // WinAppSDK BUG BUG - no media player support
+    //_mediaEndedRevoker.revoke();
+    //if (_bellPlayer)
+    //{
+    //    _bellPlayer.Pause();
+    //    _bellPlayer.Source(nullptr);
+    //    _bellPlayer.Close();
+    //}
+    //_bellPlayer = nullptr;
 
     if (_IsLeaf())
     {

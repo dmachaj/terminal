@@ -5,7 +5,7 @@
 
   <!-- Work around 1.0 bug by importing before cppwinrt -->
   <!-- WinAppSDK -->
-  <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.props" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.0.0\build\native\Microsoft.WindowsAppSDK.props')" />
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.1.0-20220302.0-ci-experimental\build\native\Microsoft.WindowsAppSDK.props" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.WindowsAppSDK.1.1.0-20220302.0-ci-experimental\build\native\Microsoft.WindowsAppSDK.props')" />
   <Import Project="$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props" Condition="'$(TerminalWinAppSDK)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props')" />
 
   <!-- CppWinrt -->

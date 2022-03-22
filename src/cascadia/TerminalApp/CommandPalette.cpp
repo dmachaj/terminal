@@ -1199,7 +1199,7 @@ namespace winrt::TerminalApp::implementation
             }
             else
             {
-                ElementFactoryGetArgs factoryArgs{};
+                winrt::Microsoft::UI::Xaml::ElementFactoryGetArgs factoryArgs{};
                 const auto listViewItem = _listItemTemplate.GetElement(factoryArgs).try_as<Controls::ListViewItem>();
                 listViewItem.ContentTemplate(dataTemplate);
 

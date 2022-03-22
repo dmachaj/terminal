@@ -128,7 +128,7 @@ AppHost::~AppHost()
     _revokers = {};
 
     _window = nullptr;
-    _app.Close();
+    //_app.Close(); WinAppSDK BUG BUG not closing the app
     _app = nullptr;
 }
 
