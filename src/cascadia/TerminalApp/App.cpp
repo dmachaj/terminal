@@ -26,6 +26,7 @@ namespace winrt::TerminalApp::implementation
         //    _isUwp = true;
         //}
 
+        m_windowsXamlManager = winrt::Microsoft::UI::Xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
         //m_windowsXamlManager = winrt::Microsoft::UI::Xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
         //InitializeComponent();
 

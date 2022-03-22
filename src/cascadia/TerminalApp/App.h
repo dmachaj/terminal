@@ -21,6 +21,7 @@ namespace winrt::TerminalApp::implementation
     private:
         //bool _isUwp = false;
         winrt::Microsoft::UI::Xaml::Window window{ nullptr };
+        winrt::Microsoft::UI::Xaml::Hosting::WindowsXamlManager m_windowsXamlManager{ nullptr };
     };
 }
 
