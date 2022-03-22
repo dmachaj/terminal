@@ -22,7 +22,7 @@
 
   <PropertyGroup Label="NuGet Dependencies">
     <TerminalCppWinrt>true</TerminalCppWinrt>
-    <TerminalXamlApplicationToolkit>true</TerminalXamlApplicationToolkit>
+    <!-- <TerminalXamlApplicationToolkit>true</TerminalXamlApplicationToolkit> -->
     <TerminalVCRTForwarders>true</TerminalVCRTForwarders>
     <TerminalThemeHelpers>true</TerminalThemeHelpers>
   </PropertyGroup>

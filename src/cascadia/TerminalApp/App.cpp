@@ -35,6 +35,7 @@ namespace winrt::TerminalApp::implementation
         // and background colors that we draw in XAML.
         HighContrastAdjustment(::winrt::Microsoft::UI::Xaml::ApplicationHighContrastAdjustment::None);
 
+        //Windows::Foundation::Uri resourceLocator{ L"ms-appx:///WindowsTerminalDev/Files/App.xaml" };
         //Microsoft::UI::Xaml::Application::LoadComponent(*this, resourceLocator, Microsoft::UI::Xaml::Controls::Primitives::ComponentResourceLocation::Nested);
     }
 

@@ -5,11 +5,15 @@
 
 #include "ScopedResourceLoader.h"
 
-using namespace ::winrt::Windows::ApplicationModel::Resources::Core;
+//using namespace ::winrt::Windows::ApplicationModel::Resources::Core;
+using namespace ::winrt::Microsoft::Windows::ApplicationModel::Resources;
 
 ScopedResourceLoader::ScopedResourceLoader(const std::wstring_view resourceLocatorBase) :
-    _resourceMap{ ResourceManager::Current().MainResourceMap().GetSubtree(resourceLocatorBase) },
-    _resourceContext{ ResourceContext::GetForViewIndependentUse() }
+    _resourceManager{ ResourceManager::ResourceManager() },
+    //_resourceMap{ ResourceManager::Current().MainResourceMap().GetSubtree(resourceLocatorBase) },
+    _resourceMap{ _resourceManager.MainResourceMap().GetSubtree(resourceLocatorBase) },
+    //_resourceContext{ ResourceContext::GetForViewIndependentUse() }
+    _resourceContext{ _resourceManager.CreateResourceContext() }
 {
 }
 
@@ -44,5 +48,6 @@ winrt::hstring ScopedResourceLoader::GetLocalizedString(const std::wstring_view 
 // - A boolean indicating whether the resource was found
 bool ScopedResourceLoader::HasResourceWithName(const std::wstring_view resourceName) const
 {
-    return _resourceMap.HasKey(resourceName);
+    //return _resourceMap.HasKey(resourceName);
+    return _resourceMap.TryGetValue(resourceName) != nullptr;
 }

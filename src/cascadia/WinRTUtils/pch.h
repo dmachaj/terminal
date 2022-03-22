@@ -31,6 +31,7 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.System.h>
+#include <winrt/Microsoft.Windows.ApplicationModel.Resources.h>
 
 #include <shlobj.h>
 #include <shobjidl_core.h>
