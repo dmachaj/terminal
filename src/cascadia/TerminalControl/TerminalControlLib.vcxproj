@@ -5,7 +5,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectName>Microsoft.Terminal.Control.Lib</ProjectName>
     <RootNamespace>Microsoft.Terminal.Control</RootNamespace>
-    <TargetName>Microsoft.Terminal.ControlLib</TargetName>
+    <TargetName>Microsoft.Terminal.Control</TargetName>
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <SubSystem>Console</SubSystem>
     <OpenConsoleUniversalApp>true</OpenConsoleUniversalApp>

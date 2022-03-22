@@ -279,7 +279,7 @@ namespace TerminalAppLocalTests
             auto app = ::winrt::Microsoft::UI::Xaml::Application::Current();
 
             winrt::TerminalApp::TerminalPage pp = *page;
-            winrt::Microsoft::UI::Xaml::Window::Current().Content(pp);
+            //winrt::Microsoft::UI::Xaml::Window::Current().Content(pp);
             winrt::Microsoft::UI::Xaml::Window::Current().Activate();
         });
         VERIFY_SUCCEEDED(result);
