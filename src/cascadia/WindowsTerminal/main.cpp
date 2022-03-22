@@ -122,6 +122,21 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
     // Make sure to call this so we get WM_POINTER messages.
     EnableMouseInPointer(true);
 
+    //{
+    //    void(WINAPI * pfnXamlCheckProcessRequirements)();
+    //    auto module = ::LoadLibrary(L"Microsoft.ui.xaml.dll");
+    //    if (module)
+    //    {
+    //        pfnXamlCheckProcessRequirements = reinterpret_cast<decltype(pfnXamlCheckProcessRequirements)>(GetProcAddress(module, "XamlCheckProcessRequirements"));
+    //        if (pfnXamlCheckProcessRequirements)
+    //        {
+    //            (*pfnXamlCheckProcessRequirements)();
+    //        }
+
+    //        ::FreeLibrary(module);
+    //    }
+    //}
+
     // !!! LOAD BEARING !!!
     // We must initialize the main thread as a single-threaded apartment before
     // constructing any Xaml objects. Failing to do so will cause some issues

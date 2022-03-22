@@ -33,6 +33,12 @@
     <Message Importance="high" Text="Restoring global NuGet configuration"/>
   </Target>
 
+  <PropertyGroup>
+    <!-- cpprestsdk doesn't automatically enable itself unless WindowsStoreApp is true.  Manually set it. -->
+    <!--OpenConsoleVcpkgEnabled Condition="'$(TerminalCppRestSDK)' == 'true'">true</OpenConsoleVcpkgEnabled>
+    <OpenConsoleVcpkgTriplet Condition="'$(OpenConsoleVcpkgTriplet)' == ''">x64-uwp-mixed</OpenConsoleVcpkgTriplet-->
+  </PropertyGroup>
+
   <ImportGroup Label="ExtensionTargets">
     <!--  PGO -->
     <Import Condition="'$(PgoTarget)' == 'true' And '$(Platform)'=='x64' And '$(PGOBuildMode)'!='' and Exists('$(PkgMicrosoft_PGO_Helpers_Cpp)\build\Microsoft.PGO-Helpers.Cpp.targets')" Project="$(PkgMicrosoft_PGO_Helpers_Cpp)\build\Microsoft.PGO-Helpers.Cpp.targets" />

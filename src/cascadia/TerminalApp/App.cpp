@@ -4,6 +4,7 @@
 #include "pch.h"
 #include "App.h"
 #include "App.g.cpp"
+#include "TerminalPage.h"
 
 using namespace winrt;
 using namespace winrt::Windows::ApplicationModel::Activation;
@@ -49,8 +50,8 @@ namespace winrt::TerminalApp::implementation
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const& /*e*/)
     {
-        //window = winrt::make<TerminalPage>();
-        //window.Activate();
+        window = winrt::make<TerminalPage>();
+        window.Activate();
         // 
         //// if this is a UWP... it means its our problem to hook up the content to the window here.
         //if (_isUwp)
