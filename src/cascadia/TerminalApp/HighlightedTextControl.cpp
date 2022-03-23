@@ -81,7 +81,7 @@ namespace winrt::TerminalApp::implementation
             for (const auto& match : highlightedText.Segments())
             {
                 const auto matchText = match.TextSegment();
-                const auto fontWeight = match.IsHighlighted() ? FontWeights::Bold() : FontWeights::Normal();
+                const auto fontWeight = match.IsHighlighted() ? winrt::Microsoft::UI::Text::FontWeights::Bold() : winrt::Microsoft::UI::Text::FontWeights::Normal();
 
                 Documents::Run run;
                 run.Text(matchText);

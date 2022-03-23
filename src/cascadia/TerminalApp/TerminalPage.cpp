@@ -839,7 +839,7 @@ namespace winrt::TerminalApp::implementation
             if (profile.Guid() == defaultProfileGuid)
             {
                 // Contrast the default profile with others in font weight.
-                profileMenuItem.FontWeight(FontWeights::Bold());
+                profileMenuItem.FontWeight(winrt::Microsoft::UI::Text::FontWeights::Bold());
             }
 
             auto newTabRun = WUX::Documents::Run();

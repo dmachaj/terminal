@@ -38,6 +38,7 @@
 #include <winrt/Windows.UI.Input.h>
 #include <winrt/Microsoft.UI.Input.h>
 #include <winrt/Windows.UI.Text.h>
+#include <winrt/Microsoft.UI.Text.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <winrt/Microsoft.UI.Xaml.Automation.Peers.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
