@@ -325,7 +325,8 @@ void IslandWindow::Initialize()
 
     // Enable vintage opacity by removing the XAML emergency backstop, GH#603.
     // We don't really care if this failed or not.
-    TerminalTrySetTransparentBackground(true);
+    // WinAppSDK workaround - This loads Windows.ui.xaml which confuses things.
+    //TerminalTrySetTransparentBackground(true);
 }
 
 void IslandWindow::OnSize(const UINT width, const UINT height)

@@ -282,7 +282,8 @@ namespace winrt::TerminalApp::implementation
         // (we'll need to adapt this logic once we make cursor context aware)
         try
         {
-            _defaultPointerCursor = CoreWindow::GetForCurrentThread().PointerCursor();
+            //_defaultPointerCursor = CoreWindow::GetForCurrentThread().PointerCursor();
+            //_defaultPointerCursor = Microsoft::UI::Input::PointerCu
         }
         CATCH_LOG();
 
