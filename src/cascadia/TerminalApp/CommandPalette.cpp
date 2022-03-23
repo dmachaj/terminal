@@ -267,10 +267,13 @@ namespace winrt::TerminalApp::implementation
     {
         const auto key = e.OriginalKey();
         const auto scanCode = e.KeyStatus().ScanCode;
-        const auto coreWindow = CoreWindow::GetForCurrentThread();
-        const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
-        const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
-        const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
+        //const auto coreWindow = CoreWindow::GetForCurrentThread();
+        const auto ctrlDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Control) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto altDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Menu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto shiftDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        //const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
+        //const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
+        //const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
 
         // Some keypresses such as Tab, Return, Esc, and Arrow Keys are ignored by controls because
         // they're not considered input key presses. While they don't raise KeyDown events,
@@ -430,10 +433,13 @@ namespace winrt::TerminalApp::implementation
     // - <none>
     void CommandPalette::_anchorKeyUpHandler()
     {
-        const auto coreWindow = CoreWindow::GetForCurrentThread();
-        const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
-        const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
-        const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
+        //const auto coreWindow = CoreWindow::GetForCurrentThread();
+        const auto ctrlDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Control) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto altDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Menu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto shiftDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        //const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
+        //const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
+        //const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
 
         if (!ctrlDown && !altDown && !shiftDown)
         {

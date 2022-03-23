@@ -24,6 +24,7 @@
 #endif
 
 #include <wil/cppwinrt.h>
+#include <winrt/Microsoft.UI.Dispatching.h>
 
 #include <winrt/Windows.ApplicationModel.h>
 #include <winrt/Windows.ApplicationModel.DataTransfer.h>
@@ -33,7 +34,7 @@
 #include <winrt/Windows.Globalization.h>
 #include <winrt/Windows.Graphics.Display.h>
 #include <winrt/Windows.System.h>
-#include <winrt/Windows.UI.Core.h>
+//#include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Input.h>
 #include <winrt/Microsoft.UI.Input.h>
 #include <winrt/Windows.UI.Text.h>
@@ -66,6 +67,8 @@
 #include <winrt/Windows.Storage.Pickers.h>
 
 #include <winrt/windows.ui.xaml.interop.h>
+
+#include <wil/cppwinrt_helpers.h>
 
 #include <Microsoft.UI.Xaml.media.dxinterop.h>
 

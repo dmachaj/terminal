@@ -27,12 +27,15 @@ std::wstring_view AzureCloudShellGenerator::GetNamespace() const noexcept
 // - a vector with the Azure Cloud Shell connection profile, if available.
 void AzureCloudShellGenerator::GenerateProfiles(std::vector<winrt::com_ptr<implementation::Profile>>& profiles) const
 {
-    if (AzureConnection::IsAzureConnectionAvailable())
-    {
-        auto azureCloudShellProfile{ CreateDynamicProfile(L"Azure Cloud Shell") };
-        azureCloudShellProfile->StartingDirectory(winrt::hstring{ DEFAULT_STARTING_DIRECTORY });
-        azureCloudShellProfile->DefaultAppearance().ColorSchemeName(L"Vintage");
-        azureCloudShellProfile->ConnectionType(AzureConnection::ConnectionType());
-        profiles.emplace_back(std::move(azureCloudShellProfile));
-    }
+    // WinAppSDK bug - for some reason this whole DLL cannot be found/loaded
+    profiles;
+    return;
+    //if (AzureConnection::IsAzureConnectionAvailable())
+    //{
+    //    auto azureCloudShellProfile{ CreateDynamicProfile(L"Azure Cloud Shell") };
+    //    azureCloudShellProfile->StartingDirectory(winrt::hstring{ DEFAULT_STARTING_DIRECTORY });
+    //    azureCloudShellProfile->DefaultAppearance().ColorSchemeName(L"Vintage");
+    //    azureCloudShellProfile->ConnectionType(AzureConnection::ConnectionType());
+    //    profiles.emplace_back(std::move(azureCloudShellProfile));
+    //}
 }

@@ -120,7 +120,7 @@ namespace winrt::TerminalApp::implementation
         // the "Hovered" state when we minimize. This will leave the button
         // visibly hovered in the taskbar preview for our window.
         auto weakThis{ get_weak() };
-        co_await MinMaxCloseControl().Dispatcher();
+        co_await wil::resume_foreground(MinMaxCloseControl().DispatcherQueue());
         if (auto self{ weakThis.get() })
         {
             // Just handle this in the same way we would if the button were

@@ -33,4 +33,5 @@ BOOL WINAPI DllMain(HINSTANCE hInstDll, DWORD reason, LPVOID /*reserved*/)
     return TRUE;
 }
 
-UTILS_DEFINE_LIBRARY_RESOURCE_SCOPE(L"TerminalApp/Resources")
+// WinAppSDK bug - Can't figure out why the resource scope changed name
+UTILS_DEFINE_LIBRARY_RESOURCE_SCOPE(L"TerminalAppLib/Resources")

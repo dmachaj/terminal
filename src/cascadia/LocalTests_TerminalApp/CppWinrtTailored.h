@@ -72,7 +72,7 @@ HRESULT RunOnUIThread(const TFunction& function)
 {
     auto m = winrt::Windows::ApplicationModel::Core::CoreApplication::MainView();
     auto cw = m.CoreWindow();
-    auto d = cw.Dispatcher();
+    auto d = cw.Dispatcher(); // Will crash at runtime.  Fix later!
 
     // Create an event so we can wait for the callback to complete
     details::Event completedEvent;

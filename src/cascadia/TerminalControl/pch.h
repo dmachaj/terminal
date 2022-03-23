@@ -49,6 +49,8 @@
 #include <winrt/Windows.UI.Xaml.Interop.h>
 #include <winrt/Windows.ApplicationModel.DataTransfer.h>
 #include <winrt/Windows.Storage.h>
+#include <winrt/Microsoft.UI.Dispatching.h>
+#include <wil/cppwinrt_helpers.h>
 
 #include <wil/cppwinrt_helpers.h>
 

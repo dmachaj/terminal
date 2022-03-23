@@ -189,7 +189,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         {
 #ifndef NDEBUG
             // _closing isn't atomic and may only be accessed from the main thread.
-            if (const auto dispatcher = Dispatcher())
+            if (const auto dispatcher = DispatcherQueue())
             {
                 assert(dispatcher.HasThreadAccess());
             }

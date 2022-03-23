@@ -68,6 +68,8 @@ Abstract:
 #include <winrt/Windows.ApplicationModel.h>
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
 #include <winrt/Windows.UI.Composition.h>
+#include <winrt/Microsoft.UI.Dispatching.h>
+#include <wil/cppwinrt_helpers.h>
 
 #include <winrt/TerminalApp.h>
 #include <winrt/Microsoft.Terminal.Settings.Model.h>

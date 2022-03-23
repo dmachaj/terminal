@@ -6,6 +6,7 @@
     <RootNamespace>TerminalApp</RootNamespace>
     <ProjectName>TerminalAppLib</ProjectName>
     <TargetName>TerminalAppLib</TargetName>
+    <ProjectPriIndexName>TerminalApp</ProjectPriIndexName>
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <SubSystem>Console</SubSystem>
     <OpenConsoleUniversalApp>true</OpenConsoleUniversalApp>
