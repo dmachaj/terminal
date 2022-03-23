@@ -51,6 +51,7 @@
 #include <winrt/Windows.Media.Core.h>
 #include <winrt/Windows.Media.Playback.h>
 #include <winrt/Microsoft.UI.Xaml.Hosting.h>
+#include <Microsoft.UI.Xaml.hosting.desktopwindowxamlsource.h>
 
 //#include <winrt/Microsoft.Toolkit.Win32.UI.XamlHost.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.h>

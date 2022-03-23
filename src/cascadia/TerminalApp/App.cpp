@@ -52,8 +52,9 @@ namespace winrt::TerminalApp::implementation
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const& /*e*/)
     {
-        window = winrt::make<TerminalPage>();
-        window.Activate();
+        //window = winrt::make<TerminalPage>();
+        //window.Activate();
+        //window = Logic().GetRoot().as<winrt::Microsoft::UI::Xaml::Window>();
         // 
         //// if this is a UWP... it means its our problem to hook up the content to the window here.
         //if (_isUwp)

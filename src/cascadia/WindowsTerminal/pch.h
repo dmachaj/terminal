@@ -53,7 +53,8 @@ Abstract:
 #include <winrt/Windows.system.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Microsoft.UI.Xaml.Hosting.h>
-#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
+//#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
+#include <Microsoft.UI.Xaml.hosting.desktopwindowxamlsource.h>
 
 // Additional headers for various xaml features. We need:
 //  * Core so we can resume_foreground with CoreDispatcher

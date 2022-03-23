@@ -186,6 +186,7 @@ namespace winrt::TerminalApp::implementation
         // SetTitleBarContent
         _isElevated = ::Microsoft::Console::Utils::IsElevated();
         _root = winrt::make_self<TerminalPage>();
+        _root.as<winrt::Microsoft::UI::Xaml::Window>().Activate();
 
         _reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(winrt::Windows::System::DispatcherQueue::GetForCurrentThread(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
             if (auto self{ weakSelf.get() })
@@ -1100,7 +1101,8 @@ namespace winrt::TerminalApp::implementation
 
     UIElement AppLogic::GetRoot() noexcept
     {
-        return _root.as<winrt::Microsoft::UI::Xaml::Controls::Control>();
+        //return _root.as<winrt::Microsoft::UI::Xaml::Controls::Control>();
+        return _root->Root();
     }
 
     // Method Description:

@@ -3315,7 +3315,8 @@ namespace winrt::TerminalApp::implementation
         auto isUwp = false;
         try
         {
-            isUwp = ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
+            // This reenters during init and deadlocks
+            //isUwp = ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Logic().IsUwp();
         }
         CATCH_LOG();
 
