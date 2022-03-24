@@ -186,9 +186,10 @@ namespace winrt::TerminalApp::implementation
         // SetTitleBarContent
         _isElevated = ::Microsoft::Console::Utils::IsElevated();
         _root = winrt::make_self<TerminalPage>();
-        _root.as<winrt::Microsoft::UI::Xaml::Window>().Activate();
+        //_root.as<winrt::Microsoft::UI::Xaml::Window>().Activate();
 
-        _reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(winrt::Windows::System::DispatcherQueue::GetForCurrentThread(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
+        //_reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(winrt::Windows::System::DispatcherQueue::GetForCurrentThread(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
+        _reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(_root->DispatcherQueue(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
             if (auto self{ weakSelf.get() })
             {
                 self->_ReloadSettings();
@@ -274,8 +275,7 @@ namespace winrt::TerminalApp::implementation
         }
 
         _root->SetSettings(_settings, false);
-        // WinAppSDK BUG BUG This is horribly broken
-        //_root->Loaded({ this, &AppLogic::_OnLoaded });
+        _root->Loaded({ this, &AppLogic::_OnLoaded });
         _root->Initialized([this](auto&&, auto&&) {
             // GH#288 - When we finish initialization, if the user wanted us
             // launched _fullscreen_, toggle fullscreen mode. This will make sure
@@ -358,7 +358,7 @@ namespace winrt::TerminalApp::implementation
         // IMPORTANT: This is necessary as documented in the ContentDialog MSDN docs.
         // Since we're hosting the dialog in a Xaml island, we need to connect it to the
         // xaml tree somehow.
-        dialog.XamlRoot(_root->Content().XamlRoot());
+        dialog.XamlRoot(_root->XamlRoot());
 
         // IMPORTANT: Set the requested theme of the dialog, because the
         // PopupRoot isn't directly in the Xaml tree of our root. So the dialog
@@ -396,10 +396,12 @@ namespace winrt::TerminalApp::implementation
     // - Dismiss the (only) visible ContentDialog
     void AppLogic::DismissDialog()
     {
-        if (auto localDialog = std::exchange(_dialog, nullptr))
-        {
-            localDialog.Hide();
-        }
+        // WinAppSDK bug - this crashes
+        return;
+        //if (auto localDialog = std::exchange(_dialog, nullptr))
+        //{
+        //    localDialog.Hide();
+        //}
     }
 
     // Method Description:
@@ -1101,8 +1103,8 @@ namespace winrt::TerminalApp::implementation
 
     UIElement AppLogic::GetRoot() noexcept
     {
-        //return _root.as<winrt::Microsoft::UI::Xaml::Controls::Control>();
-        return _root->Root();
+        return _root.as<winrt::Microsoft::UI::Xaml::Controls::Control>();
+        //return _root->Root();
     }
 
     // Method Description:
@@ -1148,7 +1150,7 @@ namespace winrt::TerminalApp::implementation
         if (_root)
         {
             // Manually bubble the OnDirectKeyEvent event up through the focus tree.
-            auto xamlRoot{ _root->Content().XamlRoot() };
+            auto xamlRoot{ _root->XamlRoot() };
             auto focusedObject{ Microsoft::UI::Xaml::Input::FocusManager::GetFocusedElement(xamlRoot) };
             do
             {

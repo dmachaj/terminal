@@ -140,10 +140,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // proc, this'll return null. We'll need to instead make a new
         // DispatcherQueue (on a new thread), so we can use that for throttled
         // functions.
-        _dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        //_dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        // WinAppSDK possible bug - should get the real dispatcher
+        _dispatcher = winrt::Microsoft::UI::Dispatching::DispatcherQueue::GetForCurrentThread();
         if (!_dispatcher)
         {
-            auto controller{ winrt::Windows::System::DispatcherQueueController::CreateOnDedicatedThread() };
+            auto controller{ winrt::Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread() };
             _dispatcher = controller.DispatcherQueue();
         }
 

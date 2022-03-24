@@ -27,7 +27,7 @@ namespace winrt::TerminalApp::implementation
         // Get our dispatcher. This will get us the same dispatcher as
         // Dispatcher(), but it's a DispatcherQueue, so we can use it with
         // ThrottledFunc
-        auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        auto dispatcher = DispatcherQueue(); //winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
 
         InitializeComponent();
 

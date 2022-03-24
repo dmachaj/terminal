@@ -148,7 +148,14 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         const double actualCanvasWidth{ Canvas().ActualWidth() };
         const double actualTextBlockHeight{ TextBlock().ActualHeight() };
-        const auto actualWindowBounds{ CoreWindow::GetForCurrentThread().Bounds() };
+        //const auto actualWindowBounds{ CoreWindow::GetForCurrentThread().Bounds() };
+        const auto actualWindowSize{ XamlRoot().Size() };
+        const Rect actualWindowBounds{
+            0,
+            0,
+            actualWindowSize.Width,
+            actualWindowSize.Height
+        };
 
         if (_currentTerminalCursorPos == cursorPos &&
             _currentCanvasWidth == actualCanvasWidth &&
@@ -187,7 +194,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         const til::point clientCursorPos{ _currentTerminalCursorPos * fontSize };
 
         // Get scale factor for view
-        const double scaleFactor = DisplayInformation::GetForCurrentView().RawPixelsPerViewPixel();
+        const double scaleFactor = XamlRoot().RasterizationScale();
 
         const til::point clientCursorInDips{ til::math::flooring, clientCursorPos.x / scaleFactor, clientCursorPos.y / scaleFactor };
 

@@ -43,7 +43,9 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     {
         if (!CompositionLight())
         {
-            auto spotLight{ Window::Current().Compositor().CreateAmbientLight() };
+            auto compositorSuperWasteful = winrt::Microsoft::UI::Composition::Compositor();
+            auto spotLight{ compositorSuperWasteful.CreateAmbientLight() };
+            //auto spotLight{ Window::Current().Compositor().CreateAmbientLight() };
             spotLight.Color(Windows::UI::Colors::White());
             CompositionLight(spotLight);
         }

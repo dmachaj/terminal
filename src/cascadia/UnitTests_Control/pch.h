@@ -39,6 +39,7 @@ Licensed under the MIT license.
 #include <winrt/Windows.system.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
+#include <winrt/Microsoft.UI.Dispatching.h>
 
 #include <winrt/Microsoft.Terminal.Core.h>
 #include <winrt/Microsoft.Terminal.Control.h>

@@ -20,7 +20,7 @@ namespace winrt::TerminalApp::implementation
         // This is the same trick that Initialize() is about to use to figure out whether we're coming
         // from a UWP context or from a Win32 context
         // See https://github.com/windows-toolkit/Microsoft.Toolkit.Win32/blob/52611c57d89554f357f281d0c79036426a7d9257/Microsoft.Toolkit.Win32.UI.XamlApplication/XamlApplication.cpp#L42
-        const auto dispatcherQueue = ::winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        //const auto dispatcherQueue = ::winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
         //if (dispatcherQueue)
         //{
         //    _isUwp = true;
@@ -52,6 +52,9 @@ namespace winrt::TerminalApp::implementation
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const& /*e*/)
     {
+        // Temporary to try and make stowed exception debuggable
+        //DebugSettings().FailFastOnErrors(true);
+
         //window = winrt::make<TerminalPage>();
         //window.Activate();
         //window = Logic().GetRoot().as<winrt::Microsoft::UI::Xaml::Window>();

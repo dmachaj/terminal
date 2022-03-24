@@ -235,7 +235,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         double _panelHeight{ 0 };
         double _compositionScale{ 0 };
 
-        winrt::Windows::System::DispatcherQueue _dispatcher{ nullptr };
+        winrt::Microsoft::UI::Dispatching::DispatcherQueue _dispatcher{ nullptr };
         std::shared_ptr<ThrottledFuncTrailing<>> _tsfTryRedrawCanvas;
         std::shared_ptr<ThrottledFuncTrailing<>> _updatePatternLocations;
         std::shared_ptr<ThrottledFuncTrailing<Control::ScrollPositionChangedArgs>> _updateScrollBar;

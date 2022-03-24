@@ -103,7 +103,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         // Get our dispatcher. This will get us the same dispatcher as
         // TermControl::Dispatcher().
-        auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        //auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        auto dispatcher = DispatcherQueue();
 
         // These three throttled functions are triggered by terminal output and interact with the UI.
         // Since Close() is the point after which we are removed from the UI, but before the
@@ -1555,7 +1556,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         _focused = true;
 
-        InputPane::GetForCurrentView().TryShow();
+        //InputPane::GetForCurrentView().TryShow();
+        //InputPane::GetForUIContext(this->XamlRoot()).TryShow();
 
         // GH#5421: Enable the UiaEngine before checking for the SearchBox
         // That way, new selections are notified to automation clients.
@@ -2126,7 +2128,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - The Microsoft::Terminal::Core::ControlKeyStates representing the modifier key states.
     ControlKeyStates TermControl::_GetPressedModifierKeys() noexcept
     {
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
         // DONT USE
         //      != CoreVirtualKeyStates::None
         // OR
@@ -2155,7 +2157,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         for (const auto& mod : modifiers)
         {
-            const auto state = window.GetKeyState(mod.vkey);
+            const auto state = winrt::Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(mod.vkey);
             const auto isDown = WI_IsFlagSet(state, CoreVirtualKeyStates::Down);
 
             if (isDown)

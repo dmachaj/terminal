@@ -5,4 +5,5 @@
 
 #pragma once
 
+#include <winrt/Microsoft.UI.Dispatching.h>
 #include "UnitTestApp.xaml.h"
