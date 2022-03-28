@@ -10,8 +10,8 @@
 
 using namespace winrt;
 using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
@@ -26,7 +26,7 @@ using namespace std::chrono_literals;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
     using IInspectable = Windows::Foundation::IInspectable;
 }
 

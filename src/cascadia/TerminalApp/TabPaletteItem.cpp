@@ -11,7 +11,7 @@
 using namespace winrt;
 using namespace winrt::TerminalApp;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
@@ -52,7 +52,7 @@ namespace winrt::TerminalApp::implementation
                 // Sometimes nested bindings do not get updated,
                 // thus let's notify property changed on TabStatus when one of its properties changes
                 auto item{ weakThis.get() };
-                item->_PropertyChangedHandlers(*item, Windows::UI::Xaml::Data::PropertyChangedEventArgs{ L"TabStatus" });
+                item->_PropertyChangedHandlers(*item, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"TabStatus" });
             });
         }
     }

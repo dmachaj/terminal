@@ -77,7 +77,7 @@ public:
         return _profile;
     }
 
-    winrt::Windows::UI::Xaml::Controls::Grid GetRootElement();
+    winrt::Microsoft::UI::Xaml::Controls::Grid GetRootElement();
 
     bool WasLastFocused() const noexcept;
     void UpdateVisuals();
@@ -195,7 +195,7 @@ public:
 
     WINRT_CALLBACK(Closed, winrt::Windows::Foundation::EventHandler<winrt::Windows::Foundation::IInspectable>);
 
-    using gotFocusArgs = winrt::delegate<std::shared_ptr<Pane>, winrt::Windows::UI::Xaml::FocusState>;
+    using gotFocusArgs = winrt::delegate<std::shared_ptr<Pane>, winrt::Microsoft::UI::Xaml::FocusState>;
 
     WINRT_CALLBACK(GotFocus, gotFocusArgs);
     WINRT_CALLBACK(LostFocus, winrt::delegate<std::shared_ptr<Pane>>);
@@ -209,13 +209,13 @@ private:
     struct SnapChildrenSizeResult;
     struct LayoutSizeNode;
 
-    winrt::Windows::UI::Xaml::Controls::Grid _root{};
-    winrt::Windows::UI::Xaml::Controls::Border _borderFirst{};
-    winrt::Windows::UI::Xaml::Controls::Border _borderSecond{};
+    winrt::Microsoft::UI::Xaml::Controls::Grid _root{};
+    winrt::Microsoft::UI::Xaml::Controls::Border _borderFirst{};
+    winrt::Microsoft::UI::Xaml::Controls::Border _borderSecond{};
     winrt::Microsoft::Terminal::Control::TermControl _control{ nullptr };
     winrt::Microsoft::Terminal::TerminalConnection::ConnectionState _connectionState{ winrt::Microsoft::Terminal::TerminalConnection::ConnectionState::NotConnected };
-    static winrt::Windows::UI::Xaml::Media::SolidColorBrush s_focusedBorderBrush;
-    static winrt::Windows::UI::Xaml::Media::SolidColorBrush s_unfocusedBorderBrush;
+    static winrt::Microsoft::UI::Xaml::Media::SolidColorBrush s_focusedBorderBrush;
+    static winrt::Microsoft::UI::Xaml::Media::SolidColorBrush s_unfocusedBorderBrush;
 
     std::shared_ptr<Pane> _firstChild{ nullptr };
     std::shared_ptr<Pane> _secondChild{ nullptr };
@@ -232,8 +232,8 @@ private:
     winrt::event_token _secondClosedToken{ 0 };
     winrt::event_token _warningBellToken{ 0 };
 
-    winrt::Windows::UI::Xaml::UIElement::GotFocus_revoker _gotFocusRevoker;
-    winrt::Windows::UI::Xaml::UIElement::LostFocus_revoker _lostFocusRevoker;
+    winrt::Microsoft::UI::Xaml::UIElement::GotFocus_revoker _gotFocusRevoker;
+    winrt::Microsoft::UI::Xaml::UIElement::LostFocus_revoker _lostFocusRevoker;
 
     std::shared_mutex _createCloseLock{};
 
@@ -241,8 +241,9 @@ private:
 
     bool _zoomed{ false };
 
-    winrt::Windows::Media::Playback::MediaPlayer _bellPlayer{ nullptr };
-    winrt::Windows::Media::Playback::MediaPlayer::MediaEnded_revoker _mediaEndedRevoker;
+    // WinAppSDK BUG BUG - No media playback support 
+    //winrt::Windows::Media::Playback::MediaPlayer _bellPlayer{ nullptr };
+    //winrt::Windows::Media::Playback::MediaPlayer::MediaEnded_revoker _mediaEndedRevoker;
 
     bool _IsLeaf() const noexcept;
     bool _HasFocusedChild() const noexcept;
@@ -281,9 +282,9 @@ private:
     void _ControlWarningBellHandler(winrt::Windows::Foundation::IInspectable const& sender,
                                     winrt::Windows::Foundation::IInspectable const& e);
     void _ControlGotFocusHandler(winrt::Windows::Foundation::IInspectable const& sender,
-                                 winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+                                 winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
     void _ControlLostFocusHandler(winrt::Windows::Foundation::IInspectable const& sender,
-                                  winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+                                  winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
     std::pair<float, float> _CalcChildrenSizes(const float fullSize) const;
     SnapChildrenSizeResult _CalcSnappedChildrenSizes(const bool widthOrHeight, const float fullSize) const;

@@ -22,8 +22,8 @@ namespace winrt::TerminalApp::implementation
 
     private:
         winrt::weak_ref<winrt::TerminalApp::TabBase> _tab;
-        Windows::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _tabChangedRevoker;
-        Windows::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _tabStatusChangedRevoker;
+        Microsoft::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _tabChangedRevoker;
+        Microsoft::UI::Xaml::Data::INotifyPropertyChanged::PropertyChanged_revoker _tabStatusChangedRevoker;
     };
 }
 

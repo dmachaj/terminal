@@ -13,13 +13,13 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
     public:
         KeyChordListener();
 
-        void KeyChordTextBox_KeyDown(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e);
+        void KeyChordTextBox_KeyDown(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
         DEPENDENCY_PROPERTY(Control::KeyChord, Keys);
 
     private:
         static void _InitializeProperties();
-        static void _OnKeysChanged(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+        static void _OnKeysChanged(Microsoft::UI::Xaml::DependencyObject const& d, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
     };
 }
 

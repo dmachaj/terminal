@@ -9,8 +9,8 @@
 
 using namespace winrt;
 using namespace winrt::Windows::UI;
-using namespace winrt::Windows::UI::Composition;
-using namespace winrt::Windows::UI::Xaml::Hosting;
+using namespace winrt::Microsoft::UI::Composition;
+using namespace winrt::Microsoft::UI::Xaml::Hosting;
 using namespace winrt::Windows::Foundation::Numerics;
 
 // Note: Generate GUID using TlgGuid.exe tool - seriously, it won't work if you
@@ -121,6 +121,21 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 
     // Make sure to call this so we get WM_POINTER messages.
     EnableMouseInPointer(true);
+
+    //{
+    //    void(WINAPI * pfnXamlCheckProcessRequirements)();
+    //    auto module = ::LoadLibrary(L"Microsoft.ui.xaml.dll");
+    //    if (module)
+    //    {
+    //        pfnXamlCheckProcessRequirements = reinterpret_cast<decltype(pfnXamlCheckProcessRequirements)>(GetProcAddress(module, "XamlCheckProcessRequirements"));
+    //        if (pfnXamlCheckProcessRequirements)
+    //        {
+    //            (*pfnXamlCheckProcessRequirements)();
+    //        }
+
+    //        ::FreeLibrary(module);
+    //    }
+    //}
 
     // !!! LOAD BEARING !!!
     // We must initialize the main thread as a single-threaded apartment before

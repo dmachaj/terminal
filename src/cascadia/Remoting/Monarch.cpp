@@ -125,7 +125,7 @@ namespace winrt::Microsoft::Terminal::Remoting::implementation
             // We can only get into this try/catch if the peasant died on us. So
             // the return value doesn't _really_ matter. They're not about to
             // get it.
-            return -1;
+            return std::numeric_limits<uint64_t>::max();
         }
     }
 

@@ -11,7 +11,7 @@ import "ControlCore.idl";
 namespace Microsoft.Terminal.Control
 {
 
-    [default_interface] runtimeclass TermControl : Windows.UI.Xaml.Controls.UserControl,
+    [default_interface] runtimeclass TermControl : Microsoft.UI.Xaml.Controls.UserControl,
                                                    IDirectKeyListener,
                                                    IMouseWheelListener,
                                                    ICoreState
@@ -41,7 +41,7 @@ namespace Microsoft.Terminal.Control
         event Windows.Foundation.TypedEventHandler<Object, Object> ReadOnlyChanged;
         event Windows.Foundation.TypedEventHandler<Object, Object> FocusFollowMouseRequested;
 
-        event Windows.Foundation.TypedEventHandler<TermControl, Windows.UI.Xaml.RoutedEventArgs> Initialized;
+        event Windows.Foundation.TypedEventHandler<TermControl, Microsoft.UI.Xaml.RoutedEventArgs> Initialized;
         // This is an event handler forwarder for the underlying connection.
         // We expose this and ConnectionState here so that it might eventually be data bound.
         event Windows.Foundation.TypedEventHandler<Object, IInspectable> ConnectionStateChanged;

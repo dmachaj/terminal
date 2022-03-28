@@ -10,7 +10,7 @@
 #include "Utils.h"
 
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::UI::Text;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::Foundation::Collections;
@@ -837,13 +837,13 @@ namespace winrt::TerminalApp::implementation
         if (WindowRenamer() == nullptr)
         {
             // We need to use FindName to lazy-load this object
-            if (MUX::Controls::TeachingTip tip{ FindName(L"WindowRenamer").try_as<MUX::Controls::TeachingTip>() })
+            if (MUX::Controls::TeachingTip tip{ this->Root().FindName(L"WindowRenamer").try_as<MUX::Controls::TeachingTip>() })
             {
                 tip.Closed({ get_weak(), &TerminalPage::_FocusActiveControl });
             }
         }
 
-        _UpdateTeachingTipTheme(WindowRenamer().try_as<winrt::Windows::UI::Xaml::FrameworkElement>());
+        _UpdateTeachingTipTheme(WindowRenamer().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>());
         WindowRenamer().IsOpen(true);
 
         // PAIN: We can't immediately focus the textbox in the TeachingTip. It's

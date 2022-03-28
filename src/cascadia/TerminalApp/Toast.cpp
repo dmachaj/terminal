@@ -7,7 +7,7 @@
 
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 constexpr const auto ToastDuration = std::chrono::milliseconds(3000);
 

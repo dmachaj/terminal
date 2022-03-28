@@ -16,8 +16,8 @@
 
 using namespace winrt::Windows::ApplicationModel;
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::System;
 using namespace winrt::Microsoft::Terminal;
@@ -126,7 +126,7 @@ static Documents::Run _BuildErrorRun(const winrt::hstring& text, const ResourceD
     if (resources.HasKey(key))
     {
         winrt::IInspectable g = resources.Lookup(key);
-        auto brush = g.try_as<winrt::Windows::UI::Xaml::Media::Brush>();
+        auto brush = g.try_as<winrt::Microsoft::UI::Xaml::Media::Brush>();
         textRun.Foreground(brush);
     }
 
@@ -143,7 +143,7 @@ namespace winrt::TerminalApp::implementation
     AppLogic* AppLogic::Current() noexcept
     try
     {
-        if (auto currentXamlApp{ winrt::Windows::UI::Xaml::Application::Current().try_as<winrt::TerminalApp::App>() })
+        if (auto currentXamlApp{ winrt::Microsoft::UI::Xaml::Application::Current().try_as<winrt::TerminalApp::App>() })
         {
             if (auto appLogicPointer{ winrt::get_self<AppLogic>(currentXamlApp.Logic()) })
             {
@@ -186,8 +186,10 @@ namespace winrt::TerminalApp::implementation
         // SetTitleBarContent
         _isElevated = ::Microsoft::Console::Utils::IsElevated();
         _root = winrt::make_self<TerminalPage>();
+        //_root.as<winrt::Microsoft::UI::Xaml::Window>().Activate();
 
-        _reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(winrt::Windows::System::DispatcherQueue::GetForCurrentThread(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
+        //_reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(winrt::Windows::System::DispatcherQueue::GetForCurrentThread(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
+        _reloadSettings = std::make_shared<ThrottledFuncTrailing<>>(_root->DispatcherQueue(), std::chrono::milliseconds(100), [weakSelf = get_weak()]() {
             if (auto self{ weakSelf.get() })
             {
                 self->_ReloadSettings();
@@ -336,7 +338,7 @@ namespace winrt::TerminalApp::implementation
     // - dialog: the dialog object that is going to show up
     // Return value:
     // - an IAsyncOperation with the dialog result
-    winrt::Windows::Foundation::IAsyncOperation<ContentDialogResult> AppLogic::ShowDialog(winrt::Windows::UI::Xaml::Controls::ContentDialog dialog)
+    winrt::Windows::Foundation::IAsyncOperation<ContentDialogResult> AppLogic::ShowDialog(winrt::Microsoft::UI::Xaml::Controls::ContentDialog dialog)
     {
         // DON'T release this lock in a wil::scope_exit. The scope_exit will get
         // called when we await, which is not what we want.
@@ -372,11 +374,11 @@ namespace winrt::TerminalApp::implementation
         // It's not enough to set the theme on the dialog alone.
         auto themingLambda{ [this](const Windows::Foundation::IInspectable& sender, const RoutedEventArgs&) {
             auto theme{ _settings.GlobalSettings().Theme() };
-            auto element{ sender.try_as<winrt::Windows::UI::Xaml::FrameworkElement>() };
+            auto element{ sender.try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>() };
             while (element)
             {
                 element.RequestedTheme(theme);
-                element = element.Parent().try_as<winrt::Windows::UI::Xaml::FrameworkElement>();
+                element = element.Parent().try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>();
             }
         } };
 
@@ -394,10 +396,12 @@ namespace winrt::TerminalApp::implementation
     // - Dismiss the (only) visible ContentDialog
     void AppLogic::DismissDialog()
     {
-        if (auto localDialog = std::exchange(_dialog, nullptr))
-        {
-            localDialog.Hide();
-        }
+        // WinAppSDK bug - this crashes
+        return;
+        //if (auto localDialog = std::exchange(_dialog, nullptr))
+        //{
+        //    localDialog.Hide();
+        //}
     }
 
     // Method Description:
@@ -431,7 +435,7 @@ namespace winrt::TerminalApp::implementation
         // Make sure the lines of text wrap
         warningsTextBlock.TextWrapping(TextWrapping::Wrap);
 
-        winrt::Windows::UI::Xaml::Documents::Run errorRun;
+        winrt::Microsoft::UI::Xaml::Documents::Run errorRun;
         const auto errorLabel = GetLibraryResourceString(contentKey);
         errorRun.Text(errorLabel);
         warningsTextBlock.Inlines().Append(errorRun);
@@ -441,13 +445,13 @@ namespace winrt::TerminalApp::implementation
         {
             if (!_settingsLoadExceptionText.empty())
             {
-                warningsTextBlock.Inlines().Append(_BuildErrorRun(_settingsLoadExceptionText, ::winrt::Windows::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Resources()));
+                warningsTextBlock.Inlines().Append(_BuildErrorRun(_settingsLoadExceptionText, ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Resources()));
                 warningsTextBlock.Inlines().Append(Documents::LineBreak{});
             }
         }
 
         // Add a note that we're using the default settings in this case.
-        winrt::Windows::UI::Xaml::Documents::Run usingDefaultsRun;
+        winrt::Microsoft::UI::Xaml::Documents::Run usingDefaultsRun;
         const auto usingDefaultsText = RS_(L"UsingDefaultSettingsText");
         usingDefaultsRun.Text(usingDefaultsText);
         warningsTextBlock.Inlines().Append(Documents::LineBreak{});
@@ -485,7 +489,7 @@ namespace winrt::TerminalApp::implementation
             const auto warningText = _GetWarningText(warning);
             if (!warningText.empty())
             {
-                warningsTextBlock.Inlines().Append(_BuildErrorRun(warningText, ::winrt::Windows::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Resources()));
+                warningsTextBlock.Inlines().Append(_BuildErrorRun(warningText, ::winrt::Microsoft::UI::Xaml::Application::Current().as<::winrt::TerminalApp::App>().Resources()));
                 warningsTextBlock.Inlines().Append(Documents::LineBreak{});
             }
         }
@@ -747,7 +751,7 @@ namespace winrt::TerminalApp::implementation
         return _settings.GlobalSettings().CenterOnLaunch();
     }
 
-    winrt::Windows::UI::Xaml::ElementTheme AppLogic::GetRequestedTheme()
+    winrt::Microsoft::UI::Xaml::ElementTheme AppLogic::GetRequestedTheme()
     {
         if (!_loadedInitialSettings)
         {
@@ -1091,7 +1095,7 @@ namespace winrt::TerminalApp::implementation
     //   root of the application.
     // Arguments:
     // - newTheme: The ElementTheme to apply to our elements.
-    void AppLogic::_ApplyTheme(const Windows::UI::Xaml::ElementTheme& newTheme)
+    void AppLogic::_ApplyTheme(const Microsoft::UI::Xaml::ElementTheme& newTheme)
     {
         // Propagate the event to the host layer, so it can update its own UI
         _RequestedThemeChangedHandlers(*this, newTheme);
@@ -1099,7 +1103,8 @@ namespace winrt::TerminalApp::implementation
 
     UIElement AppLogic::GetRoot() noexcept
     {
-        return _root.as<winrt::Windows::UI::Xaml::Controls::Control>();
+        return _root.as<winrt::Microsoft::UI::Xaml::Controls::Control>();
+        //return _root->Root();
     }
 
     // Method Description:
@@ -1146,7 +1151,7 @@ namespace winrt::TerminalApp::implementation
         {
             // Manually bubble the OnDirectKeyEvent event up through the focus tree.
             auto xamlRoot{ _root->XamlRoot() };
-            auto focusedObject{ Windows::UI::Xaml::Input::FocusManager::GetFocusedElement(xamlRoot) };
+            auto focusedObject{ Microsoft::UI::Xaml::Input::FocusManager::GetFocusedElement(xamlRoot) };
             do
             {
                 if (auto keyListener{ focusedObject.try_as<IDirectKeyListener>() })
@@ -1158,7 +1163,7 @@ namespace winrt::TerminalApp::implementation
                     // otherwise, keep walking. bubble the event manually.
                 }
 
-                if (auto focusedElement{ focusedObject.try_as<Windows::UI::Xaml::FrameworkElement>() })
+                if (auto focusedElement{ focusedObject.try_as<Microsoft::UI::Xaml::FrameworkElement>() })
                 {
                     focusedObject = focusedElement.Parent();
 
@@ -1166,7 +1171,7 @@ namespace winrt::TerminalApp::implementation
                     // Use the VisualTreeHelper's GetParent as a fallback.
                     if (!focusedObject)
                     {
-                        focusedObject = winrt::Windows::UI::Xaml::Media::VisualTreeHelper::GetParent(focusedElement);
+                        focusedObject = winrt::Microsoft::UI::Xaml::Media::VisualTreeHelper::GetParent(focusedElement);
                     }
                 }
                 else

@@ -13,6 +13,10 @@
     <AppxOSMaxVersionTestedReplaceManifestVersion>false</AppxOSMaxVersionTestedReplaceManifestVersion>
     <OCExecutionAliasName Condition="'$(WindowsTerminalBranding)'=='' or '$(WindowsTerminalBranding)'=='Dev'">wtd</OCExecutionAliasName>
     <OCExecutionAliasName Condition="'$(OCExecutionAliasName)'==''">wt</OCExecutionAliasName>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectGuid>CA5CAD1A-224A-4171-B13A-F16E576FDD12</ProjectGuid>
@@ -50,7 +54,6 @@
     <PRIResource Include="Resources\Resources.resw" />
     <OCResourceDirectory Include="Resources" />
   </ItemGroup>
-
   <!-- This is picked up by CascadiaResources.build.items. -->
   <PropertyGroup Condition="'$(WindowsTerminalBranding)'=='' or '$(WindowsTerminalBranding)'=='Dev'">
     <WindowsTerminalAssetSuffix>-Dev</WindowsTerminalAssetSuffix>
@@ -58,10 +61,8 @@
   <PropertyGroup Condition="'$(WindowsTerminalBranding)'=='Preview'">
     <WindowsTerminalAssetSuffix>-Pre</WindowsTerminalAssetSuffix>
   </PropertyGroup>
-
   <Import Project="$(MSBuildThisFileDirectory)..\CascadiaResources.build.items" />
   <Import Project="$(OpenConsoleDir)src\wap-common.build.post.props" />
-
   <ItemGroup>
     <ProjectReference Include="$(OpenConsoleDir)src\cascadia\WindowsTerminal\WindowsTerminal.vcxproj">
       <Project>{CA5CAD1A-1754-4A9D-93D7-857A9D17CB1B}</Project>
@@ -78,14 +79,16 @@
     <ProjectReference Include="$(OpenConsoleDir)src\host\exe\Host.EXE.vcxproj">
       <Project>{9CBD7DFA-1754-4A9D-93D7-857A9D17CB1B}</Project>
     </ProjectReference>
-    <ProjectReference Include="$(OpenConsoleDir)src\cascadia\ElevateShim\elevate-shim.vcxproj" >
+    <ProjectReference Include="$(OpenConsoleDir)src\cascadia\ElevateShim\elevate-shim.vcxproj">
       <Project>{416fd703-baa7-4f6e-9361-64f550ec8fca}</Project>
     </ProjectReference>
     <ProjectReference Include="$(OpenConsoleDir)src\host\proxy\Host.Proxy.vcxproj">
       <Project>{71CC9D78-BA29-4D93-946F-BEF5D9A3A6EF}</Project>
     </ProjectReference>
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="app.manifest" />
+  </ItemGroup>
   <Target Name="OpenConsoleStompSourceProjectForWapProject" BeforeTargets="_ConvertItems">
     <ItemGroup>
       <!-- Stomp all "SourceProject" values for all incoming dependencies to flatten the package. -->
@@ -137,7 +140,6 @@
       <AppxUploadPackagePayload Remove="@(AppxUploadPackagePayload)" Condition="'%(Extension)' == '.pri' and '%(Filename)' != 'resources'" />
     </ItemGroup>
   </Target>
-
   <!--
     Some of our dependencies still require a CRT, so we're going to ship the forwarders in our package and
     depend on the desktop CRT. This lets us unify the Windows 10 and Windows 11 builds around a common CRT.
@@ -150,7 +152,6 @@
       <FrameworkSdkPackage Remove="@(FrameworkSdkPackage)" Condition="'%(FrameworkSdkPackage.Name)'=='Microsoft.VCLibs.140.00' or '%(FrameworkSdkPackage.Name)'=='Microsoft.VCLibs.140.00.Debug'" />
     </ItemGroup>
   </Target>
-
   <!-- This target removes the FrameworkSdkPackages from before the *desktop bridge* manifest generation happens. -->
   <Target Name="_OpenConsoleStripAllDependenciesFromPackageSecondManifest" BeforeTargets="_GenerateDesktopBridgeAppxManifest" DependsOnTargets="_ResolveVCLibDependencies">
     <ItemGroup>
@@ -158,15 +159,5 @@
       <FrameworkSdkPackage Remove="@(FrameworkSdkPackage)" Condition="'%(FrameworkSdkPackage.Name)'=='Microsoft.VCLibs.140.00' or '%(FrameworkSdkPackage.Name)'=='Microsoft.VCLibs.140.00.Debug'" />
     </ItemGroup>
   </Target>
-
-  <!-- This is required to get the package dependency in the AppXManifest. -->
-  <Import Project="..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets'))" />
-  </Target>
-
   <Import Project="$(SolutionDir)build\rules\CollectWildcardResources.targets" />
 </Project>

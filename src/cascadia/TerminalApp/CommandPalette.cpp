@@ -13,8 +13,8 @@
 using namespace winrt;
 using namespace winrt::TerminalApp;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
@@ -166,7 +166,7 @@ namespace winrt::TerminalApp::implementation
     {
         if (const auto container = _filteredActionsView().ContainerFromIndex(0))
         {
-            if (const auto item = container.try_as<winrt::Windows::UI::Xaml::Controls::ListViewItem>())
+            if (const auto item = container.try_as<winrt::Microsoft::UI::Xaml::Controls::ListViewItem>())
             {
                 const auto itemHeight = ::base::saturated_cast<int>(item.ActualHeight());
                 const auto listHeight = ::base::saturated_cast<int>(_filteredActionsView().ActualHeight());
@@ -234,7 +234,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_selectedCommandChanged(const IInspectable& /*sender*/,
-                                                 const Windows::UI::Xaml::RoutedEventArgs& /*args*/)
+                                                 const Microsoft::UI::Xaml::RoutedEventArgs& /*args*/)
     {
         const auto selectedCommand = _filteredActionsView().SelectedItem();
         const auto filteredCommand{ selectedCommand.try_as<winrt::TerminalApp::FilteredCommand>() };
@@ -263,14 +263,17 @@ namespace winrt::TerminalApp::implementation
     }
 
     void CommandPalette::_previewKeyDownHandler(IInspectable const& /*sender*/,
-                                                Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+                                                Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
     {
         const auto key = e.OriginalKey();
         const auto scanCode = e.KeyStatus().ScanCode;
-        const auto coreWindow = CoreWindow::GetForCurrentThread();
-        const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
-        const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
-        const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
+        //const auto coreWindow = CoreWindow::GetForCurrentThread();
+        const auto ctrlDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Control) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto altDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Menu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto shiftDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        //const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
+        //const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
+        //const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
 
         // Some keypresses such as Tab, Return, Esc, and Arrow Keys are ignored by controls because
         // they're not considered input key presses. While they don't raise KeyDown events,
@@ -412,7 +415,7 @@ namespace winrt::TerminalApp::implementation
     }
 
     void CommandPalette::_keyUpHandler(IInspectable const& /*sender*/,
-                                       Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+                                       Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
     {
         if (_currentMode == CommandPaletteMode::TabSwitchMode)
         {
@@ -430,10 +433,13 @@ namespace winrt::TerminalApp::implementation
     // - <none>
     void CommandPalette::_anchorKeyUpHandler()
     {
-        const auto coreWindow = CoreWindow::GetForCurrentThread();
-        const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
-        const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
-        const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
+        //const auto coreWindow = CoreWindow::GetForCurrentThread();
+        const auto ctrlDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Control) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto altDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Menu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto shiftDown = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::Shift) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        //const auto ctrlDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Control), CoreVirtualKeyStates::Down);
+        //const auto altDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Menu), CoreVirtualKeyStates::Down);
+        //const auto shiftDown = WI_IsFlagSet(coreWindow.GetKeyState(winrt::Windows::System::VirtualKey::Shift), CoreVirtualKeyStates::Down);
 
         if (!ctrlDown && !altDown && !shiftDown)
         {
@@ -454,7 +460,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_rootPointerPressed(Windows::Foundation::IInspectable const& /*sender*/,
-                                             Windows::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
+                                             Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
     {
         if (Visibility() != Visibility::Collapsed)
         {
@@ -477,7 +483,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_lostFocusHandler(Windows::Foundation::IInspectable const& /*sender*/,
-                                           Windows::UI::Xaml::RoutedEventArgs const& /*args*/)
+                                           Microsoft::UI::Xaml::RoutedEventArgs const& /*args*/)
     {
         const auto flyout = _searchBox().ContextFlyout();
         if (flyout && flyout.IsOpen())
@@ -495,7 +501,7 @@ namespace winrt::TerminalApp::implementation
             }
 
             // Go up to the next ancestor
-            focusedElementOrAncestor = winrt::Windows::UI::Xaml::Media::VisualTreeHelper::GetParent(focusedElementOrAncestor);
+            focusedElementOrAncestor = winrt::Microsoft::UI::Xaml::Media::VisualTreeHelper::GetParent(focusedElementOrAncestor);
         }
 
         // We got to the root (the element with no parent) and didn't meet this palette on the path.
@@ -512,7 +518,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_backdropPointerPressed(Windows::Foundation::IInspectable const& /*sender*/,
-                                                 Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e)
+                                                 Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e)
     {
         e.Handled(true);
     }
@@ -526,7 +532,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_listItemClicked(Windows::Foundation::IInspectable const& /*sender*/,
-                                          Windows::UI::Xaml::Controls::ItemClickEventArgs const& e)
+                                          Microsoft::UI::Xaml::Controls::ItemClickEventArgs const& e)
     {
         const auto selectedCommand = e.ClickedItem();
         if (const auto filteredCommand = selectedCommand.try_as<winrt::TerminalApp::FilteredCommand>())
@@ -544,7 +550,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_moveBackButtonClicked(Windows::Foundation::IInspectable const& /*sender*/,
-                                                Windows::UI::Xaml::RoutedEventArgs const&)
+                                                Microsoft::UI::Xaml::RoutedEventArgs const&)
     {
         _PreviewActionHandlers(*this, nullptr);
         _nestedActionStack.Clear();
@@ -805,7 +811,7 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_filterTextChanged(IInspectable const& /*sender*/,
-                                            Windows::UI::Xaml::RoutedEventArgs const& /*args*/)
+                                            Microsoft::UI::Xaml::RoutedEventArgs const& /*args*/)
     {
         if (_currentMode == CommandPaletteMode::CommandlineMode)
         {
@@ -1174,8 +1180,8 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_choosingItemContainer(
-        Windows::UI::Xaml::Controls::ListViewBase const& /*sender*/,
-        Windows::UI::Xaml::Controls::ChoosingItemContainerEventArgs const& args)
+        Microsoft::UI::Xaml::Controls::ListViewBase const& /*sender*/,
+        Microsoft::UI::Xaml::Controls::ChoosingItemContainerEventArgs const& args)
     {
         const auto dataTemplate = _itemTemplateSelector.SelectTemplate(args.Item());
         const auto itemContainer = args.ItemContainer();
@@ -1199,13 +1205,13 @@ namespace winrt::TerminalApp::implementation
             }
             else
             {
-                ElementFactoryGetArgs factoryArgs{};
+                winrt::Microsoft::UI::Xaml::ElementFactoryGetArgs factoryArgs{};
                 const auto listViewItem = _listItemTemplate.GetElement(factoryArgs).try_as<Controls::ListViewItem>();
                 listViewItem.ContentTemplate(dataTemplate);
 
                 if (dataTemplate == _itemTemplateSelector.NestedItemTemplate())
                 {
-                    const auto helpText = winrt::box_value(RS_(L"CommandPalette_MoreOptions/[using:Windows.UI.Xaml.Automation]AutomationProperties/HelpText"));
+                    const auto helpText = winrt::box_value(RS_(L"CommandPalette_MoreOptions/[using:Microsoft.UI.Xaml.Automation]AutomationProperties/HelpText"));
                     listViewItem.SetValue(Automation::AutomationProperties::HelpTextProperty(), helpText);
                 }
 
@@ -1223,8 +1229,8 @@ namespace winrt::TerminalApp::implementation
     // Return Value:
     // - <none>
     void CommandPalette::_containerContentChanging(
-        Windows::UI::Xaml::Controls::ListViewBase const& /*sender*/,
-        Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs const& args)
+        Microsoft::UI::Xaml::Controls::ListViewBase const& /*sender*/,
+        Microsoft::UI::Xaml::Controls::ContainerContentChangingEventArgs const& args)
     {
         const auto itemContainer = args.ItemContainer();
         if (args.InRecycleQueue() && itemContainer && itemContainer.ContentTemplate())

@@ -13,7 +13,7 @@ namespace Microsoft.Terminal.Settings.Editor
         event AddNewArgs AddNew;
     };
 
-    [default_interface] runtimeclass AddProfile : Windows.UI.Xaml.Controls.Page, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass AddProfile : Microsoft.UI.Xaml.Controls.Page, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         AddProfile();
         AddProfilePageNavigationState State { get; };

@@ -30,7 +30,7 @@ JSON_ENUM_MAPPER(::winrt::Microsoft::Terminal::Core::CursorStyle)
     };
 };
 
-JSON_ENUM_MAPPER(::winrt::Windows::UI::Xaml::Media::Stretch)
+JSON_ENUM_MAPPER(::winrt::Microsoft::UI::Xaml::Media::Stretch)
 {
     static constexpr std::array<pair_type, 4> mappings = {
         pair_type{ "uniformToFill", ValueType::UniformToFill },
@@ -200,7 +200,7 @@ struct ::Microsoft::Terminal::Settings::Model::JsonUtils::ConversionTrait<::winr
     }
 };
 
-JSON_ENUM_MAPPER(::winrt::Windows::UI::Xaml::ElementTheme)
+JSON_ENUM_MAPPER(::winrt::Microsoft::UI::Xaml::ElementTheme)
 {
     JSON_MAPPINGS(3) = {
         pair_type{ "system", ValueType::Default },

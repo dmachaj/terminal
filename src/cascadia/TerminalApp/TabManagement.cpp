@@ -25,8 +25,8 @@
 
 using namespace winrt;
 using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
@@ -44,7 +44,7 @@ using namespace ::Microsoft::Console;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
     using IInspectable = Windows::Foundation::IInspectable;
 }
 
@@ -716,7 +716,7 @@ namespace winrt::TerminalApp::implementation
         //          sometimes set focus to an incorrect tab after removing some tabs
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(_tabView.Dispatcher());
+        co_await wil::resume_foreground(_tabView.DispatcherQueue());
 
         if (auto page{ weakThis.get() })
         {
@@ -852,9 +852,9 @@ namespace winrt::TerminalApp::implementation
     // Arguments:
     // - sender: the control that originated this event (TabViewItem)
     // - eventArgs: the event's constituent arguments
-    void TerminalPage::_OnTabClick(const IInspectable& sender, const Windows::UI::Xaml::Input::PointerRoutedEventArgs& eventArgs)
+    void TerminalPage::_OnTabClick(const IInspectable& sender, const Microsoft::UI::Xaml::Input::PointerRoutedEventArgs& eventArgs)
     {
-        if (eventArgs.GetCurrentPoint(*this).Properties().IsMiddleButtonPressed())
+        if (eventArgs.GetCurrentPoint(this->Root()).Properties().IsMiddleButtonPressed())
         {
             const auto tabViewItem = sender.try_as<MUX::Controls::TabViewItem>();
             if (auto tab{ _GetTabByTabViewItem(tabViewItem) })
@@ -863,7 +863,7 @@ namespace winrt::TerminalApp::implementation
             }
             eventArgs.Handled(true);
         }
-        else if (eventArgs.GetCurrentPoint(*this).Properties().IsRightButtonPressed())
+        else if (eventArgs.GetCurrentPoint(this->Root()).Properties().IsRightButtonPressed())
         {
             eventArgs.Handled(true);
         }

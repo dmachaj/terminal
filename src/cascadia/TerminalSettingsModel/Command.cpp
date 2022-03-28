@@ -17,7 +17,7 @@ using namespace ::Microsoft::Terminal::Settings::Model;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
 }
 
 static constexpr std::string_view NameKey{ "name" };

@@ -88,6 +88,9 @@
     <CharacterSet>Unicode</CharacterSet>
     <LinkIncremental>false</LinkIncremental>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+
+    <!-- WinAppSDK change -->
+    <DesktopCompatible>true</DesktopCompatible>
   </PropertyGroup>
 
   <ItemDefinitionGroup>

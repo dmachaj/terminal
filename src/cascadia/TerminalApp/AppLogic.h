@@ -99,13 +99,13 @@ namespace winrt::TerminalApp::implementation
         Windows::Foundation::Size GetLaunchDimensions(uint32_t dpi);
         bool CenterOnLaunch();
         TerminalApp::InitialPosition GetInitialPosition(int64_t defaultInitialX, int64_t defaultInitialY);
-        winrt::Windows::UI::Xaml::ElementTheme GetRequestedTheme();
+        winrt::Microsoft::UI::Xaml::ElementTheme GetRequestedTheme();
         Microsoft::Terminal::Settings::Model::LaunchMode GetLaunchMode();
         bool GetShowTabsInTitlebar();
         bool GetInitialAlwaysOnTop();
         float CalcSnappedDimension(const bool widthOrHeight, const float dimension) const;
 
-        Windows::UI::Xaml::UIElement GetRoot() noexcept;
+        Microsoft::UI::Xaml::UIElement GetRoot() noexcept;
 
         void SetInboundListener();
 
@@ -121,14 +121,14 @@ namespace winrt::TerminalApp::implementation
         bool GetAlwaysShowNotificationIcon();
         bool GetShowTitleInTitlebar();
 
-        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::UI::Xaml::Controls::ContentDialogResult> ShowDialog(winrt::Windows::UI::Xaml::Controls::ContentDialog dialog);
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Microsoft::UI::Xaml::Controls::ContentDialogResult> ShowDialog(winrt::Microsoft::UI::Xaml::Controls::ContentDialog dialog);
         bool CanShowDialog();
         void DismissDialog();
 
         Windows::Foundation::Collections::IMapView<Microsoft::Terminal::Control::KeyChord, Microsoft::Terminal::Settings::Model::Command> GlobalHotkeys();
 
         // -------------------------------- WinRT Events ---------------------------------
-        TYPED_EVENT(RequestedThemeChanged, winrt::Windows::Foundation::IInspectable, winrt::Windows::UI::Xaml::ElementTheme);
+        TYPED_EVENT(RequestedThemeChanged, winrt::Windows::Foundation::IInspectable, winrt::Microsoft::UI::Xaml::ElementTheme);
         TYPED_EVENT(SettingsChanged, winrt::Windows::Foundation::IInspectable, winrt::Windows::Foundation::IInspectable);
         TYPED_EVENT(SystemMenuChangeRequested, winrt::Windows::Foundation::IInspectable, winrt::TerminalApp::SystemMenuChangeArgs);
 
@@ -151,7 +151,7 @@ namespace winrt::TerminalApp::implementation
         uint64_t _numOpenWindows{ 0 };
 
         std::shared_mutex _dialogLock;
-        winrt::Windows::UI::Xaml::Controls::ContentDialog _dialog;
+        winrt::Microsoft::UI::Xaml::Controls::ContentDialog _dialog;
 
         ::TerminalApp::AppCommandlineArgs _appArgs;
         ::TerminalApp::AppCommandlineArgs _settingsAppArgs;
@@ -175,7 +175,7 @@ namespace winrt::TerminalApp::implementation
         void _RefreshThemeRoutine();
         fire_and_forget _ApplyStartupTaskStateChange();
 
-        void _OnLoaded(const IInspectable& sender, const Windows::UI::Xaml::RoutedEventArgs& eventArgs);
+        void _OnLoaded(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& eventArgs);
 
         [[nodiscard]] HRESULT _TryLoadSettings() noexcept;
         void _RegisterSettingsChange();
@@ -183,7 +183,7 @@ namespace winrt::TerminalApp::implementation
         void _ReloadSettings();
         void _OpenSettingsUI();
 
-        void _ApplyTheme(const Windows::UI::Xaml::ElementTheme& newTheme);
+        void _ApplyTheme(const Microsoft::UI::Xaml::ElementTheme& newTheme);
 
         bool _hasCommandLineArguments{ false };
         bool _hasSettingsStartupActions{ false };
@@ -192,7 +192,7 @@ namespace winrt::TerminalApp::implementation
         // These are events that are handled by the TerminalPage, but are
         // exposed through the AppLogic. This macro is used to forward the event
         // directly to them.
-        FORWARDED_TYPED_EVENT(SetTitleBarContent, winrt::Windows::Foundation::IInspectable, winrt::Windows::UI::Xaml::UIElement, _root, SetTitleBarContent);
+        FORWARDED_TYPED_EVENT(SetTitleBarContent, winrt::Windows::Foundation::IInspectable, winrt::Microsoft::UI::Xaml::UIElement, _root, SetTitleBarContent);
         FORWARDED_TYPED_EVENT(TitleChanged, winrt::Windows::Foundation::IInspectable, winrt::hstring, _root, TitleChanged);
         FORWARDED_TYPED_EVENT(LastTabClosed, winrt::Windows::Foundation::IInspectable, winrt::TerminalApp::LastTabClosedEventArgs, _root, LastTabClosed);
         FORWARDED_TYPED_EVENT(FocusModeChanged, winrt::Windows::Foundation::IInspectable, winrt::Windows::Foundation::IInspectable, _root, FocusModeChanged);

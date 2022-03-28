@@ -11,7 +11,7 @@
 #include "AppLogic.h"
 
 using namespace winrt;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Microsoft::Terminal::Control;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
@@ -20,7 +20,7 @@ using namespace winrt::Windows::System;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
 }
 
 namespace winrt::TerminalApp::implementation
@@ -146,7 +146,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
 
         if (auto tab{ weakThis.get() })
         {
@@ -288,7 +288,7 @@ namespace winrt::TerminalApp::implementation
 
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
 
         if (auto tab{ weakThis.get() })
         {
@@ -307,7 +307,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
 
         if (auto tab{ weakThis.get() })
         {
@@ -336,7 +336,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
 
         if (auto tab{ weakThis.get() })
         {
@@ -351,7 +351,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
 
         if (auto tab{ weakThis.get() })
         {
@@ -398,7 +398,7 @@ namespace winrt::TerminalApp::implementation
     winrt::fire_and_forget TerminalTab::UpdateTitle()
     {
         auto weakThis{ get_weak() };
-        co_await wil::resume_foreground(TabViewItem().Dispatcher());
+        co_await wil::resume_foreground(TabViewItem().DispatcherQueue());
         if (auto tab{ weakThis.get() })
         {
             const auto activeTitle = _GetActiveTitle();
@@ -424,7 +424,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto control = GetActiveTerminalControl();
 
-        co_await wil::resume_foreground(control.Dispatcher());
+        co_await wil::resume_foreground(control.DispatcherQueue());
 
         const auto currentOffset = control.ScrollOffset();
         control.ScrollViewport(::base::ClampAdd(currentOffset, delta));
@@ -841,7 +841,7 @@ namespace winrt::TerminalApp::implementation
     void TerminalTab::_AttachEventHandlersToControl(const uint32_t paneId, const TermControl& control)
     {
         auto weakThis{ get_weak() };
-        auto dispatcher = TabViewItem().Dispatcher();
+        auto dispatcher = TabViewItem().DispatcherQueue();
         ControlEventTokens events{};
 
         events.titleToken = control.TitleChanged([weakThis](auto&&, auto&&) {
@@ -1074,7 +1074,7 @@ namespace winrt::TerminalApp::implementation
             {
                 if (tab->_zoomedPane)
                 {
-                    co_await wil::resume_foreground(tab->Content().Dispatcher());
+                    co_await wil::resume_foreground(tab->Content().DispatcherQueue());
 
                     tab->Content(tab->_rootPane->GetRootElement());
                     tab->ExitZoom();
@@ -1088,7 +1088,7 @@ namespace winrt::TerminalApp::implementation
                     // did not actually change. Triggering
                     if (pane != tab->_activePane && !tab->_activePane->_IsLeaf())
                     {
-                        co_await wil::resume_foreground(tab->Content().Dispatcher());
+                        co_await wil::resume_foreground(tab->Content().DispatcherQueue());
                         tab->_UpdateActivePane(tab->_activePane);
                     }
 
@@ -1365,7 +1365,7 @@ namespace winrt::TerminalApp::implementation
     {
         auto weakThis{ get_weak() };
 
-        TabViewItem().Dispatcher().RunAsync(CoreDispatcherPriority::Normal, [weakThis]() {
+        TabViewItem().DispatcherQueue().TryEnqueue(/*CoreDispatcherPriority::Normal,*/ [weakThis]() {
             auto ptrTab = weakThis.get();
             if (!ptrTab)
                 return;

@@ -21,7 +21,7 @@ namespace TestHostApp
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs ^ e)
     {
-        Windows::UI::Xaml::Window::Current->Activate();
+        Microsoft::UI::Xaml::Window::Current->Activate();
         Microsoft::VisualStudio::TestPlatform::TestExecutor::WinRTCore::UnitTestClient::Run(e->Arguments);
     }
 }

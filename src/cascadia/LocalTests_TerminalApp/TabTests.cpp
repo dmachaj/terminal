@@ -23,15 +23,15 @@ using namespace WEX::Common;
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
 using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Windows::System;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::UI::Text;
 
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
     using IInspectable = Windows::Foundation::IInspectable;
 }
 
@@ -155,13 +155,13 @@ namespace TerminalAppLocalTests
             VERIFY_IS_NOT_NULL(v, L"Ensure we have a current view");
             // Verify we can create a some XAML objects
             // Just creating all of them is enough to know that everything is working.
-            winrt::Windows::UI::Xaml::Controls::UserControl controlRoot;
+            winrt::Microsoft::UI::Xaml::Controls::UserControl controlRoot;
             VERIFY_IS_NOT_NULL(controlRoot, L"Try making a UserControl");
-            winrt::Windows::UI::Xaml::Controls::Grid root;
+            winrt::Microsoft::UI::Xaml::Controls::Grid root;
             VERIFY_IS_NOT_NULL(root, L"Try making a Grid");
-            winrt::Windows::UI::Xaml::Controls::SwapChainPanel swapChainPanel;
+            winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapChainPanel;
             VERIFY_IS_NOT_NULL(swapChainPanel, L"Try making a SwapChainPanel");
-            winrt::Windows::UI::Xaml::Controls::Primitives::ScrollBar scrollBar;
+            winrt::Microsoft::UI::Xaml::Controls::Primitives::ScrollBar scrollBar;
             VERIFY_IS_NOT_NULL(scrollBar, L"Try making a ScrollBar");
         });
 
@@ -276,11 +276,11 @@ namespace TerminalAppLocalTests
             page->_startupActions.Append(newTabAction);
             Log::Comment(L"Added a single newTab action");
 
-            auto app = ::winrt::Windows::UI::Xaml::Application::Current();
+            auto app = ::winrt::Microsoft::UI::Xaml::Application::Current();
 
             winrt::TerminalApp::TerminalPage pp = *page;
-            winrt::Windows::UI::Xaml::Window::Current().Content(pp);
-            winrt::Windows::UI::Xaml::Window::Current().Activate();
+            //winrt::Microsoft::UI::Xaml::Window::Current().Content(pp);
+            winrt::Microsoft::UI::Xaml::Window::Current().Activate();
         });
         VERIFY_SUCCEEDED(result);
 

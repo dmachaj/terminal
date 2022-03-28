@@ -36,7 +36,7 @@ namespace winrt::TerminalApp::implementation
         // remove the TextBox from the UI tree, then the following KeyUp
         // will bubble to the NewTabButton, which we don't want to have
         // happen.
-        HeaderRenamerTextBox().KeyUp([&](auto&&, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e) {
+        HeaderRenamerTextBox().KeyUp([&](auto&&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e) {
             if (_receivedKeyDown)
             {
                 if (e.OriginalKey() == Windows::System::VirtualKey::Enter)
@@ -64,7 +64,7 @@ namespace winrt::TerminalApp::implementation
     // - true if the renamer is open.
     bool TabHeaderControl::InRename()
     {
-        return Windows::UI::Xaml::Visibility::Visible == HeaderRenamerTextBox().Visibility();
+        return Microsoft::UI::Xaml::Visibility::Visible == HeaderRenamerTextBox().Visibility();
     }
 
     // Method Description:
@@ -75,12 +75,12 @@ namespace winrt::TerminalApp::implementation
         _receivedKeyDown = false;
         _renameCancelled = false;
 
-        HeaderTextBlock().Visibility(Windows::UI::Xaml::Visibility::Collapsed);
-        HeaderRenamerTextBox().Visibility(Windows::UI::Xaml::Visibility::Visible);
+        HeaderTextBlock().Visibility(Microsoft::UI::Xaml::Visibility::Collapsed);
+        HeaderRenamerTextBox().Visibility(Microsoft::UI::Xaml::Visibility::Visible);
 
         HeaderRenamerTextBox().Text(Title());
         HeaderRenamerTextBox().SelectAll();
-        HeaderRenamerTextBox().Focus(Windows::UI::Xaml::FocusState::Programmatic);
+        HeaderRenamerTextBox().Focus(Microsoft::UI::Xaml::FocusState::Programmatic);
 
         TraceLoggingWrite(
             g_hTerminalAppProvider, // handle to TerminalApp tracelogging provider
@@ -95,7 +95,7 @@ namespace winrt::TerminalApp::implementation
     // - When the rename box loses focus, we send a request for the title change depending
     //   on whether the rename was cancelled
     void TabHeaderControl::RenameBoxLostFocusHandler(Windows::Foundation::IInspectable const& /*sender*/,
-                                                     Windows::UI::Xaml::RoutedEventArgs const& /*e*/)
+                                                     Microsoft::UI::Xaml::RoutedEventArgs const& /*e*/)
     {
         // If the context menu associated with the renamer text box is open we know it gained the focus.
         // In this case we ignore this event (we will regain the focus once the menu will be closed).
@@ -128,10 +128,10 @@ namespace winrt::TerminalApp::implementation
     // - Hides the rename box and displays the title text block
     void TabHeaderControl::_CloseRenameBox()
     {
-        if (HeaderRenamerTextBox().Visibility() == Windows::UI::Xaml::Visibility::Visible)
+        if (HeaderRenamerTextBox().Visibility() == Microsoft::UI::Xaml::Visibility::Visible)
         {
-            HeaderRenamerTextBox().Visibility(Windows::UI::Xaml::Visibility::Collapsed);
-            HeaderTextBlock().Visibility(Windows::UI::Xaml::Visibility::Visible);
+            HeaderRenamerTextBox().Visibility(Microsoft::UI::Xaml::Visibility::Collapsed);
+            HeaderTextBlock().Visibility(Microsoft::UI::Xaml::Visibility::Visible);
             _RenameEndedHandlers(*this, nullptr);
         }
     }

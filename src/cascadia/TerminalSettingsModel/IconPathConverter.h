@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IconPathConverter.g.h"
+#include <winrt/windows.ui.xaml.interop.h>
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
@@ -18,7 +19,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
                                                       Windows::Foundation::IInspectable const& parameter,
                                                       hstring const& language);
 
-        static Windows::UI::Xaml::Controls::IconSource IconSourceWUX(hstring path);
+        static Microsoft::UI::Xaml::Controls::IconSource IconSourceWUX(hstring path);
         static Microsoft::UI::Xaml::Controls::IconSource IconSourceMUX(hstring path);
     };
 }

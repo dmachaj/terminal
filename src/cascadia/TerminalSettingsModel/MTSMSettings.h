@@ -33,7 +33,7 @@ Author(s):
     X(bool, ShowTitleInTitlebar, "showTerminalTitleInTitlebar", true)                                                                                      \
     X(bool, ConfirmCloseAllTabs, "confirmCloseAllTabs", true)                                                                                              \
     X(hstring, Language, "language")                                                                                                                       \
-    X(winrt::Windows::UI::Xaml::ElementTheme, Theme, "theme", winrt::Windows::UI::Xaml::ElementTheme::Default)                                             \
+    X(winrt::Microsoft::UI::Xaml::ElementTheme, Theme, "theme", winrt::Microsoft::UI::Xaml::ElementTheme::Default)                                             \
     X(winrt::Microsoft::UI::Xaml::Controls::TabViewWidthMode, TabWidthMode, "tabWidthMode", winrt::Microsoft::UI::Xaml::Controls::TabViewWidthMode::Equal) \
     X(bool, UseAcrylicInTabRow, "useAcrylicInTabRow", false)                                                                                               \
     X(bool, ShowTabsInTitlebar, "showTabsInTitlebar", true)                                                                                                \
@@ -98,7 +98,7 @@ Author(s):
     X(Core::CursorStyle, CursorShape, "cursorShape", Core::CursorStyle::Bar)                                                                                       \
     X(uint32_t, CursorHeight, "cursorHeight", DEFAULT_CURSOR_HEIGHT)                                                                                               \
     X(double, BackgroundImageOpacity, "backgroundImageOpacity", 1.0)                                                                                               \
-    X(winrt::Windows::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, "backgroundImageStretchMode", winrt::Windows::UI::Xaml::Media::Stretch::UniformToFill) \
+    X(winrt::Microsoft::UI::Xaml::Media::Stretch, BackgroundImageStretchMode, "backgroundImageStretchMode", winrt::Microsoft::UI::Xaml::Media::Stretch::UniformToFill) \
     X(bool, RetroTerminalEffect, "experimental.retroTerminalEffect", false)                                                                                        \
     X(hstring, PixelShaderPath, "experimental.pixelShaderPath")                                                                                                    \
     X(ConvergedAlignment, BackgroundImageAlignment, "backgroundImageAlignment", ConvergedAlignment::Horizontal_Center | ConvergedAlignment::Vertical_Center)       \

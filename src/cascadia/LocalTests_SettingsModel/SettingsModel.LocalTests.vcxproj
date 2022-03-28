@@ -20,6 +20,10 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <OpenConsoleCppWinRTProject>true</OpenConsoleCppWinRTProject>
     <!-- TerminalCppWinrt is not set intentionally -->
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)\common.openconsole.props" Condition="'$(OpenConsoleDir)'==''" />
@@ -104,8 +108,5 @@
     <Native-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</Native-Platform>
     <_MUXBinRoot>&quot;$(OpenConsoleDir)packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\runtimes\win10-$(Native-Platform)\native\&quot;</_MUXBinRoot>
   </PropertyGroup>
-
-  <!-- We actually can just straight up reference MUX here, it's fine -->
-  <Import Project="..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\..\packages\Microsoft.UI.Xaml.$(TerminalMUXVersion)\build\native\Microsoft.UI.Xaml.targets')" />
 
 </Project>

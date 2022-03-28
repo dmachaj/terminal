@@ -34,5 +34,5 @@ public:
 
 private:
     winrt::Microsoft::UI::Xaml::Controls::TeachingTip _tip;
-    winrt::Windows::UI::Xaml::DispatcherTimer _timer;
+    winrt::Microsoft::UI::Xaml::DispatcherTimer _timer;
 };

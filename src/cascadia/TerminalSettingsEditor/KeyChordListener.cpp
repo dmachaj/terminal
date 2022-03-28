@@ -7,12 +7,12 @@
 #include "LibraryResources.h"
 
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
-using namespace winrt::Windows::UI::Xaml::Data;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml::Data;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::System;
-using namespace winrt::Windows::UI::Xaml::Input;
+using namespace winrt::Microsoft::UI::Xaml::Input;
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
 {

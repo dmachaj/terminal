@@ -420,7 +420,7 @@ namespace winrt::Microsoft::Terminal::TerminalConnection::implementation
             {
                 _WriteCaughtExceptionRecord();
                 _transitionToState(ConnectionState::Failed);
-                return E_FAIL;
+                return (DWORD)E_FAIL;
             }
         }
     }

@@ -7,7 +7,7 @@
 #include "InteractionPageNavigationState.g.cpp"
 #include "EnumEntry.h"
 
-using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation

@@ -18,9 +18,9 @@ using namespace ::Microsoft::Console::Types;
 using namespace ::Microsoft::Console::VirtualTerminal;
 using namespace ::Microsoft::Terminal::Core;
 using namespace winrt::Windows::Graphics::Display;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Input;
-using namespace winrt::Windows::UI::Xaml::Automation::Peers;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Input;
+using namespace winrt::Microsoft::UI::Xaml::Automation::Peers;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::UI::Input;
@@ -103,7 +103,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         // Get our dispatcher. This will get us the same dispatcher as
         // TermControl::Dispatcher().
-        auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        //auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        auto dispatcher = DispatcherQueue();
 
         // These three throttled functions are triggered by terminal output and interact with the UI.
         // Since Close() is the point after which we are removed from the UI, but before the
@@ -244,7 +245,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         // Dispatch a call to the UI thread to apply the new settings to the
         // terminal.
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
 
         _core.UpdateSettings(settings, unfocusedAppearance);
 
@@ -260,7 +261,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     winrt::fire_and_forget TermControl::UpdateAppearance(IControlAppearance newAppearance)
     {
         // Dispatch a call to the UI thread
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
 
         _UpdateAppearanceFromUIThread(newAppearance);
     }
@@ -465,7 +466,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
             if (acrylic == nullptr)
             {
                 acrylic = Media::AcrylicBrush{};
-                acrylic.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
+                // WINAPPSDKBUG - Acrylic background not supported
+                //acrylic.BackgroundSource(Media::AcrylicBackgroundSource::HostBackdrop);
             }
 
             // see GH#1082: Initialize background color so we don't get a
@@ -504,7 +506,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
                                                                     const IInspectable& /*args*/)
     {
         auto weakThis{ get_weak() };
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
         if (auto control{ weakThis.get() })
         {
             til::color newBgColor{ _core.BackgroundColor() };
@@ -579,7 +581,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - None
     // Return Value:
     // - The automation peer for our control
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer TermControl::OnCreateAutomationPeer()
+    Microsoft::UI::Xaml::Automation::Peers::AutomationPeer TermControl::OnCreateAutomationPeer()
     {
         // MSFT 33353327: We're purposefully not using _initializedTerminal to ensure we're fully initialized.
         // Doing so makes us return nullptr when XAML requests an automation peer.
@@ -609,7 +611,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         return til::point{ til::math::rounding, _core.FontSize().Width, _core.FontSize().Height };
     }
 
-    const Windows::UI::Xaml::Thickness TermControl::GetPadding()
+    const Microsoft::UI::Xaml::Thickness TermControl::GetPadding()
     {
         return SwapChainPanel().Margin();
     }
@@ -626,7 +628,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // We also don't lock for things that come back from the renderer.
         auto weakThis{ get_weak() };
 
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
 
         if (auto control{ weakThis.get() })
         {
@@ -651,7 +653,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         const auto hr = static_cast<HRESULT>(args.Result());
 
         auto weakThis{ get_weak() };
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
 
         if (auto control{ weakThis.get() })
         {
@@ -1160,7 +1162,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // We'll need this later, for PointerMoved events.
         _pointerPressedInBounds = true;
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             const auto contactRect = point.Properties().ContactRect();
             auto anchor = til::point{ til::math::rounding, contactRect.X, contactRect.Y };
@@ -1205,8 +1207,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
             _FocusFollowMouseRequestedHandlers(*this, nullptr);
         }
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Mouse ||
-            type == Windows::Devices::Input::PointerDeviceType::Pen)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Mouse ||
+            type == Microsoft::UI::Input::PointerDeviceType::Pen)
         {
             _interactivity.PointerMoved(TermControl::GetPressedMouseButtons(point),
                                         TermControl::GetPointerUpdateKind(point),
@@ -1249,7 +1251,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
                 }
             }
         }
-        else if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        else if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             const auto contactRect = point.Properties().ContactRect();
             til::point newTouchPoint{ til::math::rounding, contactRect.X, contactRect.Y };
@@ -1284,15 +1286,15 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         _ReleasePointerCapture(sender, args);
 
-        if (type == Windows::Devices::Input::PointerDeviceType::Mouse ||
-            type == Windows::Devices::Input::PointerDeviceType::Pen)
+        if (type == Microsoft::UI::Input::PointerDeviceType::Mouse ||
+            type == Microsoft::UI::Input::PointerDeviceType::Pen)
         {
             _interactivity.PointerReleased(TermControl::GetPressedMouseButtons(point),
                                            TermControl::GetPointerUpdateKind(point),
                                            ControlKeyStates(args.KeyModifiers()),
                                            pixelPosition.to_core_point());
         }
-        else if (type == Windows::Devices::Input::PointerDeviceType::Touch)
+        else if (type == Microsoft::UI::Input::PointerDeviceType::Touch)
         {
             _interactivity.TouchReleased();
         }
@@ -1376,7 +1378,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     winrt::fire_and_forget TermControl::_coreTransparencyChanged(IInspectable /*sender*/,
                                                                  Control::TransparencyChangedEventArgs /*args*/)
     {
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
         try
         {
             _changeBackgroundOpacity();
@@ -1430,7 +1432,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - args: pointer data (i.e.: mouse, touch)
     // Return Value:
     // - true if we successfully capture the pointer, false otherwise.
-    bool TermControl::_CapturePointer(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    bool TermControl::_CapturePointer(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
         IUIElement uielem;
         if (sender.try_as(uielem))
@@ -1448,7 +1450,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - args: pointer data (i.e.: mouse, touch)
     // Return Value:
     // - true if we release capture of the pointer, false otherwise.
-    bool TermControl::_ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    bool TermControl::_ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
         IUIElement uielem;
         if (sender.try_as(uielem))
@@ -1466,7 +1468,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - pointerPoint: info about pointer that causes auto scroll. Pointer's position
     //      is later used to update selection.
     // - scrollVelocity: target velocity of scrolling in characters / sec
-    void TermControl::_TryStartAutoScroll(Windows::UI::Input::PointerPoint const& pointerPoint, const double scrollVelocity)
+    void TermControl::_TryStartAutoScroll(Microsoft::UI::Input::PointerPoint  const& pointerPoint, const double scrollVelocity)
     {
         // Allow only one pointer at the time
         if (!_autoScrollingPointerPoint ||
@@ -1554,7 +1556,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         _focused = true;
 
-        InputPane::GetForCurrentView().TryShow();
+        //InputPane::GetForCurrentView().TryShow();
+        //InputPane::GetForUIContext(this->XamlRoot()).TryShow();
 
         // GH#5421: Enable the UiaEngine before checking for the SearchBox
         // That way, new selections are notified to automation clients.
@@ -1689,7 +1692,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // Arguments:
     // - sender: The SwapChainPanel who's DPI changed. This is our _swapchainPanel.
     // - args: This param is unused in the CompositionScaleChanged event.
-    void TermControl::_SwapChainScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel const& sender,
+    void TermControl::_SwapChainScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender,
                                              Windows::Foundation::IInspectable const& /*args*/)
     {
         const auto scaleX = sender.CompositionScaleX();
@@ -1771,7 +1774,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // just go ahead and do it.
         // This can come in off the COM thread - hop back to the UI thread.
         auto weakThis{ get_weak() };
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
         if (auto control{ weakThis.get() }; !control->_IsClosing())
         {
             control->TSFInputControl().TryRedrawCanvas();
@@ -2069,8 +2072,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     //      Two Double values provide isometric horizontal & vertical padding
     //      Four Double values provide independent padding for 4 sides of the bounding rectangle
     // Return Value:
-    // - Windows::UI::Xaml::Thickness object
-    Windows::UI::Xaml::Thickness TermControl::ParseThicknessFromPadding(const hstring padding)
+    // - Microsoft::UI::Xaml::Thickness object
+    Microsoft::UI::Xaml::Thickness TermControl::ParseThicknessFromPadding(const hstring padding)
     {
         const wchar_t singleCharDelim = L',';
         std::wstringstream tokenStream(padding.c_str());
@@ -2125,7 +2128,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - The Microsoft::Terminal::Core::ControlKeyStates representing the modifier key states.
     ControlKeyStates TermControl::_GetPressedModifierKeys() noexcept
     {
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
         // DONT USE
         //      != CoreVirtualKeyStates::None
         // OR
@@ -2154,7 +2157,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         for (const auto& mod : modifiers)
         {
-            const auto state = window.GetKeyState(mod.vkey);
+            const auto state = winrt::Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(mod.vkey);
             const auto isDown = WI_IsFlagSet(state, CoreVirtualKeyStates::Down);
 
             if (isDown)
@@ -2459,7 +2462,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // Just in case someone was holding a lock when they called us and
         // the handlers decide to do something that take another lock
         // (like ShellExecute pumping our messaging thread...GH#7994)
-        co_await Dispatcher();
+        co_await wil::resume_foreground(DispatcherQueue());
 
         _OpenHyperlinkHandlers(*strongThis, args);
     }
@@ -2470,11 +2473,11 @@ namespace winrt::Microsoft::Terminal::Control::implementation
                                                                    IInspectable /*args*/)
     {
         auto strongThis{ get_strong() };
-        co_await Dispatcher(); // pop up onto the UI thread
+        co_await wil::resume_foreground(DispatcherQueue()); // pop up onto the UI thread
 
         if (auto loadedUiElement{ FindName(L"RendererFailedNotice") })
         {
-            if (auto uiElement{ loadedUiElement.try_as<::winrt::Windows::UI::Xaml::UIElement>() })
+            if (auto uiElement{ loadedUiElement.try_as<::winrt::Microsoft::UI::Xaml::UIElement>() })
             {
                 uiElement.Visibility(Visibility::Visible);
             }
@@ -2609,7 +2612,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     // - sender: not used
     // - args: event data
     void TermControl::_PointerExitedHandler(Windows::Foundation::IInspectable const& /*sender*/,
-                                            Windows::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
+                                            Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& /*e*/)
     {
         _core.ClearHoveredCell();
     }
@@ -2618,7 +2621,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
                                                                  IInspectable args)
     {
         auto weakThis{ get_weak() };
-        co_await wil::resume_foreground(Dispatcher());
+        co_await wil::resume_foreground(DispatcherQueue());
         if (auto self{ weakThis.get() })
         {
             auto lastHoveredCell = _core.HoveredCell();
@@ -2678,7 +2681,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         _RaiseNoticeHandlers(*this, eventArgs);
     }
 
-    Control::MouseButtonState TermControl::GetPressedMouseButtons(const winrt::Windows::UI::Input::PointerPoint point)
+    Control::MouseButtonState TermControl::GetPressedMouseButtons(const winrt::Microsoft::UI::Input::PointerPoint  point)
     {
         Control::MouseButtonState state{};
         WI_SetFlagIf(state, Control::MouseButtonState::IsLeftButtonDown, point.Properties().IsLeftButtonPressed());
@@ -2687,7 +2690,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         return state;
     }
 
-    unsigned int TermControl::GetPointerUpdateKind(const winrt::Windows::UI::Input::PointerPoint point)
+    unsigned int TermControl::GetPointerUpdateKind(const winrt::Microsoft::UI::Input::PointerPoint  point)
     {
         const auto props = point.Properties();
 
@@ -2695,22 +2698,22 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         unsigned int uiButton{};
         switch (props.PointerUpdateKind())
         {
-        case winrt::Windows::UI::Input::PointerUpdateKind::LeftButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::LeftButtonPressed:
             uiButton = WM_LBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::LeftButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::LeftButtonReleased:
             uiButton = WM_LBUTTONUP;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::MiddleButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::MiddleButtonPressed:
             uiButton = WM_MBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::MiddleButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::MiddleButtonReleased:
             uiButton = WM_MBUTTONUP;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::RightButtonPressed:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::RightButtonPressed:
             uiButton = WM_RBUTTONDOWN;
             break;
-        case winrt::Windows::UI::Input::PointerUpdateKind::RightButtonReleased:
+        case winrt::Microsoft::UI::Input::PointerUpdateKind::RightButtonReleased:
             uiButton = WM_RBUTTONUP;
             break;
         default:

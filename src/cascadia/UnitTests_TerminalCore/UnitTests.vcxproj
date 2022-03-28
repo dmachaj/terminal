@@ -8,6 +8,7 @@
     <TargetName>Terminal.Core.Unit.Tests</TargetName>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <OpenConsoleUniversalApp>false</OpenConsoleUniversalApp>
+    <TerminalCppWinrt>true</TerminalCppWinrt>
   </PropertyGroup>
   <PropertyGroup Label="NuGet Dependencies">
     <TerminalCppWinrt>true</TerminalCppWinrt>

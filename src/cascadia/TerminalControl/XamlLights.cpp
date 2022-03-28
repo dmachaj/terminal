@@ -6,8 +6,8 @@
 #include "XamlLights.h"
 #include "VisualBellLight.g.cpp"
 
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Media;
 
 namespace winrt::Microsoft::Terminal::Control::implementation
 {
@@ -43,7 +43,9 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     {
         if (!CompositionLight())
         {
-            auto spotLight{ Window::Current().Compositor().CreateAmbientLight() };
+            auto compositorSuperWasteful = winrt::Microsoft::UI::Composition::Compositor();
+            auto spotLight{ compositorSuperWasteful.CreateAmbientLight() };
+            //auto spotLight{ Window::Current().Compositor().CreateAmbientLight() };
             spotLight.Color(Windows::UI::Colors::White());
             CompositionLight(spotLight);
         }

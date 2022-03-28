@@ -11,10 +11,10 @@
 
 using namespace winrt;
 using namespace winrt::Windows::UI;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Navigation;
-using namespace winrt::Windows::UI::Xaml::Controls;
-using namespace winrt::Windows::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml::Media;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
@@ -22,7 +22,7 @@ using namespace winrt::Microsoft::UI::Xaml::Controls;
 namespace winrt
 {
     namespace MUX = Microsoft::UI::Xaml;
-    namespace WUX = Windows::UI::Xaml;
+    namespace WUX = Microsoft::UI::Xaml;
 }
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
@@ -74,17 +74,17 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         InitializeComponent();
 
         Automation::AutomationProperties::SetName(ColorSchemeComboBox(), RS_(L"ColorScheme_Name/Header"));
-        Automation::AutomationProperties::SetFullDescription(ColorSchemeComboBox(), RS_(L"ColorScheme_Name/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
-        ToolTipService::SetToolTip(ColorSchemeComboBox(), box_value(RS_(L"ColorScheme_Name/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip")));
+        Automation::AutomationProperties::SetFullDescription(ColorSchemeComboBox(), RS_(L"ColorScheme_Name/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        ToolTipService::SetToolTip(ColorSchemeComboBox(), box_value(RS_(L"ColorScheme_Name/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip")));
 
-        Automation::AutomationProperties::SetName(RenameButton(), RS_(L"Rename/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetName(RenameButton(), RS_(L"Rename/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
 
         Automation::AutomationProperties::SetName(NameBox(), RS_(L"ColorScheme_Name/Header"));
-        Automation::AutomationProperties::SetFullDescription(NameBox(), RS_(L"ColorScheme_Name/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
-        ToolTipService::SetToolTip(NameBox(), box_value(RS_(L"ColorScheme_Name/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip")));
+        Automation::AutomationProperties::SetFullDescription(NameBox(), RS_(L"ColorScheme_Name/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        ToolTipService::SetToolTip(NameBox(), box_value(RS_(L"ColorScheme_Name/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip")));
 
-        Automation::AutomationProperties::SetName(RenameAcceptButton(), RS_(L"RenameAccept/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
-        Automation::AutomationProperties::SetName(RenameCancelButton(), RS_(L"RenameCancel/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetName(RenameAcceptButton(), RS_(L"RenameAccept/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
+        Automation::AutomationProperties::SetName(RenameCancelButton(), RS_(L"RenameCancel/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"));
         Automation::AutomationProperties::SetName(AddNewButton(), RS_(L"ColorScheme_AddNewButton/Text"));
         Automation::AutomationProperties::SetName(DeleteButton(), RS_(L"ColorScheme_DeleteButton/Text"));
     }
@@ -129,8 +129,8 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         }
 
         // populate color table grid
-        const auto colorLabelStyle{ Resources().Lookup(winrt::box_value(L"ColorLabelStyle")).as<Windows::UI::Xaml::Style>() };
-        const auto colorControlStyle{ Resources().Lookup(winrt::box_value(L"ColorControlStyle")).as<Windows::UI::Xaml::Style>() };
+        const auto colorLabelStyle{ Resources().Lookup(winrt::box_value(L"ColorLabelStyle")).as<Microsoft::UI::Xaml::Style>() };
+        const auto colorControlStyle{ Resources().Lookup(winrt::box_value(L"ColorControlStyle")).as<Microsoft::UI::Xaml::Style>() };
         const auto colorTableEntryTemplate{ Resources().Lookup(winrt::box_value(L"ColorTableEntryTemplate")).as<DataTemplate>() };
         auto setupColorControl = [colorTableEntryTemplate, colorControlStyle, colorTableGrid{ ColorTableGrid() }](const auto&& colorRef, const uint32_t& row, const uint32_t& col) {
             ContentControl colorControl{};
@@ -192,7 +192,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         DeleteButtonDisclaimer().Text(disclaimer);
 
         // Update the state of the page
-        _PropertyChangedHandlers(*this, Windows::UI::Xaml::Data::PropertyChangedEventArgs{ L"CanDeleteCurrentScheme" });
+        _PropertyChangedHandlers(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"CanDeleteCurrentScheme" });
         IsRenaming(false);
     }
 
@@ -345,7 +345,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         RenameButton().Focus(FocusState::Programmatic);
     }
 
-    void ColorSchemes::NameBox_PreviewKeyDown(IInspectable const& /*sender*/, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+    void ColorSchemes::NameBox_PreviewKeyDown(IInspectable const& /*sender*/, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
     {
         if (e.OriginalKey() == winrt::Windows::System::VirtualKey::Enter)
         {

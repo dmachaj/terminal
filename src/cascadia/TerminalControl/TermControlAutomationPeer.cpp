@@ -12,7 +12,7 @@
 #include "../types/UiaTracing.h"
 
 using namespace Microsoft::Console::Types;
-using namespace winrt::Windows::UI::Xaml::Automation::Peers;
+using namespace winrt::Microsoft::UI::Xaml::Automation::Peers;
 using namespace winrt::Windows::Graphics::Display;
 
 namespace UIA
@@ -23,9 +23,9 @@ namespace UIA
 
 namespace XamlAutomation
 {
-    using winrt::Windows::UI::Xaml::Automation::SupportedTextSelection;
-    using winrt::Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
-    using winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider;
+    using winrt::Microsoft::UI::Xaml::Automation::SupportedTextSelection;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::IRawElementProviderSimple;
+    using winrt::Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider;
 }
 
 static constexpr wchar_t UNICODE_NEWLINE{ L'\n' };
@@ -126,12 +126,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     void TermControlAutomationPeer::SignalSelectionChanged()
     {
         UiaTracing::Signal::SelectionChanged();
-        auto dispatcher{ Dispatcher() };
+        auto dispatcher{ DispatcherQueue() };
         if (!dispatcher)
         {
             return;
         }
-        dispatcher.RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [weakThis{ get_weak() }]() {
+        dispatcher.TryEnqueue(/*Windows::UI::Core::CoreDispatcherPriority::Normal, */[weakThis{ get_weak() }]() {
             if (auto strongThis{ weakThis.get() })
             {
                 // The event that is raised when the text selection is modified.
@@ -149,12 +149,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     void TermControlAutomationPeer::SignalTextChanged()
     {
         UiaTracing::Signal::TextChanged();
-        auto dispatcher{ Dispatcher() };
+        auto dispatcher{ DispatcherQueue() };
         if (!dispatcher)
         {
             return;
         }
-        dispatcher.RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [weakThis{ get_weak() }]() {
+        dispatcher.TryEnqueue(/*Windows::UI::Core::CoreDispatcherPriority::Normal,*/ [weakThis{ get_weak() }]() {
             if (auto strongThis{ weakThis.get() })
             {
                 // The event that is raised when textual content is modified.
@@ -172,12 +172,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
     void TermControlAutomationPeer::SignalCursorChanged()
     {
         UiaTracing::Signal::CursorChanged();
-        auto dispatcher{ Dispatcher() };
+        auto dispatcher{ DispatcherQueue() };
         if (!dispatcher)
         {
             return;
         }
-        dispatcher.RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [weakThis{ get_weak() }]() {
+        dispatcher.TryEnqueue(/*Windows::UI::Core::CoreDispatcherPriority::Normal, */[weakThis{ get_weak() }]() {
             if (auto strongThis{ weakThis.get() })
             {
                 // The event that is raised when the text was changed in an edit control.
@@ -223,7 +223,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
             return;
         }
 
-        auto dispatcher{ Dispatcher() };
+        auto dispatcher{ DispatcherQueue() };
         if (!dispatcher)
         {
             return;
@@ -233,7 +233,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // [1] make sure the scope returns a copy of "sanitized" so that it isn't accidentally deleted
         // [2] AutomationNotificationProcessing::All --> ensures it can be interrupted by keyboard events
         // [3] Do not "RunAsync(...).get()". For whatever reason, this causes NVDA to just not receive "SignalTextChanged()"'s events.
-        dispatcher.RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [weakThis{ get_weak() }, sanitizedCopy{ hstring{ sanitized } }]() {
+        dispatcher.TryEnqueue(/*Windows::UI::Core::CoreDispatcherPriority::Normal, */[weakThis{ get_weak() }, sanitizedCopy{ hstring{ sanitized } }]() {
             if (auto strongThis{ weakThis.get() })
             {
                 try

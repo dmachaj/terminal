@@ -12,9 +12,9 @@
 #include "icon.h"
 
 using namespace winrt::Windows::UI;
-using namespace winrt::Windows::UI::Composition;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Hosting;
+using namespace winrt::Microsoft::UI::Composition;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Hosting;
 using namespace winrt::Windows::Foundation::Numerics;
 using namespace winrt::Microsoft::Terminal;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
@@ -128,7 +128,7 @@ AppHost::~AppHost()
     _revokers = {};
 
     _window = nullptr;
-    _app.Close();
+    //_app.Close(); WinAppSDK BUG BUG not closing the app
     _app = nullptr;
 }
 
@@ -665,7 +665,7 @@ void AppHost::_HandleCreateWindow(const HWND hwnd, RECT proposedRect, LaunchMode
 // - arg: the UIElement to use as the new Titlebar content.
 // Return Value:
 // - <none>
-void AppHost::_UpdateTitleBarContent(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::UI::Xaml::UIElement& arg)
+void AppHost::_UpdateTitleBarContent(const winrt::Windows::Foundation::IInspectable&, const winrt::Microsoft::UI::Xaml::UIElement& arg)
 {
     if (_useNonClientArea)
     {
@@ -681,7 +681,7 @@ void AppHost::_UpdateTitleBarContent(const winrt::Windows::Foundation::IInspecta
 // - arg: the ElementTheme to use as the new theme for the UI
 // Return Value:
 // - <none>
-void AppHost::_UpdateTheme(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::UI::Xaml::ElementTheme& arg)
+void AppHost::_UpdateTheme(const winrt::Windows::Foundation::IInspectable&, const winrt::Microsoft::UI::Xaml::ElementTheme& arg)
 {
     _window->OnApplicationThemeChanged(arg);
 }
@@ -764,7 +764,7 @@ void AppHost::_WindowMouseWheeled(const til::point coord, const int32_t delta)
     if (_logic)
     {
         // Find all the elements that are underneath the mouse
-        auto elems = winrt::Windows::UI::Xaml::Media::VisualTreeHelper::FindElementsInHostCoordinates(coord.to_winrt_point(), _logic.GetRoot());
+        auto elems = winrt::Microsoft::UI::Xaml::Media::VisualTreeHelper::FindElementsInHostCoordinates(coord.to_winrt_point(), _logic.GetRoot());
         for (const auto& e : elems)
         {
             // If that element has implemented IMouseWheelListener, call OnMouseWheel on that element.
@@ -841,7 +841,7 @@ winrt::Windows::Foundation::IAsyncOperation<winrt::hstring> AppHost::_GetWindowL
 
     winrt::hstring layoutJson = L"";
     // Use the main thread since we are accessing controls.
-    co_await wil::resume_foreground(_logic.GetRoot().Dispatcher());
+    co_await wil::resume_foreground(_logic.GetRoot().DispatcherQueue());
     try
     {
         const auto pos = _GetWindowLaunchPosition();
@@ -1017,7 +1017,7 @@ void AppHost::_listenForInboundConnections()
 winrt::fire_and_forget AppHost::_setupGlobalHotkeys()
 {
     // The hotkey MUST be registered on the main thread. It will fail otherwise!
-    co_await wil::resume_foreground(_logic.GetRoot().Dispatcher());
+    co_await wil::resume_foreground(_logic.GetRoot().DispatcherQueue());
 
     if (!_window)
     {
@@ -1354,7 +1354,7 @@ winrt::fire_and_forget AppHost::_QuitRequested(const winrt::Windows::Foundation:
                                                const winrt::Windows::Foundation::IInspectable&)
 {
     // Need to be on the main thread to close out all of the tabs.
-    co_await wil::resume_foreground(_logic.GetRoot().Dispatcher());
+    co_await wil::resume_foreground(_logic.GetRoot().DispatcherQueue());
 
     _logic.Quit();
 }

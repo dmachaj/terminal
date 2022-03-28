@@ -90,8 +90,8 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         ~TermControl();
 
-        Windows::UI::Xaml::Automation::Peers::AutomationPeer OnCreateAutomationPeer();
-        const Windows::UI::Xaml::Thickness GetPadding();
+        Microsoft::UI::Xaml::Automation::Peers::AutomationPeer OnCreateAutomationPeer();
+        const Microsoft::UI::Xaml::Thickness GetPadding();
 
         static Windows::Foundation::Size GetProposedDimensions(IControlSettings const& settings, const uint32_t dpi);
         static Windows::Foundation::Size GetProposedDimensions(IControlSettings const& settings, const uint32_t dpi, const winrt::Windows::Foundation::Size& initialSizeInChars);
@@ -101,9 +101,9 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         bool ReadOnly() const noexcept;
         void ToggleReadOnly();
 
-        static Control::MouseButtonState GetPressedMouseButtons(const winrt::Windows::UI::Input::PointerPoint point);
-        static unsigned int GetPointerUpdateKind(const winrt::Windows::UI::Input::PointerPoint point);
-        static Windows::UI::Xaml::Thickness ParseThicknessFromPadding(const hstring padding);
+        static Control::MouseButtonState GetPressedMouseButtons(const winrt::Microsoft::UI::Input::PointerPoint  point);
+        static unsigned int GetPointerUpdateKind(const winrt::Microsoft::UI::Input::PointerPoint  point);
+        static Microsoft::UI::Xaml::Thickness ParseThicknessFromPadding(const hstring padding);
 
         hstring ReadEntireBuffer() const;
 
@@ -130,7 +130,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         TYPED_EVENT(RestorePointerCursor,      IInspectable, IInspectable);
         TYPED_EVENT(ReadOnlyChanged,           IInspectable, IInspectable);
         TYPED_EVENT(FocusFollowMouseRequested, IInspectable, IInspectable);
-        TYPED_EVENT(Initialized,               Control::TermControl, Windows::UI::Xaml::RoutedEventArgs);
+        TYPED_EVENT(Initialized,               Control::TermControl, Microsoft::UI::Xaml::RoutedEventArgs);
         TYPED_EVENT(WarningBell,               IInspectable, IInspectable);
         // clang-format on
 
@@ -172,24 +172,24 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         // Auto scroll occurs when user, while selecting, drags cursor outside
         // viewport. View is then scrolled to 'follow' the cursor.
         double _autoScrollVelocity;
-        std::optional<Windows::UI::Input::PointerPoint> _autoScrollingPointerPoint;
-        Windows::UI::Xaml::DispatcherTimer _autoScrollTimer;
+        std::optional<Microsoft::UI::Input::PointerPoint > _autoScrollingPointerPoint;
+        Microsoft::UI::Xaml::DispatcherTimer _autoScrollTimer;
         std::optional<std::chrono::high_resolution_clock::time_point> _lastAutoScrollUpdateTime;
         bool _pointerPressedInBounds{ false };
 
-        winrt::Windows::UI::Composition::ScalarKeyFrameAnimation _bellLightAnimation{ nullptr };
-        Windows::UI::Xaml::DispatcherTimer _bellLightTimer{ nullptr };
+        winrt::Microsoft::UI::Composition::ScalarKeyFrameAnimation _bellLightAnimation{ nullptr };
+        Microsoft::UI::Xaml::DispatcherTimer _bellLightTimer{ nullptr };
 
-        std::optional<Windows::UI::Xaml::DispatcherTimer> _cursorTimer;
-        std::optional<Windows::UI::Xaml::DispatcherTimer> _blinkTimer;
+        std::optional<Microsoft::UI::Xaml::DispatcherTimer> _cursorTimer;
+        std::optional<Microsoft::UI::Xaml::DispatcherTimer> _blinkTimer;
 
-        winrt::Windows::UI::Xaml::Controls::SwapChainPanel::LayoutUpdated_revoker _layoutUpdatedRevoker;
+        winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel::LayoutUpdated_revoker _layoutUpdatedRevoker;
 
         inline bool _IsClosing() const noexcept
         {
 #ifndef NDEBUG
             // _closing isn't atomic and may only be accessed from the main thread.
-            if (const auto dispatcher = Dispatcher())
+            if (const auto dispatcher = DispatcherQueue())
             {
                 assert(dispatcher.HasThreadAccess());
             }
@@ -210,22 +210,22 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         bool _InitializeTerminal();
         void _SetFontSize(int fontSize);
-        void _TappedHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs const& e);
-        void _KeyDownHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e);
-        void _KeyUpHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e);
-        void _CharacterHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::CharacterReceivedRoutedEventArgs const& e);
-        void _PointerPressedHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        void _PointerMovedHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        void _PointerReleasedHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        void _PointerExitedHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        void _MouseWheelHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        void _ScrollbarChangeHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs const& e);
+        void _TappedHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& e);
+        void _KeyDownHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
+        void _KeyUpHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
+        void _CharacterHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::CharacterReceivedRoutedEventArgs const& e);
+        void _PointerPressedHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _PointerMovedHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _PointerReleasedHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _PointerExitedHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _MouseWheelHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _ScrollbarChangeHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs const& e);
 
-        void _GotFocusHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
-        void _LostFocusHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
+        void _GotFocusHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        void _LostFocusHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
-        winrt::fire_and_forget _DragDropHandler(Windows::Foundation::IInspectable sender, Windows::UI::Xaml::DragEventArgs e);
-        void _DragOverHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::DragEventArgs const& e);
+        winrt::fire_and_forget _DragDropHandler(Windows::Foundation::IInspectable sender, Microsoft::UI::Xaml::DragEventArgs e);
+        void _DragOverHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::DragEventArgs const& e);
 
         winrt::fire_and_forget _HyperlinkHandler(Windows::Foundation::IInspectable sender, Control::OpenHyperlinkEventArgs e);
 
@@ -235,22 +235,22 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         void _SetEndSelectionPointAtCursor(Windows::Foundation::Point const& cursorPosition);
 
-        void _SwapChainSizeChanged(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::SizeChangedEventArgs const& e);
-        void _SwapChainScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel const& sender, Windows::Foundation::IInspectable const& args);
+        void _SwapChainSizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
+        void _SwapChainScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, Windows::Foundation::IInspectable const& args);
 
         void _TerminalTabColorChanged(const std::optional<til::color> color);
 
         void _ScrollPositionChanged(const IInspectable& sender, const Control::ScrollPositionChangedArgs& args);
         winrt::fire_and_forget _CursorPositionChanged(const IInspectable& sender, const IInspectable& args);
 
-        bool _CapturePointer(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
-        bool _ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        bool _CapturePointer(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        bool _ReleasePointerCapture(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
 
-        void _TryStartAutoScroll(Windows::UI::Input::PointerPoint const& pointerPoint, const double scrollVelocity);
+        void _TryStartAutoScroll(Microsoft::UI::Input::PointerPoint  const& pointerPoint, const double scrollVelocity);
         void _TryStopAutoScroll(const uint32_t pointerId);
         void _UpdateAutoScroll(Windows::Foundation::IInspectable const& sender, Windows::Foundation::IInspectable const& e);
 
-        void _KeyHandler(Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e, const bool keyDown);
+        void _KeyHandler(Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e, const bool keyDown);
         static ::Microsoft::Terminal::Core::ControlKeyStates _GetPressedModifierKeys() noexcept;
         bool _TryHandleKeyBinding(const WORD vkey, const WORD scanCode, ::Microsoft::Terminal::Core::ControlKeyStates modifiers) const;
         static void _ClearKeyboardState(const WORD vkey, const WORD scanCode) noexcept;
@@ -260,7 +260,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
         double _GetAutoScrollSpeed(double cursorDistanceFromBorder) const;
 
         void _Search(const winrt::hstring& text, const bool goForward, const bool caseSensitive);
-        void _CloseSearchBoxControl(const winrt::Windows::Foundation::IInspectable& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void _CloseSearchBoxControl(const winrt::Windows::Foundation::IInspectable& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 
         // TSFInputControl Handlers
         void _CompositionCompleted(winrt::hstring text);

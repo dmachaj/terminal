@@ -18,7 +18,7 @@ namespace TerminalApp
         Close = 20 // HTCLOSE
     };
 
-    [default_interface] runtimeclass TitlebarControl : Windows.UI.Xaml.Controls.Grid
+    [default_interface] runtimeclass TitlebarControl : Microsoft.UI.Xaml.Controls.Grid
     {
         TitlebarControl(UInt64 parentWindowHandle);
         void SetWindowVisualState(WindowVisualState visualState);
@@ -30,6 +30,6 @@ namespace TerminalApp
         Double CaptionButtonWidth { get; };
 
         IInspectable Content;
-        Windows.UI.Xaml.Controls.Border DragBar { get; };
+        Microsoft.UI.Xaml.Controls.Border DragBar { get; };
     }
 }

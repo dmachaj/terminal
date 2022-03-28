@@ -8,7 +8,7 @@
 
 namespace winrt::TerminalApp::implementation
 {
-    Windows::UI::Xaml::DataTemplate PaletteItemTemplateSelector::SelectTemplateCore(winrt::Windows::Foundation::IInspectable const& item, winrt::Windows::UI::Xaml::DependencyObject const& /*container*/)
+    Microsoft::UI::Xaml::DataTemplate PaletteItemTemplateSelector::SelectTemplateCore(winrt::Windows::Foundation::IInspectable const& item, winrt::Microsoft::UI::Xaml::DependencyObject const& /*container*/)
     {
         return SelectTemplateCore(item);
     }
@@ -22,7 +22,7 @@ namespace winrt::TerminalApp::implementation
     // - item - an instance of filtered command to render
     // Return Value:
     // - data template to use for rendering
-    Windows::UI::Xaml::DataTemplate PaletteItemTemplateSelector::SelectTemplateCore(winrt::Windows::Foundation::IInspectable const& item)
+    Microsoft::UI::Xaml::DataTemplate PaletteItemTemplateSelector::SelectTemplateCore(winrt::Windows::Foundation::IInspectable const& item)
     {
         if (const auto filteredCommand{ item.try_as<winrt::TerminalApp::FilteredCommand>() })
         {

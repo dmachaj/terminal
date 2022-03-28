@@ -121,7 +121,7 @@ const std::vector<size_t> Terminal::GetPatternId(const COORD location) const noe
         }
         return result;
     }
-    return {};
+    //return {};
 }
 
 std::pair<COLORREF, COLORREF> Terminal::GetAttributeColors(const TextAttribute& attr) const noexcept

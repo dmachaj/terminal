@@ -9,6 +9,8 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <SubSystem>Console</SubSystem>
     <OpenConsoleUniversalApp>true</OpenConsoleUniversalApp>
+    <TerminalCppWinrt>true</TerminalCppWinrt>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
   </PropertyGroup>
   <PropertyGroup Label="NuGet Dependencies">
     <TerminalCppWinrt>true</TerminalCppWinrt>

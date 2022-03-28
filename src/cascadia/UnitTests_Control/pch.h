@@ -23,7 +23,7 @@ Licensed under the MIT license.
 // This is inexplicable, but for whatever reason, cppwinrt conflicts with the
 //      SDK definition of this function, so the only fix is to undef it.
 // from WinBase.h
-// Windows::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
+// Microsoft::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
 #ifdef GetCurrentTime
 #undef GetCurrentTime
 #endif
@@ -39,6 +39,7 @@ Licensed under the MIT license.
 #include <winrt/Windows.system.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
+#include <winrt/Microsoft.UI.Dispatching.h>
 
 #include <winrt/Microsoft.Terminal.Core.h>
 #include <winrt/Microsoft.Terminal.Control.h>

@@ -15,8 +15,8 @@ namespace winrt::TerminalApp::implementation
     struct TabBase : TabBaseT<TabBase>
     {
     public:
-        virtual void Focus(winrt::Windows::UI::Xaml::FocusState focusState) = 0;
-        winrt::Windows::UI::Xaml::FocusState FocusState() const noexcept;
+        virtual void Focus(winrt::Microsoft::UI::Xaml::FocusState focusState) = 0;
+        winrt::Microsoft::UI::Xaml::FocusState FocusState() const noexcept;
 
         virtual void Shutdown();
         void SetDispatch(const winrt::TerminalApp::ShortcutActionDispatch& dispatch);
@@ -29,7 +29,7 @@ namespace winrt::TerminalApp::implementation
 
         WINRT_CALLBACK(Closed, winrt::Windows::Foundation::EventHandler<winrt::Windows::Foundation::IInspectable>);
         WINRT_CALLBACK(CloseRequested, winrt::Windows::Foundation::EventHandler<winrt::Windows::Foundation::IInspectable>);
-        WINRT_CALLBACK(PropertyChanged, Windows::UI::Xaml::Data::PropertyChangedEventHandler);
+        WINRT_CALLBACK(PropertyChanged, Microsoft::UI::Xaml::Data::PropertyChangedEventHandler);
 
         // The TabViewIndex is the index this Tab object resides in TerminalPage's _tabs vector.
         WINRT_PROPERTY(uint32_t, TabViewIndex, 0);
@@ -41,12 +41,12 @@ namespace winrt::TerminalApp::implementation
         WINRT_OBSERVABLE_PROPERTY(bool, ReadOnly, _PropertyChangedHandlers, false);
         WINRT_PROPERTY(winrt::Microsoft::UI::Xaml::Controls::TabViewItem, TabViewItem, nullptr);
 
-        WINRT_OBSERVABLE_PROPERTY(winrt::Windows::UI::Xaml::FrameworkElement, Content, _PropertyChangedHandlers, nullptr);
+        WINRT_OBSERVABLE_PROPERTY(winrt::Microsoft::UI::Xaml::FrameworkElement, Content, _PropertyChangedHandlers, nullptr);
 
     protected:
-        winrt::Windows::UI::Xaml::FocusState _focusState{ winrt::Windows::UI::Xaml::FocusState::Unfocused };
-        winrt::Windows::UI::Xaml::Controls::MenuFlyoutItem _closeOtherTabsMenuItem{};
-        winrt::Windows::UI::Xaml::Controls::MenuFlyoutItem _closeTabsAfterMenuItem{};
+        winrt::Microsoft::UI::Xaml::FocusState _focusState{ winrt::Microsoft::UI::Xaml::FocusState::Unfocused };
+        winrt::Microsoft::UI::Xaml::Controls::MenuFlyoutItem _closeOtherTabsMenuItem{};
+        winrt::Microsoft::UI::Xaml::Controls::MenuFlyoutItem _closeTabsAfterMenuItem{};
         winrt::TerminalApp::ShortcutActionDispatch _dispatch;
         Microsoft::Terminal::Settings::Model::IActionMapView _actionMap{ nullptr };
         winrt::hstring _keyChord{};
@@ -56,7 +56,7 @@ namespace winrt::TerminalApp::implementation
 
         virtual void _MakeTabViewItem();
 
-        void _AppendCloseMenuItems(winrt::Windows::UI::Xaml::Controls::MenuFlyout flyout);
+        void _AppendCloseMenuItems(winrt::Microsoft::UI::Xaml::Controls::MenuFlyout flyout);
         void _EnableCloseMenuItems();
         void _CloseTabsAfter();
         void _CloseOtherTabs();

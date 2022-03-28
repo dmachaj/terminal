@@ -9,9 +9,9 @@
 #include "TerminalThemeHelpers.h"
 
 using namespace winrt::Windows::UI;
-using namespace winrt::Windows::UI::Composition;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Hosting;
+using namespace winrt::Microsoft::UI::Composition;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Hosting;
 using namespace winrt::Windows::Foundation::Numerics;
 using namespace ::Microsoft::Console;
 using namespace ::Microsoft::Console::Types;
@@ -321,7 +321,7 @@ void NonClientIslandWindow::_ResizeDragBarWindow() noexcept
 // Return Value:
 // - <none>
 void NonClientIslandWindow::_OnDragBarSizeChanged(winrt::Windows::Foundation::IInspectable /*sender*/,
-                                                  winrt::Windows::UI::Xaml::SizeChangedEventArgs /*eventArgs*/)
+                                                  winrt::Microsoft::UI::Xaml::SizeChangedEventArgs /*eventArgs*/)
 {
     _ResizeDragBarWindow();
 }
@@ -371,7 +371,7 @@ void NonClientIslandWindow::Initialize()
 // - content: the new UI element to use as the client content
 // Return Value:
 // - <none>
-void NonClientIslandWindow::SetContent(winrt::Windows::UI::Xaml::UIElement content)
+void NonClientIslandWindow::SetContent(winrt::Microsoft::UI::Xaml::UIElement content)
 {
     _clientContent = content;
 
@@ -380,7 +380,7 @@ void NonClientIslandWindow::SetContent(winrt::Windows::UI::Xaml::UIElement conte
     // SetRow only works on FrameworkElement's, so cast it to a FWE before
     // calling. We know that our content is a Grid, so we don't need to worry
     // about this.
-    const auto fwe = content.try_as<winrt::Windows::UI::Xaml::FrameworkElement>();
+    const auto fwe = content.try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>();
     if (fwe)
     {
         Controls::Grid::SetRow(fwe, 1);
@@ -393,7 +393,7 @@ void NonClientIslandWindow::SetContent(winrt::Windows::UI::Xaml::UIElement conte
 // - content: the new UI element to use as the titlebar content
 // Return Value:
 // - <none>
-void NonClientIslandWindow::SetTitlebarContent(winrt::Windows::UI::Xaml::UIElement content)
+void NonClientIslandWindow::SetTitlebarContent(winrt::Microsoft::UI::Xaml::UIElement content)
 {
     _titlebar.Content(content);
 
@@ -401,7 +401,7 @@ void NonClientIslandWindow::SetTitlebarContent(winrt::Windows::UI::Xaml::UIEleme
     // this element's size will change after the dragbar's. When that happens,
     // the drag bar won't send another SizeChanged event, because the dragbar's
     // _size_ didn't change, only it's position.
-    const auto fwe = content.try_as<winrt::Windows::UI::Xaml::FrameworkElement>();
+    const auto fwe = content.try_as<winrt::Microsoft::UI::Xaml::FrameworkElement>();
     if (fwe)
     {
         fwe.SizeChanged({ this, &NonClientIslandWindow::_OnDragBarSizeChanged });

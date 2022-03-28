@@ -33,4 +33,5 @@ BOOL WINAPI DllMain(HINSTANCE hInstDll, DWORD reason, LPVOID /*reserved*/)
     return TRUE;
 }
 
-UTILS_DEFINE_LIBRARY_RESOURCE_SCOPE(L"Microsoft.Terminal.Settings.Model/Resources")
+// WinAppSDK bug - unsure why .Lib is now on the end of the resource subtree
+UTILS_DEFINE_LIBRARY_RESOURCE_SCOPE(L"Microsoft.Terminal.Settings.Model.Lib/Resources")

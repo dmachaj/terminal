@@ -11,7 +11,7 @@
 using namespace winrt;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 UTILS_DEFINE_LIBRARY_RESOURCE_SCOPE(L"Microsoft.Terminal.Settings.Editor/Resources");
 

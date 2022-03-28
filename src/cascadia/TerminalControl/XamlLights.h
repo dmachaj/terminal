@@ -13,22 +13,22 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
         winrt::hstring GetId();
 
-        static Windows::UI::Xaml::DependencyProperty IsTargetProperty() { return _IsTargetProperty; }
+        static Microsoft::UI::Xaml::DependencyProperty IsTargetProperty() { return _IsTargetProperty; }
 
-        static bool GetIsTarget(Windows::UI::Xaml::DependencyObject const& target)
+        static bool GetIsTarget(Microsoft::UI::Xaml::DependencyObject const& target)
         {
             return winrt::unbox_value<bool>(target.GetValue(_IsTargetProperty));
         }
 
-        static void SetIsTarget(Windows::UI::Xaml::DependencyObject const& target, bool value)
+        static void SetIsTarget(Microsoft::UI::Xaml::DependencyObject const& target, bool value)
         {
             target.SetValue(_IsTargetProperty, winrt::box_value(value));
         }
 
-        void OnConnected(Windows::UI::Xaml::UIElement const& newElement);
-        void OnDisconnected(Windows::UI::Xaml::UIElement const& oldElement);
+        void OnConnected(Microsoft::UI::Xaml::UIElement const& newElement);
+        void OnDisconnected(Microsoft::UI::Xaml::UIElement const& oldElement);
 
-        static void OnIsTargetChanged(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+        static void OnIsTargetChanged(Microsoft::UI::Xaml::DependencyObject const& d, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
 
         inline static winrt::hstring GetIdStatic()
         {
@@ -38,7 +38,7 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
     private:
         static void _InitializeProperties();
-        static Windows::UI::Xaml::DependencyProperty _IsTargetProperty;
+        static Microsoft::UI::Xaml::DependencyProperty _IsTargetProperty;
     };
 }
 

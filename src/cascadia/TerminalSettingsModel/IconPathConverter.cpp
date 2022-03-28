@@ -5,7 +5,7 @@
 #include "Utils.h"
 
 using namespace winrt::Windows;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
@@ -23,11 +23,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
     };
 
-    template<>
-    struct BitmapIconSource<winrt::Windows::UI::Xaml::Controls::IconSource>
-    {
-        using type = winrt::Windows::UI::Xaml::Controls::BitmapIconSource;
-    };
+    // Not needed with WinAppSDK
+    //template<>
+    //struct BitmapIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
+    //{
+    //    using type = winrt::Microsoft::UI::Xaml::Controls::BitmapIconSource;
+    //};
 #pragma endregion
 
 #pragma region FontIconSource
@@ -42,11 +43,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
     };
 
-    template<>
-    struct FontIconSource<winrt::Windows::UI::Xaml::Controls::IconSource>
-    {
-        using type = winrt::Windows::UI::Xaml::Controls::FontIconSource;
-    };
+    // Not needed with WinAppSDK
+    //template<>
+    //struct FontIconSource<winrt::Microsoft::UI::Xaml::Controls::IconSource>
+    //{
+    //    using type = winrt::Microsoft::UI::Xaml::Controls::FontIconSource;
+    //};
 #pragma endregion
 
     // Method Description:
@@ -124,12 +126,12 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
                     const bool isMDL2Icon = ch >= L'\uE700' && ch <= L'\uF8FF';
                     if (isMDL2Icon)
                     {
-                        icon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe Fluent Icons, Segoe MDL2 Assets" });
+                        icon.FontFamily(winrt::Microsoft::UI::Xaml::Media::FontFamily{ L"Segoe Fluent Icons, Segoe MDL2 Assets" });
                     }
                     else
                     {
                         // Note: you _do_ need to manually set the font here.
-                        icon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
+                        icon.FontFamily(winrt::Microsoft::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
                     }
                     icon.FontSize(12);
                     icon.Glyph(iconPath);
@@ -195,9 +197,9 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         throw hresult_not_implemented();
     }
 
-    Windows::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceWUX(hstring path)
+    Microsoft::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceWUX(hstring path)
     {
-        return _getIconSource<Windows::UI::Xaml::Controls::IconSource>(path);
+        return _getIconSource<Microsoft::UI::Xaml::Controls::IconSource>(path);
     }
 
     Microsoft::UI::Xaml::Controls::IconSource IconPathConverter::IconSourceMUX(hstring path)

@@ -5,7 +5,8 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectName>Microsoft.Terminal.Control.Lib</ProjectName>
     <RootNamespace>Microsoft.Terminal.Control</RootNamespace>
-    <TargetName>Microsoft.Terminal.ControlLib</TargetName>
+    <TargetName>Microsoft.Terminal.Control</TargetName>
+
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <SubSystem>Console</SubSystem>
     <OpenConsoleUniversalApp>true</OpenConsoleUniversalApp>
@@ -20,6 +21,12 @@
     -->
     <CppWinRTNamespaceMergeDepth>3</CppWinRTNamespaceMergeDepth>
     <XamlComponentResourceLocation>nested</XamlComponentResourceLocation>
+
+    <TerminalCppWinrt>true</TerminalCppWinrt>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
 
   </PropertyGroup>
 

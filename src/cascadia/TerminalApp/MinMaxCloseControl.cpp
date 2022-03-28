@@ -7,7 +7,7 @@
 #include "MinMaxCloseControl.g.cpp"
 #include <LibraryResources.h>
 
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::TerminalApp::implementation
 {
@@ -27,7 +27,7 @@ namespace winrt::TerminalApp::implementation
         // Get our dispatcher. This will get us the same dispatcher as
         // Dispatcher(), but it's a DispatcherQueue, so we can use it with
         // ThrottledFunc
-        auto dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        auto dispatcher = DispatcherQueue(); //winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
 
         InitializeComponent();
 

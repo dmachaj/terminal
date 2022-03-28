@@ -13,16 +13,16 @@ namespace winrt::TerminalApp::implementation
     {
         HighlightedTextControl();
 
-        static Windows::UI::Xaml::DependencyProperty TextProperty();
+        static Microsoft::UI::Xaml::DependencyProperty TextProperty();
 
         winrt::TerminalApp::HighlightedText Text();
         void Text(winrt::TerminalApp::HighlightedText const& value);
 
-        Windows::UI::Xaml::Controls::TextBlock TextView();
+        Microsoft::UI::Xaml::Controls::TextBlock TextView();
 
     private:
-        static Windows::UI::Xaml::DependencyProperty _textProperty;
-        static void _onTextChanged(Windows::UI::Xaml::DependencyObject const& o, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+        static Microsoft::UI::Xaml::DependencyProperty _textProperty;
+        static void _onTextChanged(Microsoft::UI::Xaml::DependencyObject const& o, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
     };
 }
 

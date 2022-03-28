@@ -41,9 +41,9 @@ private:
 
     void _HandleCreateWindow(const HWND hwnd, RECT proposedRect, winrt::Microsoft::Terminal::Settings::Model::LaunchMode& launchMode);
     void _UpdateTitleBarContent(const winrt::Windows::Foundation::IInspectable& sender,
-                                const winrt::Windows::UI::Xaml::UIElement& arg);
+                                const winrt::Microsoft::UI::Xaml::UIElement& arg);
     void _UpdateTheme(const winrt::Windows::Foundation::IInspectable&,
-                      const winrt::Windows::UI::Xaml::ElementTheme& arg);
+                      const winrt::Microsoft::UI::Xaml::ElementTheme& arg);
     void _FocusModeChanged(const winrt::Windows::Foundation::IInspectable& sender,
                            const winrt::Windows::Foundation::IInspectable& arg);
     void _FullscreenChanged(const winrt::Windows::Foundation::IInspectable& sender,

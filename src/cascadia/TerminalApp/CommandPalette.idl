@@ -8,7 +8,7 @@ import "FilteredCommand.idl";
 
 namespace TerminalApp
 {
-    [default_interface] runtimeclass CommandPalette : Windows.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged, IDirectKeyListener
+    [default_interface] runtimeclass CommandPalette : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged, IDirectKeyListener
     {
         CommandPalette();
 

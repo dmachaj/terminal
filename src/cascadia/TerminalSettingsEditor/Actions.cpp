@@ -13,10 +13,10 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Windows::System;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::UI::Xaml::Controls;
-using namespace winrt::Windows::UI::Xaml::Data;
-using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml::Controls;
+using namespace winrt::Microsoft::UI::Xaml::Data;
+using namespace winrt::Microsoft::UI::Xaml::Navigation;
 using namespace winrt::Microsoft::Terminal::Settings::Model;
 
 namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
@@ -56,10 +56,10 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         });
     }
 
-    hstring KeyBindingViewModel::EditButtonName() const noexcept { return RS_(L"Actions_EditButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"); }
-    hstring KeyBindingViewModel::CancelButtonName() const noexcept { return RS_(L"Actions_CancelButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"); }
-    hstring KeyBindingViewModel::AcceptButtonName() const noexcept { return RS_(L"Actions_AcceptButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"); }
-    hstring KeyBindingViewModel::DeleteButtonName() const noexcept { return RS_(L"Actions_DeleteButton/[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip"); }
+    hstring KeyBindingViewModel::EditButtonName() const noexcept { return RS_(L"Actions_EditButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"); }
+    hstring KeyBindingViewModel::CancelButtonName() const noexcept { return RS_(L"Actions_CancelButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"); }
+    hstring KeyBindingViewModel::AcceptButtonName() const noexcept { return RS_(L"Actions_AcceptButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"); }
+    hstring KeyBindingViewModel::DeleteButtonName() const noexcept { return RS_(L"Actions_DeleteButton/[using:Microsoft.UI.Xaml.Controls]ToolTipService/ToolTip"); }
 
     bool KeyBindingViewModel::ShowEditButton() const noexcept
     {
@@ -167,7 +167,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         // Manually add the editing background. This needs to be done in Actions not the view model.
         // We also have to do this manually because it hasn't been added to the list yet.
         kbdVM->IsInEditMode(true);
-        const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackgroundEditing")).as<Windows::UI::Xaml::Media::Brush>() };
+        const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackgroundEditing")).as<Microsoft::UI::Xaml::Media::Brush>() };
         kbdVM->ContainerBackground(containerBackground);
 
         // IMPORTANT: do this _after_ setting IsInEditMode. Otherwise, it'll get deleted immediately
@@ -176,7 +176,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
         _KeyBindingList.InsertAt(0, *kbdVM);
     }
 
-    void Actions::_ViewModelPropertyChangedHandler(const IInspectable& sender, const Windows::UI::Xaml::Data::PropertyChangedEventArgs& args)
+    void Actions::_ViewModelPropertyChangedHandler(const IInspectable& sender, const Microsoft::UI::Xaml::Data::PropertyChangedEventArgs& args)
     {
         const auto senderVM{ sender.as<Editor::KeyBindingViewModel>() };
         const auto propertyName{ args.PropertyName() };
@@ -211,7 +211,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
                     }
                 }
 
-                const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackgroundEditing")).as<Windows::UI::Xaml::Media::Brush>() };
+                const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackgroundEditing")).as<Microsoft::UI::Xaml::Media::Brush>() };
                 get_self<KeyBindingViewModel>(senderVM)->ContainerBackground(containerBackground);
             }
             else
@@ -219,7 +219,7 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
                 // Focus on the list view item
                 KeyBindingsListView().ContainerFromItem(senderVM).as<Controls::Control>().Focus(FocusState::Programmatic);
 
-                const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackground")).as<Windows::UI::Xaml::Media::Brush>() };
+                const auto& containerBackground{ Resources().Lookup(box_value(L"ActionContainerBackground")).as<Microsoft::UI::Xaml::Media::Brush>() };
                 get_self<KeyBindingViewModel>(senderVM)->ContainerBackground(containerBackground);
             }
         }

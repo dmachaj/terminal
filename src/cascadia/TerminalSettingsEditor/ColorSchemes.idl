@@ -10,7 +10,7 @@ namespace Microsoft.Terminal.Settings.Editor
         String LastSelectedScheme;
     };
 
-    [default_interface] runtimeclass ColorSchemes : Windows.UI.Xaml.Controls.Page, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass ColorSchemes : Microsoft.UI.Xaml.Controls.Page, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         ColorSchemes();
         ColorSchemesPageNavigationState State { get; };
@@ -32,7 +32,7 @@ namespace Microsoft.Terminal.Settings.Editor
         Windows.Foundation.Collections.IObservableVector<Microsoft.Terminal.Settings.Model.ColorScheme> ColorSchemeList { get; };
     }
 
-    [default_interface] runtimeclass ColorTableEntry : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [default_interface] runtimeclass ColorTableEntry : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         String Name { get; };
         IInspectable Tag;

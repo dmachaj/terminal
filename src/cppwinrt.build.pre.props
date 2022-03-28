@@ -24,10 +24,18 @@
        In general, cppwinrt projects all want this.
   -->
   <PropertyGroup Condition="'$(OpenConsoleUniversalApp)'=='true'">
-    <MinimalCoreWin>true</MinimalCoreWin>
-    <AppContainerApplication>true</AppContainerApplication>
+    <!-- WinAppSDK change -->
+    <!--<MinimalCoreWin>true</MinimalCoreWin>
+    <AppContainerApplication>true</AppContainerApplication>-->
     <WindowsStoreApp>true</WindowsStoreApp>
     <ApplicationType>Windows Store</ApplicationType>
+
+    <!-- WinAppSDK change -->
+    <MinimalCoreWin>false</MinimalCoreWin>
+    <AppContainerApplication>false</AppContainerApplication>
+
+    <!-- WinAppSDK bug workaround.  AppContainer=false changes <OutDir> and breaks stuff. -->
+    <GenerateProjectSpecificOutputFolder>true</GenerateProjectSpecificOutputFolder>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OpenConsoleUniversalApp)'!='true'">
     <!-- Some of our projects include the cppwinrt build options to

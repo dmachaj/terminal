@@ -16,7 +16,7 @@ Abstract:
 - Wraps the UIAutomationCore ITextProvider
   (https://docs.microsoft.com/en-us/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextprovider)
   with a XAML ITextProvider
-  (https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.automation.provider.itextprovider)
+  (https://docs.microsoft.com/en-us/uwp/api/Microsoft.UI.Xaml.automation.provider.itextprovider)
 
 Author(s):
 - Carlos Zamora   (CaZamor)    2019
@@ -52,13 +52,13 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 
 #pragma region FrameworkElementAutomationPeer
         hstring GetClassNameCore() const;
-        Windows::UI::Xaml::Automation::Peers::AutomationControlType GetAutomationControlTypeCore() const;
+        Microsoft::UI::Xaml::Automation::Peers::AutomationControlType GetAutomationControlTypeCore() const;
         hstring GetLocalizedControlTypeCore() const;
-        Windows::Foundation::IInspectable GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface) const;
-        Windows::UI::Xaml::Automation::Peers::AutomationOrientation GetOrientationCore() const;
+        Windows::Foundation::IInspectable GetPatternCore(Microsoft::UI::Xaml::Automation::Peers::PatternInterface patternInterface) const;
+        Microsoft::UI::Xaml::Automation::Peers::AutomationOrientation GetOrientationCore() const;
         hstring GetNameCore() const;
         hstring GetHelpTextCore() const;
-        Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting GetLiveSettingCore() const;
+        Microsoft::UI::Xaml::Automation::Peers::AutomationLiveSetting GetLiveSettingCore() const;
 #pragma endregion
 
 #pragma region IUiaEventDispatcher
@@ -69,12 +69,12 @@ namespace winrt::Microsoft::Terminal::Control::implementation
 #pragma endregion
 
 #pragma region ITextProvider Pattern
-        Windows::UI::Xaml::Automation::Provider::ITextRangeProvider RangeFromPoint(Windows::Foundation::Point screenLocation);
-        Windows::UI::Xaml::Automation::Provider::ITextRangeProvider RangeFromChild(Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple childElement);
-        com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> GetVisibleRanges();
-        com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> GetSelection();
-        Windows::UI::Xaml::Automation::SupportedTextSelection SupportedTextSelection();
-        Windows::UI::Xaml::Automation::Provider::ITextRangeProvider DocumentRange();
+        Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider RangeFromPoint(Windows::Foundation::Point screenLocation);
+        Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider RangeFromChild(Microsoft::UI::Xaml::Automation::Provider::IRawElementProviderSimple childElement);
+        com_array<Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider> GetVisibleRanges();
+        com_array<Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider> GetSelection();
+        Microsoft::UI::Xaml::Automation::SupportedTextSelection SupportedTextSelection();
+        Microsoft::UI::Xaml::Automation::Provider::ITextRangeProvider DocumentRange();
 #pragma endregion
 
     private:

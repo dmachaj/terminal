@@ -3,7 +3,7 @@
 #include "EmptyStringVisibilityConverter.g.cpp"
 
 using namespace winrt::Windows;
-using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 
 namespace winrt::TerminalApp::implementation
 {

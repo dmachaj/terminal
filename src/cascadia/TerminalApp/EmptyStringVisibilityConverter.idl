@@ -11,7 +11,7 @@ namespace TerminalApp
     // The default attribute is optimal if you won't be adding instance members
     // to EmptyStringVisibilityConverter, because no QueryInterface will be
     // required to call the IValueConverter methods
-    runtimeclass EmptyStringVisibilityConverter : [default] Windows.UI.Xaml.Data.IValueConverter
+    runtimeclass EmptyStringVisibilityConverter : [default] Microsoft.UI.Xaml.Data.IValueConverter
     {
         EmptyStringVisibilityConverter();
     };

@@ -46,7 +46,7 @@ namespace winrt::TerminalApp::implementation
         void EnableTabSwitcherMode(const uint32_t startIdx, Microsoft::Terminal::Settings::Model::TabSwitcherMode tabSwitcherMode);
         void EnableTabSearchMode();
 
-        WINRT_CALLBACK(PropertyChanged, Windows::UI::Xaml::Data::PropertyChangedEventHandler);
+        WINRT_CALLBACK(PropertyChanged, Microsoft::UI::Xaml::Data::PropertyChangedEventHandler);
         WINRT_OBSERVABLE_PROPERTY(winrt::hstring, NoMatchesText, _PropertyChangedHandlers);
         WINRT_OBSERVABLE_PROPERTY(winrt::hstring, SearchBoxPlaceholderText, _PropertyChangedHandlers);
         WINRT_OBSERVABLE_PROPERTY(winrt::hstring, PrefixCharacter, _PropertyChangedHandlers);
@@ -72,27 +72,27 @@ namespace winrt::TerminalApp::implementation
         bool _lastFilterTextWasEmpty{ true };
 
         void _filterTextChanged(Windows::Foundation::IInspectable const& sender,
-                                Windows::UI::Xaml::RoutedEventArgs const& args);
+                                Microsoft::UI::Xaml::RoutedEventArgs const& args);
         void _previewKeyDownHandler(Windows::Foundation::IInspectable const& sender,
-                                    Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e);
+                                    Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
         void _keyUpHandler(Windows::Foundation::IInspectable const& sender,
-                           Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e);
+                           Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
         void _selectedCommandChanged(Windows::Foundation::IInspectable const& sender,
-                                     Windows::UI::Xaml::RoutedEventArgs const& args);
+                                     Microsoft::UI::Xaml::RoutedEventArgs const& args);
 
         void _updateUIForStackChange();
 
-        void _rootPointerPressed(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _rootPointerPressed(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
 
-        void _lostFocusHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void _lostFocusHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 
-        void _backdropPointerPressed(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+        void _backdropPointerPressed(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
 
-        void _listItemClicked(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Controls::ItemClickEventArgs const& e);
+        void _listItemClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::ItemClickEventArgs const& e);
 
-        void _moveBackButtonClicked(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const&);
+        void _moveBackButtonClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const&);
 
         void _updateFilteredActions();
 
@@ -117,7 +117,7 @@ namespace winrt::TerminalApp::implementation
         void _bindTabs(Windows::Foundation::Collections::IObservableVector<winrt::TerminalApp::TabBase> const& source, Windows::Foundation::Collections::IVector<winrt::TerminalApp::FilteredCommand> const& target);
         void _anchorKeyUpHandler();
 
-        winrt::Windows::UI::Xaml::Controls::ListView::SizeChanged_revoker _sizeChangedRevoker;
+        winrt::Microsoft::UI::Xaml::Controls::ListView::SizeChanged_revoker _sizeChangedRevoker;
 
         void _dispatchCommand(winrt::TerminalApp::FilteredCommand const& command);
         void _dispatchCommandline(winrt::TerminalApp::FilteredCommand const& command);
@@ -134,11 +134,11 @@ namespace winrt::TerminalApp::implementation
         static void _updateRecentCommands(const winrt::hstring& command);
         ::TerminalApp::AppCommandlineArgs _appArgs;
 
-        void _choosingItemContainer(Windows::UI::Xaml::Controls::ListViewBase const& sender, Windows::UI::Xaml::Controls::ChoosingItemContainerEventArgs const& args);
-        void _containerContentChanging(Windows::UI::Xaml::Controls::ListViewBase const& sender, Windows::UI::Xaml::Controls::ContainerContentChangingEventArgs const& args);
+        void _choosingItemContainer(Microsoft::UI::Xaml::Controls::ListViewBase const& sender, Microsoft::UI::Xaml::Controls::ChoosingItemContainerEventArgs const& args);
+        void _containerContentChanging(Microsoft::UI::Xaml::Controls::ListViewBase const& sender, Microsoft::UI::Xaml::Controls::ContainerContentChangingEventArgs const& args);
         winrt::TerminalApp::PaletteItemTemplateSelector _itemTemplateSelector{ nullptr };
-        std::unordered_map<Windows::UI::Xaml::DataTemplate, std::unordered_set<Windows::UI::Xaml::Controls::Primitives::SelectorItem>> _listViewItemsCache;
-        Windows::UI::Xaml::DataTemplate _listItemTemplate;
+        std::unordered_map<Microsoft::UI::Xaml::DataTemplate, std::unordered_set<Microsoft::UI::Xaml::Controls::Primitives::SelectorItem>> _listViewItemsCache;
+        Microsoft::UI::Xaml::DataTemplate _listItemTemplate;
 
         friend class TerminalAppLocalTests::TabTests;
     };
