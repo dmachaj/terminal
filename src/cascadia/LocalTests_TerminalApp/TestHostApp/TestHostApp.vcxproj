@@ -14,10 +14,6 @@
     <UseWmXml>true</UseWmXml>
     <ConfigurationType>Application</ConfigurationType>
     <OpenConsoleCppWinRTProject>true</OpenConsoleCppWinRTProject>
-    <TerminalWinAppSDK>true</TerminalWinAppSDK>
-    <AppContainerApplication>false</AppContainerApplication>
-    <!-- <AppxPackage>true</AppxPackage> -->
-    <UseWinUI>true</UseWinUI>
 
     <!--
     These two properties are very important!
@@ -28,6 +24,14 @@
     <AppxOSMinVersionReplaceManifestVersion>false</AppxOSMinVersionReplaceManifestVersion>
     <AppxOSMaxVersionTestedReplaceManifestVersion>false</AppxOSMaxVersionTestedReplaceManifestVersion>
 
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Versions">
+    <TerminalCppWinRT>true</TerminalCppWinRT>
+    <TerminalWinAppSDK>true</TerminalWinAppSDK>
+    <AppContainerApplication>false</AppContainerApplication>
+    <!-- <AppxPackage>true</AppxPackage> -->
+    <UseWinUI>true</UseWinUI>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)\common.openconsole.props" Condition="'$(OpenConsoleDir)'==''" />
