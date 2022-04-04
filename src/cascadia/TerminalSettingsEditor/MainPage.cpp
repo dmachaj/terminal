@@ -446,11 +446,15 @@ namespace winrt::Microsoft::Terminal::Settings::Editor::implementation
 
     void MainPage::OpenJsonTapped(IInspectable const& /*sender*/, Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& /*args*/)
     {
-        const CoreWindow window = CoreWindow::GetForCurrentThread();
-        const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
-        const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
-        const bool altPressed = WI_IsFlagSet(lAltState, CoreVirtualKeyStates::Down) ||
-                                WI_IsFlagSet(rAltState, CoreVirtualKeyStates::Down);
+        //const CoreWindow window = CoreWindow::GetForCurrentThread();
+        //const auto rAltState = window.GetKeyState(VirtualKey::RightMenu);
+        //const auto lAltState = window.GetKeyState(VirtualKey::LeftMenu);
+        //const bool altPressed = WI_IsFlagSet(lAltState, CoreVirtualKeyStates::Down) ||
+        //                        WI_IsFlagSet(rAltState, CoreVirtualKeyStates::Down);
+
+        const auto rAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::RightMenu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto lAltState = Microsoft::UI::Input::InputKeyboardSource::GetKeyStateForCurrentThread(VirtualKey::LeftMenu) == Windows::UI::Core::CoreVirtualKeyStates::Down;
+        const auto altPressed = rAltState || lAltState;
 
         const auto target = altPressed ? SettingsTarget::DefaultsFile : SettingsTarget::SettingsFile;
         _OpenJsonHandlers(nullptr, target);
